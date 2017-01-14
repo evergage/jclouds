@@ -18,7 +18,7 @@ package org.jclouds.digitalocean2.internal;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.Iterables.getOnlyElement;
-import static com.google.common.util.concurrent.MoreExecutors.sameThreadExecutor;
+import static com.google.common.util.concurrent.MoreExecutors.newDirectExecutorService;
 import static org.testng.Assert.assertEquals;
 
 import java.io.IOException;
@@ -47,19 +47,19 @@ import com.squareup.okhttp.mockwebserver.MockWebServer;
 import com.squareup.okhttp.mockwebserver.RecordedRequest;
 
 public class BaseDigitalOcean2ApiMockTest {
-   
+
    private static final String MOCK_BEARER_TOKEN = "c5401990f0c24135e8d6b5d260603fc71696d4738da9aa04a720229a01a2521d";
    private static final String DEFAULT_ENDPOINT = new DigitalOcean2ProviderMetadata().getEndpoint();
-   
-   private final Set<Module> modules = ImmutableSet.<Module> of(new ExecutorServiceModule(sameThreadExecutor()));
-   
+
+   private final Set<Module> modules = ImmutableSet.<Module> of(new ExecutorServiceModule(newDirectExecutorService()));
+
    protected MockWebServer server;
    protected DigitalOcean2Api api;
    private Json json;
-   
+
    // So that we can ignore formatting.
    private final JsonParser parser = new JsonParser();
-   
+
    @BeforeMethod
    public void start() throws IOException {
       server = new MockWebServer();
@@ -79,7 +79,7 @@ public class BaseDigitalOcean2ApiMockTest {
       server.shutdown();
       api.close();
    }
-   
+
    protected Properties overrides() {
       return new Properties();
    }
@@ -95,7 +95,7 @@ public class BaseDigitalOcean2ApiMockTest {
    protected MockResponse response404() {
       return new MockResponse().setStatus("HTTP/1.1 404 Not Found");
    }
-   
+
    protected MockResponse response204() {
       return new MockResponse().setStatus("HTTP/1.1 204 No Content");
    }
@@ -108,7 +108,7 @@ public class BaseDigitalOcean2ApiMockTest {
          throw Throwables.propagate(e);
       }
    }
-   
+
    protected <T> T onlyObjectFromResource(String resourceName, TypeToken<Map<String, T>> type) {
       // Assume JSON objects passed here will be in the form: { "entity": { ... } }
       String text = stringFromResource(resourceName);
@@ -117,7 +117,7 @@ public class BaseDigitalOcean2ApiMockTest {
       checkArgument(object.keySet().size() == 1, "The given json does not contain more than one object: %s", text);
       return object.get(getOnlyElement(object.keySet()));
    }
-   
+
    protected <T> T objectFromResource(String resourceName, Class<T> type) {
       String text = stringFromResource(resourceName);
       return json.fromJson(text, type);

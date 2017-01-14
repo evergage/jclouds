@@ -16,7 +16,7 @@
  */
 package org.jclouds.compute.callables;
 
-import static com.google.common.util.concurrent.MoreExecutors.sameThreadExecutor;
+import static com.google.common.util.concurrent.MoreExecutors.newDirectExecutorService;
 import static com.google.inject.name.Names.named;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
@@ -51,7 +51,7 @@ import com.google.inject.assistedinject.FactoryModuleBuilder;
 
 @Test(groups = "unit", singleThreaded = true, testName = "RunScriptOnNodeAsInitScriptUsingSshAndBlockUntilCompleteTest")
 public class RunScriptOnNodeAsInitScriptUsingSshAndBlockUntilCompleteTest {
-   Injector injector = Guice.createInjector(new ExecutorServiceModule(sameThreadExecutor()),
+   Injector injector = Guice.createInjector(new ExecutorServiceModule(newDirectExecutorService()),
          new AbstractModule() {
             protected void configure() {
                bindConstant().annotatedWith(named(PROPERTY_USER_THREADS)).to(1);
@@ -128,7 +128,7 @@ public class RunScriptOnNodeAsInitScriptUsingSshAndBlockUntilCompleteTest {
       assertEquals(testMe.getStatement(), init);
 
       testMe.init();
-      
+
       assertEquals(testMe.call(), new ExecResponse("out", "err", 0));
 
       verify(sshClient);
@@ -177,15 +177,15 @@ public class RunScriptOnNodeAsInitScriptUsingSshAndBlockUntilCompleteTest {
       assertEquals(testMe.getStatement(), init);
 
       testMe.init();
-      
+
       assertEquals(testMe.call(), new ExecResponse("out", "err", 0));
-      
+
       verify(sshClient);
    }
 
    /**
     * in a couple versions of ubuntu on aws-ec2, status returneds no pid (ex. empty stdout w/exit code 1) transiently. sadly, we need to doublecheck status before assuming it has failed.
-    * 
+    *
     */
    public void testDoublecheckStatusInCaseTransientlyWrong() {
       Statement command = exec("doFoo");
@@ -231,12 +231,12 @@ public class RunScriptOnNodeAsInitScriptUsingSshAndBlockUntilCompleteTest {
       assertEquals(testMe.getStatement(), init);
 
       testMe.init();
-      
+
       assertEquals(testMe.call(), new ExecResponse("out", "err", 0));
-      
+
       verify(sshClient);
    }
-   
+
    public void testNotRoot() {
       Statement command = exec("doFoo");
       NodeMetadata node = new NodeMetadataBuilder().ids("id").status(Status.RUNNING).credentials(
@@ -280,17 +280,17 @@ public class RunScriptOnNodeAsInitScriptUsingSshAndBlockUntilCompleteTest {
       assertEquals(testMe.getStatement(), init);
 
       testMe.init();
-      
+
       assertEquals(testMe.call(), new ExecResponse("out", "err", 0));
 
       verify(sshClient);
    }
-   
+
    public void testBadReturnCode() {
       Statement command = exec("doFoo");
       NodeMetadata node = new NodeMetadataBuilder().ids("badreturncode").status(Status.RUNNING).credentials(
             LoginCredentials.builder().user("tester").password("testpassword!").authenticateSudo(true).build()).build();
-      
+
       SshClient sshClient = createMock(SshClient.class);
 
       InitScript init = InitScript.builder().name("jclouds-script-0").home("/tmp/jclouds-script-0").run(command)
@@ -329,7 +329,7 @@ public class RunScriptOnNodeAsInitScriptUsingSshAndBlockUntilCompleteTest {
       assertEquals(testMe.getStatement(), init);
 
       testMe.init();
-      
+
       assertEquals(testMe.call(), new ExecResponse("out", "err", 1));
 
       verify(sshClient);

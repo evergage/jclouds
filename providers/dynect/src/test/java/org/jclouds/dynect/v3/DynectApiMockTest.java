@@ -16,7 +16,7 @@
  */
 package org.jclouds.dynect.v3;
 
-import static com.google.common.util.concurrent.MoreExecutors.sameThreadExecutor;
+import static com.google.common.util.concurrent.MoreExecutors.newDirectExecutorService;
 import static javax.ws.rs.core.Response.Status.OK;
 import static org.jclouds.Constants.PROPERTY_MAX_RETRIES;
 
@@ -37,9 +37,9 @@ import com.squareup.okhttp.mockwebserver.MockWebServer;
 
 @Test(singleThreaded = true)
 public class DynectApiMockTest {
-   
+
    private static final Set<Module> modules = ImmutableSet.<Module> of(
-         new ExecutorServiceModule(sameThreadExecutor()));
+         new ExecutorServiceModule(newDirectExecutorService()));
 
    static DynECTApi mockDynectApi(String uri) {
       Properties overrides = new Properties();

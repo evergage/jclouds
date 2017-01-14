@@ -16,7 +16,7 @@
  */
 package org.jclouds.s3.blobstore.functions;
 
-import static com.google.common.util.concurrent.MoreExecutors.sameThreadExecutor;
+import static com.google.common.util.concurrent.MoreExecutors.newDirectExecutorService;
 import static org.testng.Assert.assertEquals;
 
 import org.jclouds.blobstore.domain.MutableStorageMetadata;
@@ -49,14 +49,14 @@ public class BucketsToStorageMetadataTest {
 
    public void test() {
       BucketsToStorageMetadata fn = new BucketsToStorageMetadata(
-               sameThreadExecutor(),
+              newDirectExecutorService(),
                new BucketToResourceMetadata(Functions.forMap(ImmutableMap.<String, Location> of("mycontainer", region))));
 
       MutableStorageMetadata expected = new MutableStorageMetadataImpl();
       expected.setName("mycontainer");
       expected.setType(StorageType.CONTAINER);
       expected.setLocation(region);
-      
+
       assertEquals(
                fn.apply(ImmutableSet.of(new BucketMetadata("mycontainer", null, null))).toString(),
                new PageSetImpl<StorageMetadata>(ImmutableSet.<StorageMetadata> of(expected), null).toString());

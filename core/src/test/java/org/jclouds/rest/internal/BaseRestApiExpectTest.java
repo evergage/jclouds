@@ -17,7 +17,7 @@
 package org.jclouds.rest.internal;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.util.concurrent.MoreExecutors.sameThreadExecutor;
+import static com.google.common.util.concurrent.MoreExecutors.newDirectExecutorService;
 import static com.google.inject.name.Names.named;
 import static org.jclouds.Constants.PROPERTY_IDEMPOTENT_METHODS;
 import static org.jclouds.Constants.PROPERTY_MAX_RETRIES;
@@ -92,22 +92,22 @@ import com.google.inject.Provides;
 import com.google.inject.TypeLiteral;
 
 /**
- * 
+ *
  * Allows us to test a client via its side effects.
- * 
+ *
  * <p/>
  * Example usage:
- * 
+ *
  * <pre>
- * 
+ *
  * HttpRequest bucketFooExists = HttpRequest.builder().method(&quot;HEAD&quot;).endpoint(
  *          URI.create(&quot;https://s3.amazonaws.com/foo?max-keys=0&quot;)).headers(
  *          ImmutableMultimap.&lt;String, String&gt; builder().put(&quot;Date&quot;, CONSTANT_DATE)
  *                   .put(&quot;Authorization&quot;, &quot;AWS identity:86P4BBb7xT+gBqq7jxM8Tc28ktY=&quot;).build()).build();
- * 
+ *
  * S3Client clientWhenBucketExists = requestSendsResponse(bucketFooExists, HttpResponse.builder().statusCode(200).build());
  * assert clientWhenBucketExists.bucketExists(&quot;foo&quot;);
- * 
+ *
  * S3Client clientWhenBucketDoesntExist = requestSendsResponse(bucketFooExists, HttpResponse.builder().statusCode(404)
  *          .build());
  * assert !clientWhenBucketDoesntExist.bucketExists(&quot;foo&quot;);
@@ -120,11 +120,11 @@ public abstract class BaseRestApiExpectTest<S> {
 
    protected ContentMetadataCodec contentMetadataCodec = new DefaultContentMetadataCodec(
             new DateServiceDateCodecFactory(new SimpleDateFormatDateService()));
-   
+
    /**
     * Override this to supply alternative bindings for use in the test. This is commonly used to
     * override suppliers of dates so that the test results are predicatable.
-    * 
+    *
     * @return optional guice module which can override bindings
     */
    protected Module createModule() {
@@ -140,14 +140,14 @@ public abstract class BaseRestApiExpectTest<S> {
 
    /**
     * Convenience method used when creating a response that includes an http payload.
-    * 
+    *
     * <p/>
     * ex.
-    * 
+    *
     * <pre>
     * HttpResponse.builder().statusCode(200).payload(payloadFromResource(&quot;/ip_get_details.json&quot;)).build()
     * </pre>
-    * 
+    *
     * @param resource
     *           resource file such as {@code /serverlist.json}
     * @return payload for use in http responses.
@@ -226,7 +226,7 @@ public abstract class BaseRestApiExpectTest<S> {
 
       @Override
       public void configure() {
-         bind(ListeningExecutorService.class).annotatedWith(named(PROPERTY_USER_THREADS)).toInstance(sameThreadExecutor());
+         bind(ListeningExecutorService.class).annotatedWith(named(PROPERTY_USER_THREADS)).toInstance(newDirectExecutorService());
          bind(new TypeLiteral<Function<HttpRequest, HttpResponse>>() {
          }).toInstance(fn);
          bind(HttpCommandExecutorService.class).to(ExpectHttpCommandExecutorService.class);
@@ -241,7 +241,7 @@ public abstract class BaseRestApiExpectTest<S> {
 
    /**
     * creates a client for a mock server which only responds to a single http request
-    * 
+    *
     * @param request
     *           the http request the mock server responds to
     * @param response
@@ -258,7 +258,7 @@ public abstract class BaseRestApiExpectTest<S> {
 
    /**
     * creates a client for a mock server which only responds to two types of requests
-    * 
+    *
     * @param requestA
     *           an http request the mock server responds to
     * @param responseA
@@ -281,7 +281,7 @@ public abstract class BaseRestApiExpectTest<S> {
 
    /**
     * creates a client for a mock server which only responds to three types of requests
-    * 
+    *
     * @param requestA
     *           an http request the mock server responds to
     * @param responseA
@@ -347,7 +347,7 @@ public abstract class BaseRestApiExpectTest<S> {
    /**
     * creates a client for a mock server which returns responses for requests based on the supplied
     * Map parameter.
-    * 
+    *
     * @param requestToResponse
     *           valid requests and responses for the mock to respond to
     * @return a client configured with this behavior
@@ -380,7 +380,7 @@ public abstract class BaseRestApiExpectTest<S> {
          if (a.getPayload() == null || b.getPayload() == null) {
             return Objects.equal(a, b);
          }
- 
+
          switch (compareHttpRequestAsType(a)) {
             case XML: {
                Diff diff = XMLUnit.compareXML(Strings2.toStringAndClose(a.getPayload().openStream()),
@@ -414,7 +414,7 @@ public abstract class BaseRestApiExpectTest<S> {
 
                return diff.identical();
             }
-            case JSON: {               
+            case JSON: {
                JsonParser parser = new JsonParser();
                JsonElement payloadA = parser.parse(Strings2.toStringAndClose(a.getPayload().openStream()));
                JsonElement payloadB = parser.parse(Strings2.toStringAndClose(b.getPayload().openStream()));
@@ -436,7 +436,7 @@ public abstract class BaseRestApiExpectTest<S> {
    public S requestsSendResponses(final Map<HttpRequest, HttpResponse> requestToResponse, Module module,
             Properties props) {
       return createClient(new Function<HttpRequest, HttpResponse>() {
-         
+
          @Override
          public HttpResponse apply(HttpRequest input) {
             HttpRequest matchedRequest = null;
@@ -564,7 +564,7 @@ public abstract class BaseRestApiExpectTest<S> {
                .overrides(props)
                .buildInjector();
    }
-   
+
    /**
     * override this to supply context-specific parameters during tests.
     */
