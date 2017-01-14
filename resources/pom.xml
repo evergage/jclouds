@@ -22,13 +22,13 @@
   <parent>
     <artifactId>jclouds-project</artifactId>
     <groupId>org.apache.jclouds</groupId>
-    <version>2.0.0</version>
+    <version>2.0.0-evg1</version>
     <relativePath>../project/pom.xml</relativePath>
-  </parent>    
+  </parent>
   <artifactId>jclouds-resources</artifactId>
   <name>jclouds shared Maven resources</name>
 
-  <!-- Cannot be run on a clean repo, because of a self-dependency. Install into the 
+  <!-- Cannot be run on a clean repo, because of a self-dependency. Install into the
        local repo with 'mvn clean install' first. -->
   <build>
     <resources>

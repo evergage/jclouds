@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.apache.jclouds</groupId>
     <artifactId>jclouds-project</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.0-evg1</version>
     <relativePath>../../project/pom.xml</relativePath>
   </parent>
   <groupId>org.apache.jclouds.api</groupId>
@@ -30,7 +30,7 @@
   <name>jclouds Rackspace Cloud Load Balancers API</name>
   <description>Cloud Load Balancers API for Rackspace</description>
   <packaging>bundle</packaging>
-  
+
   <properties>
     <test.rackspace-cloudloadbalancers.endpoint>https://identity.api.rackspacecloud.com/v2.0/</test.rackspace-cloudloadbalancers.endpoint>
     <test.rackspace-cloudloadbalancers.api-version>1</test.rackspace-cloudloadbalancers.api-version>
