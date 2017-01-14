@@ -21,8 +21,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.beans.ConstructorProperties;
 import java.util.Set;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ImmutableSet;
 
 /**
@@ -31,7 +32,7 @@ import com.google.common.collect.ImmutableSet;
  * <p/>
  * This is a composite type consisting of both the set of allowed units for the
  * resource type as well as the cost per unit.
- * 
+ *
  * @see AllowedArgumentsForCreateServer
  */
 public class AllowedArguments {
@@ -122,7 +123,7 @@ public class AllowedArguments {
 	}
 
 	protected ToStringHelper string() {
-		return Objects.toStringHelper("").add("costPerUnit", this.costPerUnit)
+		return MoreObjects.toStringHelper("").add("costPerUnit", this.costPerUnit)
 				.add("allowedUnits", this.allowedUnits);
 	}
 

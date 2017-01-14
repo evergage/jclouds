@@ -22,21 +22,22 @@ import java.beans.ConstructorProperties;
 
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * An OpenStack Cinder Volume Attachment (describes how Volumes are attached to Servers).
  */
 public class VolumeAttachment {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromVolumeAttachment(this);
    }
 
@@ -47,8 +48,8 @@ public class VolumeAttachment {
       protected String volumeId;
       protected String serverId;
       protected String device;
-   
-      /** 
+
+      /**
        * @see VolumeAttachment#getId()
        */
       public T id(String id) {
@@ -56,7 +57,7 @@ public class VolumeAttachment {
          return self();
       }
 
-      /** 
+      /**
        * @see VolumeAttachment#getVolumeId()
        */
       public T volumeId(String volumeId) {
@@ -64,7 +65,7 @@ public class VolumeAttachment {
          return self();
       }
 
-      /** 
+      /**
        * @see VolumeAttachment#getServerId()
        */
       public T serverId(String serverId) {
@@ -72,7 +73,7 @@ public class VolumeAttachment {
          return self();
       }
 
-      /** 
+      /**
        * @see VolumeAttachment#getDevice()
        */
       public T device(String device) {
@@ -83,7 +84,7 @@ public class VolumeAttachment {
       public VolumeAttachment build() {
          return new VolumeAttachment(id, volumeId, serverId, device);
       }
-      
+
       public T fromVolumeAttachment(VolumeAttachment in) {
          return this
                   .id(in.getId())
@@ -162,12 +163,12 @@ public class VolumeAttachment {
                && Objects.equal(this.serverId, that.serverId)
                && Objects.equal(this.device, that.device);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("id", id).add("volumeId", volumeId).add("serverId", serverId).add("device", device);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

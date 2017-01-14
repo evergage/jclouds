@@ -21,6 +21,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.io.Closeable;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.Context;
 import org.jclouds.View;
 import org.jclouds.location.Provider;
@@ -28,7 +29,7 @@ import org.jclouds.rest.ApiContext;
 import org.jclouds.util.TypeTokenUtils;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ForwardingObject;
 import com.google.common.reflect.TypeParameter;
 import com.google.common.reflect.TypeToken;
@@ -42,25 +43,25 @@ public abstract class BaseView extends ForwardingObject implements View {
       this.backend = checkNotNull(backend, "backend");
       this.backendType = checkNotNull(backendType, "backendType");
    }
-   
+
    @SuppressWarnings("unchecked")
    @Override
    public <C extends Context> C unwrap(TypeToken<C> type) {
       checkArgument(TypeTokenUtils.isSupertypeOf(checkNotNull(type, "type"), backendType), "%s is not a supertype of backend type %s", type, backendType);
       return (C) backend;
    }
-   
+
    @Override
    public TypeToken<? extends Context> getBackendType() {
       return backendType;
    }
-   
+
    @SuppressWarnings("unchecked")
    @Override
    public <C extends Context> C unwrap() throws ClassCastException {
       return (C) unwrap(getBackendType());
    }
-   
+
    @Override
    public <A extends Closeable> A unwrapApi(Class<A> apiClass) {
       checkArgument(ApiContext.class.isAssignableFrom(backendType.getRawType()),
@@ -98,7 +99,7 @@ public abstract class BaseView extends ForwardingObject implements View {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper("").add("backend", delegate()).add("backendType", getBackendType());
+      return MoreObjects.toStringHelper("").add("backend", delegate()).add("backendType", getBackendType());
    }
 
 }

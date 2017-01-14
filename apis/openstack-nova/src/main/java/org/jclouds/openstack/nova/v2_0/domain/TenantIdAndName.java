@@ -22,20 +22,21 @@ import java.beans.ConstructorProperties;
 
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Class TenantIdAndName
- * 
+ *
 */
 public class TenantIdAndName {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromTenantIdAndName(this);
    }
 
@@ -44,8 +45,8 @@ public class TenantIdAndName {
 
       protected String tenantId;
       protected String name;
-   
-      /** 
+
+      /**
        * @see TenantIdAndName#getTenantId()
        */
       public T tenantId(String tenantId) {
@@ -53,7 +54,7 @@ public class TenantIdAndName {
          return self();
       }
 
-      /** 
+      /**
        * @see TenantIdAndName#getName()
        */
       public T name(String name) {
@@ -64,7 +65,7 @@ public class TenantIdAndName {
       public TenantIdAndName build() {
          return new TenantIdAndName(tenantId, name);
       }
-      
+
       public T fromTenantIdAndName(TenantIdAndName in) {
          return this
                   .tenantId(in.getTenantId())
@@ -112,12 +113,12 @@ public class TenantIdAndName {
       return Objects.equal(this.tenantId, that.tenantId)
                && Objects.equal(this.name, that.name);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("tenantId", tenantId).add("name", name);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

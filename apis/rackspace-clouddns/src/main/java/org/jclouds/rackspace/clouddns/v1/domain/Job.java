@@ -16,7 +16,7 @@
  */
 package org.jclouds.rackspace.clouddns.v1.domain;
 
-import static com.google.common.base.Objects.toStringHelper;
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.beans.ConstructorProperties;
@@ -32,7 +32,7 @@ public class Job<T> {
    private final Status status;
    private final Optional<Error> error;
    private final Optional<T> resource;
-   
+
    private Job(String id, Status status, Optional<Error> error, Optional<T> resource) {
       this.id = id;
       this.status = status;
@@ -58,7 +58,7 @@ public class Job<T> {
 
    public enum Status {
       /**
-       * INITIALIZED is the status that immediately precedes RUNNING and is the first possible state of a job. 
+       * INITIALIZED is the status that immediately precedes RUNNING and is the first possible state of a job.
        * It indicates acceptance of the job.
        */
       INITIALIZED,
@@ -74,7 +74,7 @@ public class Job<T> {
          }
       }
    }
-   
+
    public static <T> Builder<T> builder() {
       return new Builder<T>();
    }
@@ -104,7 +104,7 @@ public class Job<T> {
          this.resource = Optional.fromNullable(resource);
          return this;
       }
-      
+
       public Job<T> build() {
          return new Job<T>(id, status, error, resource);
       }

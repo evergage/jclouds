@@ -24,14 +24,13 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.compute.domain.Image;
 import org.jclouds.compute.domain.OsFamily;
 import org.jclouds.compute.strategy.PopulateDefaultLoginCredentialsForImageStrategy;
 import org.jclouds.domain.Credentials;
 import org.jclouds.domain.LoginCredentials;
 import org.jclouds.javax.annotation.Nullable;
-
-import com.google.common.base.Objects;
 
 @Singleton
 public class ReturnCredentialsBoundToImage implements PopulateDefaultLoginCredentialsForImageStrategy {
@@ -64,9 +63,9 @@ public class ReturnCredentialsBoundToImage implements PopulateDefaultLoginCreden
          return LoginCredentials.builder().user("root").build();
       }
    }
-   
+
    @Override
    public String toString() {
-      return Objects.toStringHelper(this).toString();
+      return MoreObjects.toStringHelper(this).toString();
    }
 }

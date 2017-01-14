@@ -30,35 +30,35 @@ import org.jclouds.openstack.v2_0.domain.Link;
 import org.jclouds.openstack.v2_0.domain.Resource;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multimap;
 
 /**
  * Extended server returned by ServerWithSecurityGroupsApi
- * 
+ *
  * @see <a href=
 "http://docs.openstack.org/api/openstack-compute/1.1/content/Get_Server_Details-d1e2623.html"
 />
 */
 public class ServerWithSecurityGroups extends Server {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromServerWithSecurityGroups(this);
    }
 
    public abstract static class Builder<T extends Builder<T>> extends Server.Builder<T>  {
       protected Set<String> securityGroupNames = ImmutableSet.of();
-   
-      /** 
+
+      /**
        * @see ServerWithSecurityGroups#getSecurityGroupNames()
        */
       public T securityGroupNames(Set<String> securityGroupNames) {
-         this.securityGroupNames = ImmutableSet.copyOf(checkNotNull(securityGroupNames, "securityGroupNames"));      
+         this.securityGroupNames = ImmutableSet.copyOf(checkNotNull(securityGroupNames, "securityGroupNames"));
          return self();
       }
 
@@ -71,7 +71,7 @@ public class ServerWithSecurityGroups extends Server {
                accessIPv4, accessIPv6, status, image, flavor, keyName, configDrive, addresses,
                metadata, extendedStatus, extendedAttributes, diskConfig, securityGroupNames, availabilityZone);
       }
-      
+
       public T fromServerWithSecurityGroups(ServerWithSecurityGroups in) {
          return super.fromServer(in)
                   .securityGroupNames(in.getSecurityGroupNames());
@@ -93,11 +93,11 @@ public class ServerWithSecurityGroups extends Server {
                                       String tenantId, String userId, Date updated, Date created, @Nullable String hostId,
                                       @Nullable String accessIPv4, @Nullable String accessIPv6, Server.Status status, Resource image,
                                       Resource flavor, @Nullable String keyName, @Nullable String configDrive,
-                                      Multimap<String, Address> addresses, Map<String, String> metadata, 
+                                      Multimap<String, Address> addresses, Map<String, String> metadata,
                                       @Nullable ServerExtendedStatus extendedStatus, @Nullable ServerExtendedAttributes extendedAttributes,
                                       @Nullable String diskConfig, Set<String> securityGroupNames, @Nullable String availabilityZone) {
       super(id, name, links, uuid, tenantId, userId, updated, created, hostId, accessIPv4, accessIPv6, status, image, flavor, keyName, configDrive, addresses, metadata, extendedStatus, extendedAttributes, diskConfig, availabilityZone);
-      this.securityGroupNames = ImmutableSet.copyOf(checkNotNull(securityGroupNames, "securityGroupNames"));      
+      this.securityGroupNames = ImmutableSet.copyOf(checkNotNull(securityGroupNames, "securityGroupNames"));
    }
 
    public Set<String> getSecurityGroupNames() {
@@ -116,10 +116,10 @@ public class ServerWithSecurityGroups extends Server {
       ServerWithSecurityGroups that = ServerWithSecurityGroups.class.cast(obj);
       return super.equals(that) && Objects.equal(this.securityGroupNames, that.securityGroupNames);
    }
-   
+
    protected ToStringHelper string() {
       return super.string()
             .add("securityGroupNames", securityGroupNames);
    }
-   
+
 }

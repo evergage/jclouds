@@ -22,21 +22,22 @@ import java.beans.ConstructorProperties;
 
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Represents a Virtual Interface (VIF)
- * 
+ *
  * @see org.jclouds.openstack.nova.v2_0.extensions.VirtualInterfaceApi
 */
 public class VirtualInterface {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromVirtualInterface(this);
    }
 
@@ -45,8 +46,8 @@ public class VirtualInterface {
 
       protected String id;
       protected String macAddress;
-   
-      /** 
+
+      /**
        * @see VirtualInterface#getId()
        */
       public T id(String id) {
@@ -54,7 +55,7 @@ public class VirtualInterface {
          return self();
       }
 
-      /** 
+      /**
        * @see VirtualInterface#getMacAddress()
        */
       public T macAddress(String macAddress) {
@@ -65,7 +66,7 @@ public class VirtualInterface {
       public VirtualInterface build() {
          return new VirtualInterface(id, macAddress);
       }
-      
+
       public T fromVirtualInterface(VirtualInterface in) {
          return this
                   .id(in.getId())
@@ -113,12 +114,12 @@ public class VirtualInterface {
       return Objects.equal(this.id, that.id)
                && Objects.equal(this.macAddress, that.macAddress);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("id", id).add("macAddress", macAddress);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

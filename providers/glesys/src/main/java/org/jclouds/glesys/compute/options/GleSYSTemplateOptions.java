@@ -23,7 +23,7 @@ import java.util.Map;
 
 import org.jclouds.compute.options.TemplateOptions;
 
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.net.InetAddresses;
 
 /**
@@ -31,13 +31,13 @@ import com.google.common.net.InetAddresses;
  * {@link ComputeService#createNodesInGroup(String, int, TemplateOptions)} and
  * {@link ComputeService#createNodesInGroup(String, int, TemplateOptions)}
  * operations on the <em>glesys</em> provider.
- * 
+ *
  * <h2>Usage</h2> The recommended way to instantiate a
  * {@link GleSYSTemplateOptions} object is to statically import
  * {@code GleSYSTemplateOptions.*} and invoke a static creation method followed
  * by an instance mutator (if needed):
  * <p>
- * 
+ *
  * <pre>
  * import static org.jclouds.compute.options.GleSYSTemplateOptions.Builder.*;
  * ComputeService api = // get connection
@@ -84,13 +84,13 @@ public class GleSYSTemplateOptions extends TemplateOptions implements Cloneable 
     * Sets the IP address to assign to the new server instance. If set to "
     * <code>any</code>" the server will be automatically assigned a free IP
     * address.
-    * 
+    *
     * @see ServerApi#createWithHostnameAndRootPassword
     * @see InetAddresses#isInetAddress
     */
    public GleSYSTemplateOptions ip(String ip) {
       checkNotNull(ip);
-      checkArgument("any".equals(ip) || InetAddresses.isInetAddress(ip), "ip %s is not valid", ip);      
+      checkArgument("any".equals(ip) || InetAddresses.isInetAddress(ip), "ip %s is not valid", ip);
       this.ip = ip;
       return this;
    }
@@ -105,7 +105,7 @@ public class GleSYSTemplateOptions extends TemplateOptions implements Cloneable 
    /**
     * Sets the password for the root user on the created server instance. If
     * left unspecified, a random password will be assigned.
-    * 
+    *
     * @see ServerApi#createWithHostnameAndRootPassword
     */
    public GleSYSTemplateOptions rootPassword(String rootPassword) {
@@ -131,7 +131,7 @@ public class GleSYSTemplateOptions extends TemplateOptions implements Cloneable 
 
    /**
     * Sets the monthly data transfer limit (in GB) for the server.
-    * 
+    *
     * @see ServerSpec#getTransferGB()
     */
    public GleSYSTemplateOptions transferGB(int transferGB) {

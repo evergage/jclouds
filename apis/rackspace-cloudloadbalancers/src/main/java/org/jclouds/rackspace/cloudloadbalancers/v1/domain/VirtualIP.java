@@ -18,8 +18,9 @@ package org.jclouds.rackspace.cloudloadbalancers.v1.domain;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * A virtual IP (VIP) makes a load balancer accessible by clients. The load balancing service
@@ -37,7 +38,7 @@ public class VirtualIP {
    public static VirtualIP publicIPv6() {
       return new VirtualIP(Type.PUBLIC, IPVersion.IPV6);
    }
-   
+
    protected VirtualIP(Type type, IPVersion ipVersion) {
       this.type = checkNotNull(type, "type");
       this.ipVersion = checkNotNull(ipVersion, "ipVersion");
@@ -52,10 +53,10 @@ public class VirtualIP {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this).omitNullValues()
+      return MoreObjects.toStringHelper(this).omitNullValues()
             .add("ipVersion", ipVersion).add("type", type);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

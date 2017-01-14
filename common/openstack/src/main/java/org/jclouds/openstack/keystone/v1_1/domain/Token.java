@@ -16,8 +16,8 @@
  */
 package org.jclouds.openstack.keystone.v1_1.domain;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Date;
@@ -25,14 +25,14 @@ import java.util.Date;
 import com.google.common.base.Objects;
 
 /**
- * 
+ *
  * Tokens are valid for a finite duration. The expires attribute denotes the
  * time after which the token will automatically become invalid. A token may be
  * manually revoked before the time identified by the expires attribute; expires
  * predicts a token's maximum possible lifespan but does not guarantee that it
  * will reach that lifespan. Clients are encouraged to cache a token until it
  * expires.
- * 
+ *
  * @see <a href=
  *      "http://docs.rackspace.com/loadbalancers/api/v1.0/clb-devguide/content/Service_Access_Endpoints-d1e517.html"
  *      />
@@ -81,7 +81,7 @@ public class Token implements Comparable<Token> {
       // prohibited in GAE. This also implies fields are not final.
       // see http://code.google.com/p/jclouds/issues/detail?id=925
    }
-  
+
    protected String id;
    protected Date expires;
 
@@ -93,7 +93,7 @@ public class Token implements Comparable<Token> {
    /**
     * When providing an ID, it is assumed that the token exists in the current
     * OpenStack deployment
-    * 
+    *
     * @return the id of the token in the current OpenStack deployment
     */
    public String getId() {

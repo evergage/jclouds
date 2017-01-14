@@ -20,22 +20,23 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.beans.ConstructorProperties;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
 
 /**
  * Class IpPortPair
- * 
+ *
 */
 public class IpPortPair implements Comparable<IpPortPair> {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromIpPortPair(this);
    }
 
@@ -44,8 +45,8 @@ public class IpPortPair implements Comparable<IpPortPair> {
 
       protected Ip ip;
       protected int port;
-   
-      /** 
+
+      /**
        * @see IpPortPair#getIp()
        */
       public T ip(Ip ip) {
@@ -53,7 +54,7 @@ public class IpPortPair implements Comparable<IpPortPair> {
          return self();
       }
 
-      /** 
+      /**
        * @see IpPortPair#getPort()
        */
       public T port(int port) {
@@ -64,7 +65,7 @@ public class IpPortPair implements Comparable<IpPortPair> {
       public IpPortPair build() {
          return new IpPortPair(ip, port);
       }
-      
+
       public T fromIpPortPair(IpPortPair in) {
          return this
                   .ip(in.getIp())
@@ -111,12 +112,12 @@ public class IpPortPair implements Comparable<IpPortPair> {
       return Objects.equal(this.ip, that.ip)
                && Objects.equal(this.port, that.port);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("ip", ip).add("port", port);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

@@ -28,7 +28,7 @@ import org.jclouds.javax.annotation.Nullable;
 import org.jclouds.openstack.v2_0.domain.Link;
 import org.jclouds.openstack.v2_0.domain.Resource;
 
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
@@ -465,7 +465,7 @@ public class Server extends Resource {
     * This field is only present if the Disk Config extension is installed.
     * <p/>
     * NOTE: Typically a field like this would be implemented as an enum but this field was
-    * originally implmented as a String and {@link Server#DISK_CONFIG_AUTO} and 
+    * originally implmented as a String and {@link Server#DISK_CONFIG_AUTO} and
     * {@link Server#DISK_CONFIG_MANUAL} were added later as Strings to preserve backwards
     * compatibility.
     *

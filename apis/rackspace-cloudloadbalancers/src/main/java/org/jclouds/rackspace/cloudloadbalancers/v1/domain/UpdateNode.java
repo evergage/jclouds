@@ -16,12 +16,13 @@
  */
 package org.jclouds.rackspace.cloudloadbalancers.v1.domain;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 import org.jclouds.rackspace.cloudloadbalancers.v1.domain.internal.BaseNode.Condition;
 import org.jclouds.rackspace.cloudloadbalancers.v1.domain.internal.BaseNode.Type;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Used to update Nodes.
@@ -30,7 +31,7 @@ public class UpdateNode {
    private final Condition condition;
    private final Type type;
    private final Integer weight;
-   
+
    protected UpdateNode(@Nullable Condition condition, @Nullable Type type, @Nullable Integer weight) {
       this.condition = condition;
       this.type = type;
@@ -50,10 +51,10 @@ public class UpdateNode {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this).omitNullValues()
+      return MoreObjects.toStringHelper(this).omitNullValues()
             .add("condition", condition).add("type", type).add("weight", weight);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();
@@ -103,7 +104,7 @@ public class UpdateNode {
          this.weight = weight;
          return this;
       }
-      
+
       public UpdateNode build() {
          return new UpdateNode(condition, type, weight);
       }

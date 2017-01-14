@@ -21,10 +21,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.beans.ConstructorProperties;
 import java.util.List;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.openstack.trove.v1.internal.Volume;
 import org.jclouds.openstack.v2_0.domain.Link;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ImmutableList;
 
 /**
@@ -100,7 +101,7 @@ public class Instance implements Comparable<Instance>{
    public List<Link> getLinks() {
       return this.links;
    }
-   
+
    /**
     * @return the hostname of this instance. The hostname is null unless this Instance was obtained with {@link InstanceApi#get(String)}.
     * @see Instance.Builder#hostname(String)
@@ -117,7 +118,7 @@ public class Instance implements Comparable<Instance>{
       /**
        * The database instance is being provisioned.
        * */
-      BUILD, 
+      BUILD,
       /**
        * The database instance is rebooting.
        */
@@ -137,7 +138,7 @@ public class Instance implements Comparable<Instance>{
       /**
        * The database instance is terminating services. Also, SHUTDOWN is returned if for any reason the instance is shut down but not the actual server.
        */
-      SHUTDOWN, 
+      SHUTDOWN,
       /**
        * Unrecognized status response.
        */
@@ -175,7 +176,7 @@ public class Instance implements Comparable<Instance>{
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("id", id).add("name", name).add("flavor", flavor).add("volume size", volume.getSize()).add("links", links).add("hostname", hostname);
    }
 
@@ -184,11 +185,11 @@ public class Instance implements Comparable<Instance>{
       return string().toString();
    }
 
-   public static Builder builder() { 
+   public static Builder builder() {
       return new Builder();
    }
 
-   public Builder toBuilder() { 
+   public Builder toBuilder() {
       return new Builder().fromInstance(this);
    }
 
@@ -201,7 +202,7 @@ public class Instance implements Comparable<Instance>{
       protected ImmutableList<Link> links;
       protected String hostname;
 
-      /** 
+      /**
        * @param id The id of this instance.
        * @return The builder object.
        * @see Instance#getId()
@@ -211,7 +212,7 @@ public class Instance implements Comparable<Instance>{
          return this;
       }
 
-      /** 
+      /**
        * @param name The name of this instance.
        * @return The builder object.
        * @see Instance#getName()
@@ -221,7 +222,7 @@ public class Instance implements Comparable<Instance>{
          return this;
       }
 
-      /** 
+      /**
        * @param size Specifies the volume size in gigabytes (GB).
        * @return The builder object.
        * @see Instance#getSize()
@@ -231,7 +232,7 @@ public class Instance implements Comparable<Instance>{
          return this;
       }
 
-      /** 
+      /**
        * @param flavor The Flavor of this instance as specified in the response from the List Flavors API call.
        * @return The builder object.
        * @see Instance#getFlavor()
@@ -241,7 +242,7 @@ public class Instance implements Comparable<Instance>{
          return this;
       }
 
-      /** 
+      /**
        * @param status The status of this instance.
        * @return The builder object.
        * @see Instance#getStatus()
@@ -251,7 +252,7 @@ public class Instance implements Comparable<Instance>{
          return this;
       }
 
-      /** 
+      /**
        * @param links The links to this instance.
        * @return The builder object.
        * @see Instance#getLinks()
@@ -260,8 +261,8 @@ public class Instance implements Comparable<Instance>{
          this.links = links;
          return this;
       }
-      
-      /** 
+
+      /**
        * @param name The hostname of this instance.
        * @return The builder object.
        * @see Instance#getHostname()
@@ -272,7 +273,7 @@ public class Instance implements Comparable<Instance>{
       }
 
       /**
-       * 
+       *
        * @return A new Instance object.
        */
       public Instance build() {
@@ -288,11 +289,11 @@ public class Instance implements Comparable<Instance>{
                .status(in.getStatus())
                .links(links)
                .hostname(hostname);
-      }        
+      }
    }
 
    @Override
    public int compareTo(Instance that) {
       return this.getId().compareTo(that.getId());
-   }   
+   }
 }

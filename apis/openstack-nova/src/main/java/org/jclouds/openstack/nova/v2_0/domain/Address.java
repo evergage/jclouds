@@ -20,8 +20,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.beans.ConstructorProperties;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Optional;
 import org.jclouds.javax.annotation.Nullable;
 
@@ -29,15 +30,15 @@ import javax.inject.Named;
 
 /**
  * IP address
- * 
+ *
 */
 public class Address {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromAddress(this);
    }
 
@@ -58,7 +59,7 @@ public class Address {
       protected String type;
 
 
-      /** 
+      /**
        * @see Address#getAddr()
        */
       public T addr(String addr) {
@@ -66,7 +67,7 @@ public class Address {
          return self();
       }
 
-      /** 
+      /**
        * @see Address#getVersion()
        */
       public T version(int version) {
@@ -87,7 +88,7 @@ public class Address {
       public Address build() {
          return new Address(addr, version, macAddr, type);
       }
-      
+
       public T fromAddress(Address in) {
          return this
                   .addr(in.getAddr())
@@ -158,12 +159,12 @@ public class Address {
                && Objects.equal(this.macAddr, that.macAddr)
                && Objects.equal(this.type, that.type);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("addr", addr).add("version", version).add("macAddr", macAddr.or("")).add("type", type.or(""));
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

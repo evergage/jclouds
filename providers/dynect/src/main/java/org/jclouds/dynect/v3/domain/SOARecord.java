@@ -25,7 +25,7 @@ import javax.inject.Named;
 import org.jclouds.dynect.v3.domain.Zone.SerialStyle;
 import org.jclouds.dynect.v3.domain.rdata.SOAData;
 
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Start of Authority per RFC 1035
@@ -91,5 +91,5 @@ public final class SOARecord extends Record<SOAData> {
       protected Builder self() {
          return this;
       }
-   }   
+   }
 }

@@ -20,14 +20,15 @@ import java.beans.ConstructorProperties;
 
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Additional attributes delivered by Extended Server Attributes extension (alias "OS-EXT-SRV-ATTR")
- * 
+ *
  * @see <a href=
         "http://nova.openstack.org/api/nova.api.openstack.compute.contrib.extended_server_attributes.html"
        />
@@ -50,7 +51,7 @@ public class ServerExtendedAttributes {
       protected String hostName;
       protected String hypervisorHostName;
 
-      /** 
+      /**
        * @see ServerExtendedAttributes#getInstanceName()
        */
       public Builder  instanceName(String instanceName) {
@@ -58,7 +59,7 @@ public class ServerExtendedAttributes {
          return self();
       }
 
-      /** 
+      /**
        * @see ServerExtendedAttributes#getHostName()
        */
       public Builder  hostName(String hostName) {
@@ -66,7 +67,7 @@ public class ServerExtendedAttributes {
          return self();
       }
 
-      /** 
+      /**
        * @see ServerExtendedAttributes#getHypervisorHostName()
        */
       public Builder  hypervisorHostName(String hypervisorHostName) {
@@ -77,7 +78,7 @@ public class ServerExtendedAttributes {
       public ServerExtendedAttributes build() {
          return new ServerExtendedAttributes(instanceName, hostName, hypervisorHostName);
       }
-      
+
       public Builder  fromServerExtendedAttributes(ServerExtendedAttributes in) {
          return this
                .instanceName(in.getInstanceName())
@@ -140,12 +141,12 @@ public class ServerExtendedAttributes {
                && Objects.equal(this.hostName, that.hostName)
                && Objects.equal(this.hypervisorHostName, that.hypervisorHostName);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("instanceName", instanceName).add("hostName", hostName).add("hypervisorHostName", hypervisorHostName);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

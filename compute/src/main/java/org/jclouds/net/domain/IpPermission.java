@@ -26,8 +26,9 @@ import java.util.Set;
 
 import com.google.common.annotations.Beta;
 import com.google.common.base.Function;
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -39,7 +40,7 @@ import com.google.common.collect.Sets;
  * Ingress access to a destination protocol on particular ports by source, which could be an ip
  * range (cidrblock), set of explicit security group ids in the current tenant, or security group
  * names in another tenant.
- * 
+ *
  * @see IpPermissions
  */
 @Beta
@@ -58,7 +59,7 @@ public class IpPermission implements Comparable<IpPermission> {
       private Set<String> exclusionCidrBlocks = Sets.newLinkedHashSet();
 
       /**
-       * 
+       *
        * @see IpPermission#getIpProtocol()
        */
       public Builder ipProtocol(IpProtocol ipProtocol) {
@@ -67,7 +68,7 @@ public class IpPermission implements Comparable<IpPermission> {
       }
 
       /**
-       * 
+       *
        * @see IpPermission#getFromPort()
        */
       public Builder fromPort(int fromPort) {
@@ -76,7 +77,7 @@ public class IpPermission implements Comparable<IpPermission> {
       }
 
       /**
-       * 
+       *
        * @see IpPermission#getToPort()
        */
       public Builder toPort(int toPort) {
@@ -278,7 +279,7 @@ public class IpPermission implements Comparable<IpPermission> {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper("").add("ipProtocol", ipProtocol).add("fromPort", fromPort)
+      return MoreObjects.toStringHelper("").add("ipProtocol", ipProtocol).add("fromPort", fromPort)
             .add("toPort", toPort).add("tenantIdGroupNamePairs", tenantIdGroupNamePairs).add("groupIds", groupIds)
             .add("cidrBlocks", cidrBlocks).add("exclusionCidrBlocks", exclusionCidrBlocks);
    }

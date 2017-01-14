@@ -21,24 +21,25 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.beans.ConstructorProperties;
 import java.util.Date;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.primitives.Longs;
 
 /**
  * State of a job.
- * 
+ *
  * @see <a href="http://wiki.gogrid.com/wiki/index.php/API:Job_State_(Object)"/>
 */
 public class JobProperties implements Comparable<JobProperties> {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromJobProperties(this);
    }
 
@@ -49,8 +50,8 @@ public class JobProperties implements Comparable<JobProperties> {
       protected Date updatedOn;
       protected JobState state;
       protected String note;
-   
-      /** 
+
+      /**
        * @see JobProperties#getId()
        */
       public T id(long id) {
@@ -58,7 +59,7 @@ public class JobProperties implements Comparable<JobProperties> {
          return self();
       }
 
-      /** 
+      /**
        * @see JobProperties#getUpdatedOn()
        */
       public T updatedOn(Date updatedOn) {
@@ -66,7 +67,7 @@ public class JobProperties implements Comparable<JobProperties> {
          return self();
       }
 
-      /** 
+      /**
        * @see JobProperties#getState()
        */
       public T state(JobState state) {
@@ -74,7 +75,7 @@ public class JobProperties implements Comparable<JobProperties> {
          return self();
       }
 
-      /** 
+      /**
        * @see JobProperties#getNote()
        */
       public T note(String note) {
@@ -85,7 +86,7 @@ public class JobProperties implements Comparable<JobProperties> {
       public JobProperties build() {
          return new JobProperties(id, updatedOn, state, note);
       }
-      
+
       public T fromJobProperties(JobProperties in) {
          return this
                   .id(in.getId())
@@ -149,12 +150,12 @@ public class JobProperties implements Comparable<JobProperties> {
                && Objects.equal(this.state, that.state)
                && Objects.equal(this.note, that.note);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("id", id).add("updatedOn", updatedOn).add("state", state).add("note", note);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

@@ -19,11 +19,12 @@ package org.jclouds.compute.domain;
 import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.annotations.Beta;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Running Operating system
@@ -117,7 +118,7 @@ public class OperatingSystem {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper("").omitNullValues().add("family", family).add("name", name).add("arch", arch)
+      return MoreObjects.toStringHelper("").omitNullValues().add("family", family).add("name", name).add("arch", arch)
                .add("version", version).add("description", description).add("is64Bit", is64Bit);
    }
 
@@ -150,11 +151,11 @@ public class OperatingSystem {
 
    /**
     * name of the operating system; ex. {@code Red Hat Enterprise Linux}
-    * 
+    *
     * <h2>note</h2> While this looks similar to, and may in some cases be the same as the java
     * system property {@code os.name} it isn't guaranteed to match a particular value. For example,
     * this value could be derived from data parsed for a cloud api or the OVF CIM OSType enum value;
-    * 
+    *
     * @return operating system name or null if it couldn't be determined.
     */
    @Nullable
@@ -167,12 +168,12 @@ public class OperatingSystem {
     * <p/>
     * generally, this is used to decide whether an operating system will run certain binaries, for
     * example, a 64bit JDK.
-    * 
+    *
     * <h2>note</h2>
     * While this looks similar to, and may in some cases be the same as the java system property
     * {@code os.arch} it isn't guaranteed to match a particular value. For example, this value could
     * be derived from data parsed for a cloud api or the OVF CIM OSType enum value;
-    * 
+    *
     * @return operating system architecture or null if it couldn't be determined.
     */
    @Nullable
@@ -189,7 +190,7 @@ public class OperatingSystem {
     * While this looks similar to, and may in some cases be the same as the java system property
     * {@code os.version} it isn't guaranteed to match a particular value. For example, this value
     * could be derived from data parsed for a cloud api or the OVF CIM OSType enum value;
-    * 
+    *
     * @return operating system version or null if it couldn't be determined.
     */
    @Nullable
@@ -203,7 +204,7 @@ public class OperatingSystem {
     * This is the only required field in the operating system object. In some implementations, it is
     * this data that is used to parse the value of the {@link #name}, {@link #version}, and
     * {@link #arch} fields.
-    * 
+    *
     * @return operating system description
     */
    public String getDescription() {
@@ -211,7 +212,7 @@ public class OperatingSystem {
    }
 
    /**
-    * 
+    *
     * @return whether this operating system supports 64 bit computation.
     */
    public boolean is64Bit() {

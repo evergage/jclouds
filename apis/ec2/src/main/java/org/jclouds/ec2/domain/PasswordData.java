@@ -20,18 +20,19 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Date;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 /**
  * The encrypted administrator password for an instance running Windows.
- * 
+ *
  * <h4>Note</h4>
- * 
+ *
  * The Windows password is only generated the first time an AMI is launched. It is not generated for
  * rebundled AMIs or after the password is changed on an instance.
- * 
+ *
  * The password is encrypted using the key pair that you provided.
- * 
+ *
  * @see <a
  *      href="http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/ApiReference-query-GetPasswordData.html"
  *      >doc</a>
@@ -144,7 +145,7 @@ public class PasswordData {
     */
    @Override
    public String toString() {
-      return Objects.toStringHelper(this).omitNullValues().add("instanceId", instanceId).add("timestamp", timestamp)
+      return MoreObjects.toStringHelper(this).omitNullValues().add("instanceId", instanceId).add("timestamp", timestamp)
                .add("passwordData", passwordData).toString();
    }
 

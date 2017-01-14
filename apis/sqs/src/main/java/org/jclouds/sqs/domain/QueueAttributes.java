@@ -20,12 +20,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Date;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 
 /**
- * 
- * 
+ *
+ *
  * @see <a href=
  *      "http://docs.amazonwebservices.com/AWSSimpleQueueService/2011-10-01/APIReference/Query_QueryGetQueueAttributes.html"
  *      />
@@ -247,7 +248,7 @@ public class QueueAttributes {
 
    /**
     * Note this is in raw Json
-    * 
+    *
     * @see Attribute#POLICY
     */
    public Optional<String> getRawPolicy() {
@@ -298,7 +299,7 @@ public class QueueAttributes {
     */
    @Override
    public String toString() {
-      return Objects.toStringHelper(this).omitNullValues().add("queueArn", queueArn)
+      return MoreObjects.toStringHelper(this).omitNullValues().add("queueArn", queueArn)
             .add("approximateNumberOfMessages", approximateNumberOfMessages)
             .add("approximateNumberOfMessagesNotVisible", approximateNumberOfMessagesNotVisible)
             .add("approximateNumberOfMessagesDelayed", approximateNumberOfMessagesDelayed)

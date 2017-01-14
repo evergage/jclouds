@@ -21,10 +21,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.beans.ConstructorProperties;
 import java.util.Set;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ForwardingSet;
 import com.google.common.collect.ImmutableSet;
 
@@ -54,7 +55,7 @@ public class Service extends ForwardingSet<Endpoint> {
       protected String name;
       protected String description;
       protected ImmutableSet.Builder<Endpoint> endpoints = ImmutableSet.<Endpoint>builder();
-      
+
       /**
        * @see Service#getId()
        */
@@ -78,7 +79,7 @@ public class Service extends ForwardingSet<Endpoint> {
          this.name = name;
          return self();
       }
-      
+
       /**
        * @see Service#getDescription()
        */
@@ -139,7 +140,7 @@ public class Service extends ForwardingSet<Endpoint> {
       this.description = description;
       this.endpoints = endpoints == null ? ImmutableSet.<Endpoint>of() : ImmutableSet.copyOf(endpoints);
    }
-   
+
    /**
     * When providing an ID, it is assumed that the service exists in the current OpenStack deployment
     *
@@ -165,7 +166,7 @@ public class Service extends ForwardingSet<Endpoint> {
    public String getName() {
       return this.name;
    }
-   
+
    /**
     * @return the description of the service
     */
@@ -183,7 +184,7 @@ public class Service extends ForwardingSet<Endpoint> {
       if (this == obj) return true;
       if (obj == null || getClass() != obj.getClass()) return false;
       Service that = Service.class.cast(obj);
-      return Objects.equal(this.id, that.id) 
+      return Objects.equal(this.id, that.id)
             && Objects.equal(this.type, that.type)
             && Objects.equal(this.name, that.name)
             && Objects.equal(this.description, that.description)
@@ -191,7 +192,7 @@ public class Service extends ForwardingSet<Endpoint> {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this).omitNullValues()
+      return MoreObjects.toStringHelper(this).omitNullValues()
             .add("id", id).add("type", type).add("name", name)
             .add("description", description).add("endpoints", endpoints);
    }

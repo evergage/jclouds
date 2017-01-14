@@ -21,8 +21,10 @@ import java.beans.ConstructorProperties;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
@@ -51,7 +53,7 @@ public class User implements Comparable<User>{
       else {
          this.databases = databases;
       }
-   }    
+   }
 
    protected User(String name, String password, String host, Set<String> databases) {
       this.name = checkNotNull(name, "name required");
@@ -72,7 +74,7 @@ public class User implements Comparable<User>{
          }
          this.databases = ImmutableList.copyOf(databaseList);
       }
-   }   
+   }
 
    /**
     * @return the name of this user. The name is not a unique or even sufficient identifier in some cases.
@@ -81,8 +83,8 @@ public class User implements Comparable<User>{
     */
    public String getName() {
       return this.name;
-   }   
-   
+   }
+
    /**
     * @return the password for this user.
     * @see User.Builder#password(String)
@@ -90,7 +92,7 @@ public class User implements Comparable<User>{
    public String getPassword() {
       return this.password;
    }
-   
+
    /**
     * @return the host for this user.
     * @see User.Builder#host(String)
@@ -98,14 +100,14 @@ public class User implements Comparable<User>{
    public String getHost() {
       return this.host;
    }
-   
+
    /**
     * @return a unique identifier for this user. In most cases, this is just the name. If the user is restricted to connections from a specific host, the hostname must be appended to the user name with a "@".
     */
    public String getIdentifier() {
       if (host == null || "%".equals(host))
          return name;
-      else 
+      else
          return name + "@" + host;
    }
 
@@ -131,14 +133,14 @@ public class User implements Comparable<User>{
       if (this == obj) return true;
       if (obj == null || getClass() != obj.getClass()) return false;
       User that = User.class.cast(obj);
-      return Objects.equal(this.name, that.name) && 
+      return Objects.equal(this.name, that.name) &&
             Objects.equal(this.password, that.password) &&
             Objects.equal(this.host, that.host) &&
             Objects.equal(this.databases, that.databases);
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("name", name)
             .add("password", password)
             .add("host", host)
@@ -150,11 +152,11 @@ public class User implements Comparable<User>{
       return string().toString();
    }
 
-   public static Builder builder() { 
+   public static Builder builder() {
       return new Builder();
    }
 
-   public Builder toBuilder() { 
+   public Builder toBuilder() {
       return new Builder().fromUser(this);
    }
 
@@ -163,8 +165,8 @@ public class User implements Comparable<User>{
       protected String password;
       protected String host;
       protected Set<String> databases;
-      
-      /** 
+
+      /**
        * @param name The name of this user.
        * @return The builder object.
        * @see User#getName()
@@ -174,7 +176,7 @@ public class User implements Comparable<User>{
          return this;
       }
 
-      /** 
+      /**
        * @param name The password for this user.
        * @return The builder object.
        * @see User#getPassword()
@@ -183,10 +185,10 @@ public class User implements Comparable<User>{
          this.password = password;
          return this;
       }
-      
-      /** 
-       * @param host Specifies the host from which a user is allowed to connect to the database. 
-       * Possible values are a string containing an IPv4 address or "%" to allow connecting from any host. 
+
+      /**
+       * @param host Specifies the host from which a user is allowed to connect to the database.
+       * Possible values are a string containing an IPv4 address or "%" to allow connecting from any host.
        * Refer to Section 3.11.1, “User Access Restriction by Host” in the Rackspace Cloud Databases Developer Guide for details.
        * If host is not specified, it defaults to "%".
        * @return The builder object.
@@ -198,7 +200,7 @@ public class User implements Comparable<User>{
          return this;
       }
 
-      /** 
+      /**
        * @param name The databases for this user.
        * @return The builder object.
        * @see User#getDatabases()
@@ -209,7 +211,7 @@ public class User implements Comparable<User>{
       }
 
       /**
-       * 
+       *
        * @return A new User object.
        */
       public User build() {
@@ -222,7 +224,7 @@ public class User implements Comparable<User>{
                .password(in.getPassword())
                .host(in.getHost())
                .databases(ImmutableSet.copyOf( in.getDatabases() ));
-      }        
+      }
    }
 
    @Override

@@ -23,27 +23,28 @@ import java.util.Date;
 
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Information the SimpleTenantUsage extension return data about each Server
- * 
+ *
 */
 public class SimpleServerUsage {
 
    /**
     */
    public static enum Status {
-      
+
       UNRECOGNIZED, ACTIVE;
-      
+
       public String value() {
       return name();
       }
-      
+
       public static Status fromValue(String v) {
       try {
       return valueOf(v.toUpperCase());
@@ -51,14 +52,14 @@ public class SimpleServerUsage {
       return UNRECOGNIZED;
       }
       }
-      
+
    }
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromSimpleServerUsage(this);
    }
 
@@ -76,8 +77,8 @@ public class SimpleServerUsage {
       protected Date instanceTerminated;
       protected SimpleServerUsage.Status instanceStatus;
       protected long uptime;
-   
-      /** 
+
+      /**
        * @see SimpleServerUsage#getInstanceName()
        */
       public T instanceName(String instanceName) {
@@ -85,7 +86,7 @@ public class SimpleServerUsage {
          return self();
       }
 
-      /** 
+      /**
        * @see SimpleServerUsage#getHours()
        */
       public T hours(double hours) {
@@ -93,7 +94,7 @@ public class SimpleServerUsage {
          return self();
       }
 
-      /** 
+      /**
        * @see SimpleServerUsage#getFlavorMemoryMb()
        */
       public T flavorMemoryMb(double flavorMemoryMb) {
@@ -101,7 +102,7 @@ public class SimpleServerUsage {
          return self();
       }
 
-      /** 
+      /**
        * @see SimpleServerUsage#getFlavorLocalGb()
        */
       public T flavorLocalGb(double flavorLocalGb) {
@@ -109,7 +110,7 @@ public class SimpleServerUsage {
          return self();
       }
 
-      /** 
+      /**
        * @see SimpleServerUsage#getFlavorVcpus()
        */
       public T flavorVcpus(double flavorVcpus) {
@@ -117,7 +118,7 @@ public class SimpleServerUsage {
          return self();
       }
 
-      /** 
+      /**
        * @see SimpleServerUsage#getTenantId()
        */
       public T tenantId(String tenantId) {
@@ -125,7 +126,7 @@ public class SimpleServerUsage {
          return self();
       }
 
-      /** 
+      /**
        * @see SimpleServerUsage#getFlavorName()
        */
       public T flavorName(String flavorName) {
@@ -133,7 +134,7 @@ public class SimpleServerUsage {
          return self();
       }
 
-      /** 
+      /**
        * @see SimpleServerUsage#getInstanceCreated()
        */
       public T instanceCreated(Date instanceCreated) {
@@ -141,7 +142,7 @@ public class SimpleServerUsage {
          return self();
       }
 
-      /** 
+      /**
        * @see SimpleServerUsage#getInstanceTerminated()
        */
       public T instanceTerminated(Date instanceTerminated) {
@@ -149,7 +150,7 @@ public class SimpleServerUsage {
          return self();
       }
 
-      /** 
+      /**
        * @see SimpleServerUsage#getInstanceStatus()
        */
       public T instanceStatus(SimpleServerUsage.Status instanceStatus) {
@@ -157,7 +158,7 @@ public class SimpleServerUsage {
          return self();
       }
 
-      /** 
+      /**
        * @see SimpleServerUsage#getUptime()
        */
       public T uptime(long uptime) {
@@ -168,7 +169,7 @@ public class SimpleServerUsage {
       public SimpleServerUsage build() {
          return new SimpleServerUsage(instanceName, hours, flavorMemoryMb, flavorLocalGb, flavorVcpus, tenantId, flavorName, instanceCreated, instanceTerminated, instanceStatus, uptime);
       }
-      
+
       public T fromSimpleServerUsage(SimpleServerUsage in) {
          return this
                   .instanceName(in.getInstanceName())
@@ -297,12 +298,12 @@ public class SimpleServerUsage {
                && Objects.equal(this.instanceStatus, that.instanceStatus)
                && Objects.equal(this.uptime, that.uptime);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("instanceName", instanceName).add("hours", hours).add("flavorMemoryMb", flavorMemoryMb).add("flavorLocalGb", flavorLocalGb).add("flavorVcpus", flavorVcpus).add("tenantId", tenantId).add("flavorName", flavorName).add("instanceCreated", instanceCreated).add("instanceTerminated", instanceTerminated).add("instanceStatus", instanceStatus).add("uptime", uptime);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

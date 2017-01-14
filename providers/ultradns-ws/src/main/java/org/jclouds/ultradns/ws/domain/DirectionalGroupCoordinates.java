@@ -16,8 +16,8 @@
  */
 package org.jclouds.ultradns.ws.domain;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -54,7 +54,7 @@ public class DirectionalGroupCoordinates {
 
    /**
     * the {@link DirectionalPoolRecord#getType() recordType} of the record.
-    * 
+    *
     * @see DirectionalPoolRecordDetail#getRecord()
     */
    public int getRecordType() {
@@ -63,7 +63,7 @@ public class DirectionalGroupCoordinates {
 
    /**
     * the {@link DirectionalGroup#getName() name} of the directional group.
-    * 
+    *
     * @see DirectionalPoolRecordDetail#getGroup()
     * @see DirectionalPoolRecordDetail#getGeolocationGroup()
     * @see DirectionalPoolRecordDetail#getSourceIpGroup()

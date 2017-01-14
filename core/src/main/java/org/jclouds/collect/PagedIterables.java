@@ -22,6 +22,7 @@ import java.util.Iterator;
 
 import com.google.common.annotations.Beta;
 import com.google.common.base.Function;
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.ImmutableSet;
@@ -34,7 +35,7 @@ public class PagedIterables {
    /**
     * @param only
     *           the only page of data
-    * 
+    *
     * @return iterable with only the one page
     */
    public static <T> PagedIterable<T> onlyPage(final IterableWithMarker<T> only) {
@@ -54,13 +55,13 @@ public class PagedIterables {
    }
 
    /**
-    * 
-    * 
+    *
+    *
     * @param initial
     *           the initial set current data
     * @param markerToNext
     *           produces the next set based on the marker
-    * 
+    *
     * @return iterable current data which continues if the user iterates beyond
     *         the first page
     */
@@ -115,17 +116,17 @@ public class PagedIterables {
 
       @Override
       public String toString() {
-         return Objects.toStringHelper("").add("current", current).add("unread", unread).toString();
+         return MoreObjects.toStringHelper("").add("current", current).add("unread", unread).toString();
       }
    }
 
    /**
-    * 
+    *
     * @param initial
     *           the initial set current data
     * @param markerToNext
     *           produces the next set based on the marker
-    * 
+    *
     * @return iterable current data which continues if the user iterates beyond
     *         the first page
     */

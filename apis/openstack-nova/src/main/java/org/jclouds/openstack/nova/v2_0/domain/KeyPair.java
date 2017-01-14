@@ -22,21 +22,22 @@ import java.beans.ConstructorProperties;
 
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Class KeyPair
 */
 public class KeyPair {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromKeyPair(this);
    }
 
@@ -48,8 +49,8 @@ public class KeyPair {
       protected String userId;
       protected String name;
       protected String fingerprint;
-   
-      /** 
+
+      /**
        * @see KeyPair#getPublicKey()
        */
       public T publicKey(String publicKey) {
@@ -57,7 +58,7 @@ public class KeyPair {
          return self();
       }
 
-      /** 
+      /**
        * @see KeyPair#getPrivateKey()
        */
       public T privateKey(String privateKey) {
@@ -65,7 +66,7 @@ public class KeyPair {
          return self();
       }
 
-      /** 
+      /**
        * @see KeyPair#getUserId()
        */
       public T userId(String userId) {
@@ -73,7 +74,7 @@ public class KeyPair {
          return self();
       }
 
-      /** 
+      /**
        * @see KeyPair#getName()
        */
       public T name(String name) {
@@ -81,7 +82,7 @@ public class KeyPair {
          return self();
       }
 
-      /** 
+      /**
        * @see KeyPair#getFingerprint()
        */
       public T fingerprint(String fingerprint) {
@@ -92,7 +93,7 @@ public class KeyPair {
       public KeyPair build() {
          return new KeyPair(publicKey, privateKey, userId, name, fingerprint);
       }
-      
+
       public T fromKeyPair(KeyPair in) {
          return this
                   .publicKey(in.getPublicKey())
@@ -170,9 +171,9 @@ public class KeyPair {
                && Objects.equal(this.name, that.name)
                && Objects.equal(this.fingerprint, that.fingerprint);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .omitNullValues()
             .add("public_key", publicKey)
             .add("private_key", privateKey)
@@ -180,7 +181,7 @@ public class KeyPair {
             .add("name", name)
             .add("fingerprint", fingerprint);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

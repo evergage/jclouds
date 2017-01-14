@@ -26,25 +26,25 @@ import java.util.Set;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * The OpenStack Compute API is extensible. Extensions serve two purposes: They
  * allow the introduction of new features in the API without requiring a version
  * change and they allow the introduction of vendor specific niche
  * functionality.
- * 
+ *
  * @see <a href=
       "http://docs.openstack.org/api/openstack-compute/2/content/Extensions-d1e1444.html"
       />
 */
 public class Extension extends Resource {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromExtension(this);
    }
 
@@ -53,8 +53,8 @@ public class Extension extends Resource {
       protected String alias;
       protected Date updated;
       protected String description;
-   
-      /** 
+
+      /**
        * @see Extension#getNamespace()
        */
       public T namespace(URI namespace) {
@@ -62,7 +62,7 @@ public class Extension extends Resource {
          return self();
       }
 
-      /** 
+      /**
        * @see Extension#getAlias()
        */
       public T alias(String alias) {
@@ -78,7 +78,7 @@ public class Extension extends Resource {
          return alias(id);
       }
 
-      /** 
+      /**
        * @see Extension#getUpdated()
        */
       public T updated(Date updated) {
@@ -86,7 +86,7 @@ public class Extension extends Resource {
          return self();
       }
 
-      /** 
+      /**
        * @see Extension#getDescription()
        */
       public T description(String description) {
@@ -97,7 +97,7 @@ public class Extension extends Resource {
       public Extension build() {
          return new Extension(name, links, namespace, alias, updated, description);
       }
-      
+
       public T fromExtension(Extension in) {
          return super.fromResource(in)
                   .namespace(in.getNamespace())
@@ -164,10 +164,10 @@ public class Extension extends Resource {
                && Objects.equal(this.updated, that.updated)
                && Objects.equal(this.description, that.description);
    }
-   
+
    protected ToStringHelper string() {
       return super.string()
             .add("namespace", namespace).add("alias", alias).add("updated", updated).add("description", description);
    }
-   
+
 }

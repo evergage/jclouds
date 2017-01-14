@@ -23,11 +23,12 @@ import java.util.Date;
 
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Optional;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * An Openstack Cinder Volume Snapshot.
@@ -37,7 +38,7 @@ public class Snapshot {
    public static Builder builder() {
       return new Builder();
    }
-   
+
    public Builder toBuilder() {
       return new Builder().fromSnapshot(this);
    }
@@ -52,8 +53,8 @@ public class Snapshot {
       protected String name;
       protected String description;
       protected SnapshotExtendedAttributes extendedAttributes;
-   
-      /** 
+
+      /**
        * @see Snapshot#getId()
        */
       public Builder id(String id) {
@@ -61,7 +62,7 @@ public class Snapshot {
          return self();
       }
 
-      /** 
+      /**
        * @see Snapshot#getVolumeId()
        */
       public Builder volumeId(String volumeId) {
@@ -69,7 +70,7 @@ public class Snapshot {
          return self();
       }
 
-      /** 
+      /**
        * @see Snapshot#getStatus()
        */
       public Builder status(Volume.Status status) {
@@ -77,7 +78,7 @@ public class Snapshot {
          return self();
       }
 
-      /** 
+      /**
        * @see Snapshot#getSize()
        */
       public Builder size(int size) {
@@ -85,7 +86,7 @@ public class Snapshot {
          return self();
       }
 
-      /** 
+      /**
        * @see Snapshot#getCreated()
        */
       public Builder created(Date created) {
@@ -93,7 +94,7 @@ public class Snapshot {
          return self();
       }
 
-      /** 
+      /**
        * @see Snapshot#getName()
        */
       public Builder name(String name) {
@@ -101,7 +102,7 @@ public class Snapshot {
          return self();
       }
 
-      /** 
+      /**
        * @see Snapshot#getDescription()
        */
       public Builder description(String description) {
@@ -120,7 +121,7 @@ public class Snapshot {
       public Snapshot build() {
          return new Snapshot(id, volumeId, status, size, created, name, description, extendedAttributes);
       }
-      
+
       public Builder fromSnapshot(Snapshot in) {
          return this
                   .id(in.getId())
@@ -244,12 +245,12 @@ public class Snapshot {
                && Objects.equal(this.description, that.description)
                && Objects.equal(this.extendedAttributes, that.extendedAttributes);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("id", id).add("volumeId", volumeId).add("status", status).add("size", size).add("created", created).add("name", name).add("description", description).add("extendedAttributes", extendedAttributes);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

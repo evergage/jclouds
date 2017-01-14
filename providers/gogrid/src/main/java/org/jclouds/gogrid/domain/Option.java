@@ -20,26 +20,27 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.beans.ConstructorProperties;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.primitives.Longs;
 
 /**
  * Class Option
- * 
+ *
 */
 public class Option implements Comparable<Option> {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromOption(this);
    }
-   
+
    public static Option createWithIdNameAndDescription(Long id, String name, String description) {
       return new Option(id, name, description);
    }
@@ -50,8 +51,8 @@ public class Option implements Comparable<Option> {
       protected Long id;
       protected String name;
       protected String description;
-   
-      /** 
+
+      /**
        * @see Option#getId()
        */
       public T id(Long id) {
@@ -59,7 +60,7 @@ public class Option implements Comparable<Option> {
          return self();
       }
 
-      /** 
+      /**
        * @see Option#getName()
        */
       public T name(String name) {
@@ -67,7 +68,7 @@ public class Option implements Comparable<Option> {
          return self();
       }
 
-      /** 
+      /**
        * @see Option#getDescription()
        */
       public T description(String description) {
@@ -78,7 +79,7 @@ public class Option implements Comparable<Option> {
       public Option build() {
          return new Option(id, name, description);
       }
-      
+
       public T fromOption(Option in) {
          return this
                   .id(in.getId())
@@ -134,12 +135,12 @@ public class Option implements Comparable<Option> {
                && Objects.equal(this.name, that.name)
                && Objects.equal(this.description, that.description);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("id", id).add("name", name).add("description", description);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

@@ -22,6 +22,7 @@ import static com.google.common.base.Preconditions.checkState;
 import javax.annotation.Resource;
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.compute.domain.ExecResponse;
 import org.jclouds.compute.domain.NodeMetadata;
 import org.jclouds.compute.events.StatementOnNodeCompletion;
@@ -36,7 +37,6 @@ import org.jclouds.ssh.SshClient;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Function;
-import com.google.common.base.Objects;
 import com.google.common.base.Throwables;
 import com.google.common.eventbus.EventBus;
 import com.google.inject.assistedinject.Assisted;
@@ -129,7 +129,7 @@ public class RunScriptOnNodeUsingSsh implements RunScriptOnNode {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper(this).add("node", node).add("name", statement).add("runAsRoot", runAsRoot)
+      return MoreObjects.toStringHelper(this).add("node", node).add("name", statement).add("runAsRoot", runAsRoot)
             .toString();
    }
 

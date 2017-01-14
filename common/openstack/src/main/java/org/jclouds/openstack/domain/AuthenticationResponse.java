@@ -21,6 +21,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.net.URI;
 import java.util.Map;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableMap;
 
@@ -36,7 +37,7 @@ public class AuthenticationResponse {
    public Map<String, URI> getServices() {
       return services;
    }
-   
+
    public String getAuthToken() {
       return authToken;
    }
@@ -60,7 +61,7 @@ public class AuthenticationResponse {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper(this).add("authToken", authToken).add("services", services).toString();
+      return MoreObjects.toStringHelper(this).add("authToken", authToken).add("services", services).toString();
    }
 
 }

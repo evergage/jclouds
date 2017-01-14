@@ -20,25 +20,26 @@ import java.beans.ConstructorProperties;
 
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 import org.jclouds.net.domain.IpProtocol;
 
 import com.google.common.annotations.Beta;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Ingress access to a destination protocol on particular ports
- * 
+ *
 */
 @Beta
 public class Ingress {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromIngress(this);
    }
 
@@ -48,8 +49,8 @@ public class Ingress {
       protected IpProtocol ipProtocol;
       protected int fromPort;
       protected int toPort;
-   
-      /** 
+
+      /**
        * @see Ingress#getIpProtocol()
        */
       public T ipProtocol(IpProtocol ipProtocol) {
@@ -57,7 +58,7 @@ public class Ingress {
          return self();
       }
 
-      /** 
+      /**
        * @see Ingress#getFromPort()
        */
       public T fromPort(int fromPort) {
@@ -65,7 +66,7 @@ public class Ingress {
          return self();
       }
 
-      /** 
+      /**
        * @see Ingress#getToPort()
        */
       public T toPort(int toPort) {
@@ -76,7 +77,7 @@ public class Ingress {
       public Ingress build() {
          return new Ingress(ipProtocol, fromPort, toPort);
       }
-      
+
       public T fromIngress(Ingress in) {
          return this
                   .ipProtocol(in.getIpProtocol())
@@ -145,12 +146,12 @@ public class Ingress {
                && Objects.equal(this.fromPort, that.fromPort)
                && Objects.equal(this.toPort, that.toPort);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("ipProtocol", ipProtocol).add("fromPort", fromPort).add("toPort", toPort);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

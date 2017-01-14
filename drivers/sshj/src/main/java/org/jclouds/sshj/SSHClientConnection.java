@@ -25,6 +25,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import net.schmizz.sshj.SSHClient;
 import net.schmizz.sshj.common.Buffer.BufferException;
 import net.schmizz.sshj.transport.verification.PromiscuousVerifier;
@@ -119,11 +120,11 @@ public class SSHClientConnection implements Connection<SSHClient> {
       this.sessionTimeout = sessionTimeout;
       this.agentConnector = checkNotNull(agentConnector, "agentConnector for %", hostAndPort);
    }
-   
+
    @Resource
    @Named("jclouds.ssh")
    protected Logger logger = Logger.NULL;
-   
+
    private final HostAndPort hostAndPort;
    private final LoginCredentials loginCredentials;
    private final int connectTimeout;
@@ -178,7 +179,7 @@ public class SSHClientConnection implements Connection<SSHClient> {
    }
 
    /**
-    * 
+    *
     * @return login used in this ssh
     */
    public LoginCredentials getLoginCredentials() {
@@ -186,7 +187,7 @@ public class SSHClientConnection implements Connection<SSHClient> {
    }
 
    /**
-    * 
+    *
     * @return how long to wait for the initial connection to be made
     */
    public int getConnectTimeout() {
@@ -194,7 +195,7 @@ public class SSHClientConnection implements Connection<SSHClient> {
    }
 
    /**
-    * 
+    *
     * @return how long to keep the ssh open, or {@code 0} for indefinitely
     */
    public int getSessionTimeout() {
@@ -210,7 +211,7 @@ public class SSHClientConnection implements Connection<SSHClient> {
    }
 
    /**
-    * 
+    *
     * @return the current ssh or {@code null} if not connected
     */
    public SSHClient getSSHClient() {
@@ -235,7 +236,7 @@ public class SSHClientConnection implements Connection<SSHClient> {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").add("hostAndPort", hostAndPort).add("loginUser", loginCredentials.getUser())
+      return MoreObjects.toStringHelper("").add("hostAndPort", hostAndPort).add("loginUser", loginCredentials.getUser())
                .add("ssh", ssh != null ? ssh.hashCode() : null).add("connectTimeout", connectTimeout).add(
                         "sessionTimeout", sessionTimeout).toString();
    }

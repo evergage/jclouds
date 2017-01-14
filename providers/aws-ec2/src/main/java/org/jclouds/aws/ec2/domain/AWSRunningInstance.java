@@ -16,14 +16,15 @@
  */
 package org.jclouds.aws.ec2.domain;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.base.MoreObjects.ToStringHelper;
 import org.jclouds.ec2.domain.BlockDevice;
 import org.jclouds.ec2.domain.Hypervisor;
 import org.jclouds.ec2.domain.InstanceState;
@@ -33,7 +34,6 @@ import org.jclouds.javax.annotation.Nullable;
 import org.jclouds.rest.annotations.SinceApiVersion;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -41,13 +41,13 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 /**
- * 
+ *
  * @see <a href=
  *      "http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/ApiReference-ItemType-RunningInstancesItemType.html"
  *      />
  */
 public class AWSRunningInstance extends RunningInstance {
-   
+
    public static Builder builder() {
       return new Builder();
    }
@@ -56,7 +56,7 @@ public class AWSRunningInstance extends RunningInstance {
    public Builder toBuilder() {
       return new Builder().fromRunningInstance(this);
    }
-   
+
    public static class Builder extends org.jclouds.ec2.domain.RunningInstance.Builder<Builder> {
       private MonitoringState monitoringState;
       private String placementGroup;
@@ -116,7 +116,7 @@ public class AWSRunningInstance extends RunningInstance {
          this.vpcId = vpcId;
          return this;
       }
-      
+
       public Builder hypervisor(Hypervisor hypervisor) {
          this.hypervisor = hypervisor;
          return this;
@@ -151,7 +151,7 @@ public class AWSRunningInstance extends RunningInstance {
                rootDeviceName, ebsBlockDevices, monitoringState, placementGroup, productCodes, subnetId,
                spotInstanceRequestId, vpcId, hypervisor, tags, iamInstanceProfile);
       }
-      
+
       @Override
       public Builder fromRunningInstance(RunningInstance in) {
          super.fromRunningInstance(in);
@@ -254,7 +254,7 @@ public class AWSRunningInstance extends RunningInstance {
    public String getVpcId() {
       return vpcId;
    }
-   
+
    /**
     * hypervisor of the VM
     * @see Hypervisor
@@ -262,7 +262,7 @@ public class AWSRunningInstance extends RunningInstance {
    public Hypervisor getHypervisor() {
       return hypervisor;
    }
-   
+
    /**
     * Specifies the subnet ID in which the instance is running (Amazon Virtual
     * Private Cloud).

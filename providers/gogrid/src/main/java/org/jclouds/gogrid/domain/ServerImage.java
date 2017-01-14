@@ -22,25 +22,26 @@ import java.beans.ConstructorProperties;
 import java.util.Date;
 import java.util.Set;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.primitives.Longs;
 
 /**
  * Class ServerImage
- * 
+ *
 */
 public class ServerImage implements Comparable<ServerImage> {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromServerImage(this);
    }
 
@@ -63,8 +64,8 @@ public class ServerImage implements Comparable<ServerImage> {
       protected Date updatedTime;
       protected Set<BillingToken> billingTokens = ImmutableSet.of();
       protected Customer owner;
-   
-      /** 
+
+      /**
        * @see ServerImage#getId()
        */
       public T id(long id) {
@@ -72,7 +73,7 @@ public class ServerImage implements Comparable<ServerImage> {
          return self();
       }
 
-      /** 
+      /**
        * @see ServerImage#getName()
        */
       public T name(String name) {
@@ -80,7 +81,7 @@ public class ServerImage implements Comparable<ServerImage> {
          return self();
       }
 
-      /** 
+      /**
        * @see ServerImage#getFriendlyName()
        */
       public T friendlyName(String friendlyName) {
@@ -88,7 +89,7 @@ public class ServerImage implements Comparable<ServerImage> {
          return self();
       }
 
-      /** 
+      /**
        * @see ServerImage#getDescription()
        */
       public T description(String description) {
@@ -96,7 +97,7 @@ public class ServerImage implements Comparable<ServerImage> {
          return self();
       }
 
-      /** 
+      /**
        * @see ServerImage#getOs()
        */
       public T os(Option os) {
@@ -104,7 +105,7 @@ public class ServerImage implements Comparable<ServerImage> {
          return self();
       }
 
-      /** 
+      /**
        * @see ServerImage#getArchitecture()
        */
       public T architecture(Option architecture) {
@@ -112,7 +113,7 @@ public class ServerImage implements Comparable<ServerImage> {
          return self();
       }
 
-      /** 
+      /**
        * @see ServerImage#getType()
        */
       public T type(ServerImageType type) {
@@ -120,7 +121,7 @@ public class ServerImage implements Comparable<ServerImage> {
          return self();
       }
 
-      /** 
+      /**
        * @see ServerImage#getState()
        */
       public T state(ServerImageState state) {
@@ -128,7 +129,7 @@ public class ServerImage implements Comparable<ServerImage> {
          return self();
       }
 
-      /** 
+      /**
        * @see ServerImage#getPrice()
        */
       public T price(double price) {
@@ -136,7 +137,7 @@ public class ServerImage implements Comparable<ServerImage> {
          return self();
       }
 
-      /** 
+      /**
        * @see ServerImage#getLocation()
        */
       public T location(String location) {
@@ -144,7 +145,7 @@ public class ServerImage implements Comparable<ServerImage> {
          return self();
       }
 
-      /** 
+      /**
        * @see ServerImage#isActive()
        */
       public T isActive(boolean isActive) {
@@ -152,7 +153,7 @@ public class ServerImage implements Comparable<ServerImage> {
          return self();
       }
 
-      /** 
+      /**
        * @see ServerImage#isPublic()
        */
       public T isPublic(boolean isPublic) {
@@ -160,7 +161,7 @@ public class ServerImage implements Comparable<ServerImage> {
          return self();
       }
 
-      /** 
+      /**
        * @see ServerImage#getCreatedTime()
        */
       public T createdTime(Date createdTime) {
@@ -168,7 +169,7 @@ public class ServerImage implements Comparable<ServerImage> {
          return self();
       }
 
-      /** 
+      /**
        * @see ServerImage#getUpdatedTime()
        */
       public T updatedTime(Date updatedTime) {
@@ -176,11 +177,11 @@ public class ServerImage implements Comparable<ServerImage> {
          return self();
       }
 
-      /** 
+      /**
        * @see ServerImage#getBillingTokens()
        */
       public T billingTokens(Set<BillingToken> billingTokens) {
-         this.billingTokens = ImmutableSet.copyOf(checkNotNull(billingTokens, "billingTokens"));      
+         this.billingTokens = ImmutableSet.copyOf(checkNotNull(billingTokens, "billingTokens"));
          return self();
       }
 
@@ -188,7 +189,7 @@ public class ServerImage implements Comparable<ServerImage> {
          return billingTokens(ImmutableSet.copyOf(in));
       }
 
-      /** 
+      /**
        * @see ServerImage#getOwner()
        */
       public T owner(Customer owner) {
@@ -199,7 +200,7 @@ public class ServerImage implements Comparable<ServerImage> {
       public ServerImage build() {
          return new ServerImage(id, name, friendlyName, description, os, architecture, type, state, price, location, isActive, isPublic, createdTime, updatedTime, billingTokens, owner);
       }
-      
+
       public T fromServerImage(ServerImage in) {
          return this
                   .id(in.getId())
@@ -265,7 +266,7 @@ public class ServerImage implements Comparable<ServerImage> {
       this.isPublic = isPublic;
       this.createdTime = createdTime;
       this.updatedTime = updatedTime;
-      this.billingTokens = ImmutableSet.copyOf(checkNotNull(billingTokens, "billingTokens"));      
+      this.billingTokens = ImmutableSet.copyOf(checkNotNull(billingTokens, "billingTokens"));
       this.owner = checkNotNull(owner, "owner");
    }
 
@@ -280,7 +281,7 @@ public class ServerImage implements Comparable<ServerImage> {
    public String getFriendlyName() {
       return this.friendlyName;
    }
-   
+
    public String getDescription() {
       return this.description;
    }
@@ -363,12 +364,12 @@ public class ServerImage implements Comparable<ServerImage> {
                && Objects.equal(this.billingTokens, that.billingTokens)
                && Objects.equal(this.owner, that.owner);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("id", id).add("name", name).add("friendlyName", friendlyName).add("description", description).add("os", os).add("architecture", architecture).add("type", type).add("state", state).add("price", price).add("location", location).add("isActive", isActive).add("isPublic", isPublic).add("createdTime", createdTime).add("updatedTime", updatedTime).add("billingTokens", billingTokens).add("owner", owner);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

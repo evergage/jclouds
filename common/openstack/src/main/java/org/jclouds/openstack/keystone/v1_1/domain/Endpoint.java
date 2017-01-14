@@ -16,8 +16,8 @@
  */
 package org.jclouds.openstack.keystone.v1_1.domain;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.net.URI;
@@ -31,7 +31,7 @@ import com.google.common.base.Objects;
  * be accessed. If using an extension for templates, you can create an endpoint
  * template, which represents the templates of all the consumable services that
  * are available across the regions.
- * 
+ *
  * @see <a href=
  *      "http://docs.rackspace.com/loadbalancers/api/v1.0/clb-devguv1Defaulte/content/Authentication-d1e699.html#Authenticate-d1e171"
  *      />
@@ -100,7 +100,7 @@ public class Endpoint implements Comparable<Endpoint> {
       // prohibited in GAE. This also implies fields are not final.
       // see http://code.google.com/p/jclouds/issues/detail?id=925
    }
-  
+
    protected boolean v1Default;
    protected String region;
    protected URI publicURL;
@@ -121,7 +121,7 @@ public class Endpoint implements Comparable<Endpoint> {
     * endpoints and therefore only returns one endpoint per service. Resources
     * stored in endpoints where v1Default is false will not be seen by Auth 1.0
     * clients.
-    * 
+    *
     * @return whether this endpoint is visible to v1.0 clients
     */
    public boolean isV1Default() {
@@ -134,7 +134,7 @@ public class Endpoint implements Comparable<Endpoint> {
     * availability. <br/>
     * <h3>Note</h3> Some services are not region-specific. These services supply
     * a single non-regional endpoint and do not provide access to internal URLs.
-    * 
+    *
     * @return the region of the endpoint
     */
    @Nullable
@@ -145,7 +145,7 @@ public class Endpoint implements Comparable<Endpoint> {
    /**
     * A public URL is accessible from anywhere. Access to a public URL usually incurs traffic
     * charges.
-    * 
+    *
     * @return the public endpoint of the service
     */
    @Nullable
@@ -156,7 +156,7 @@ public class Endpoint implements Comparable<Endpoint> {
    /**
     * Internal URLs are only accessible to services within the same region.
     * Access to an internal URL is free of charge.
-    * 
+    *
     * @return the internal url of the endpoint
     */
    @Nullable

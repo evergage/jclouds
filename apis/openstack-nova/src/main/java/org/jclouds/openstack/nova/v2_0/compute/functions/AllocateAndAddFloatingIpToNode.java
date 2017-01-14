@@ -29,6 +29,7 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.compute.domain.NodeMetadata;
 import org.jclouds.compute.domain.NodeMetadataBuilder;
 import org.jclouds.compute.reference.ComputeServiceConstants;
@@ -42,7 +43,6 @@ import org.jclouds.rest.InsufficientResourcesException;
 import org.jclouds.rest.ResourceNotFoundException;
 
 import com.google.common.base.Function;
-import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.cache.LoadingCache;
@@ -158,6 +158,6 @@ public class AllocateAndAddFloatingIpToNode implements
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("AllocateAndAddFloatingIpToNode").toString();
+      return MoreObjects.toStringHelper("AllocateAndAddFloatingIpToNode").toString();
    }
 }

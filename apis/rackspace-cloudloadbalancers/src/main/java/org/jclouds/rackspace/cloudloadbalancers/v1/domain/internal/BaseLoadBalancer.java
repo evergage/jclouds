@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 import org.jclouds.rackspace.cloudloadbalancers.v1.domain.ConnectionThrottle;
 import org.jclouds.rackspace.cloudloadbalancers.v1.domain.HealthMonitor;
@@ -29,7 +30,7 @@ import org.jclouds.rackspace.cloudloadbalancers.v1.domain.LoadBalancer;
 import org.jclouds.rackspace.cloudloadbalancers.v1.domain.SessionPersistence;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.collect.Maps;
@@ -159,7 +160,7 @@ public class BaseLoadBalancer<N extends BaseNode<N>, T extends BaseLoadBalancer<
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this).omitNullValues().add("name", name).add("protocol", protocol)
+      return MoreObjects.toStringHelper(this).omitNullValues().add("name", name).add("protocol", protocol)
             .add("port", port).add("nodes", nodes).add("timeout", timeout).add("algorithm", algorithm)
             .add("timeout", timeout).add("sessionPersistenceType", getSessionPersistenceType())
             .add("connectionLogging", connectionLogging).add("connectionThrottle", connectionThrottle)
@@ -243,7 +244,7 @@ public class BaseLoadBalancer<N extends BaseNode<N>, T extends BaseLoadBalancer<
       protected HealthMonitor healthMonitor;
 
       /**
-       * Required. Name of the load balancer to create. The name must be 128 characters or less in length, and all 
+       * Required. Name of the load balancer to create. The name must be 128 characters or less in length, and all
        * UTF-8 characters are valid.
        */
       public Builder<N, T> name(String name) {
@@ -253,7 +254,7 @@ public class BaseLoadBalancer<N extends BaseNode<N>, T extends BaseLoadBalancer<
 
       /**
        * Required. Protocol of the service which is being load balanced.
-       * 
+       *
        * @see ReportApi#listProtocols()
        */
       public Builder<N, T> protocol(String protocol) {
@@ -262,7 +263,7 @@ public class BaseLoadBalancer<N extends BaseNode<N>, T extends BaseLoadBalancer<
       }
 
       /**
-       * Required if the protocol being used is not in {@link ReportApi#listProtocols()} or the protocol is in 
+       * Required if the protocol being used is not in {@link ReportApi#listProtocols()} or the protocol is in
        * {@link ReportApi#listProtocols()} but port=0. Port number for the service you are load balancing.
        */
       public Builder<N, T> port(@Nullable Integer port) {
@@ -285,8 +286,8 @@ public class BaseLoadBalancer<N extends BaseNode<N>, T extends BaseLoadBalancer<
       }
 
       /**
-       * Algorithm that defines how traffic should be directed between back-end nodes. 
-       * 
+       * Algorithm that defines how traffic should be directed between back-end nodes.
+       *
        * @see Algorithm
        */
       public Builder<N, T> algorithm(@Nullable Algorithm algorithm) {
@@ -295,7 +296,7 @@ public class BaseLoadBalancer<N extends BaseNode<N>, T extends BaseLoadBalancer<
       }
 
       /**
-       * The timeout value for the load balancer and communications with its nodes. Defaults to 30 seconds with 
+       * The timeout value for the load balancer and communications with its nodes. Defaults to 30 seconds with
        * a maximum of 120 seconds.
        */
       public Builder<N, T> timeout(@Nullable Integer timeout) {
@@ -304,8 +305,8 @@ public class BaseLoadBalancer<N extends BaseNode<N>, T extends BaseLoadBalancer<
       }
 
       /**
-       * Enable or Disable Half-Closed support for the load balancer. Half-Closed support provides the ability 
-       * for one end of the connection to terminate its output, while still receiving data from the other end. 
+       * Enable or Disable Half-Closed support for the load balancer. Half-Closed support provides the ability
+       * for one end of the connection to terminate its output, while still receiving data from the other end.
        * Only available for TCP/TCP_CLIENT_FIRST protocols.
        */
       public Builder<N, T> halfClosed(@Nullable Boolean halfClosed) {
@@ -315,7 +316,7 @@ public class BaseLoadBalancer<N extends BaseNode<N>, T extends BaseLoadBalancer<
 
       /**
        * Specifies whether multiple requests from clients are directed to the same node.
-       * 
+       *
        * @see SessionPersistence
        */
       public Builder<N, T> sessionPersistenceType(@Nullable SessionPersistence sessionPersistenceType) {
@@ -331,7 +332,7 @@ public class BaseLoadBalancer<N extends BaseNode<N>, T extends BaseLoadBalancer<
       }
 
       /**
-       * Current connection logging configuration. 
+       * Current connection logging configuration.
        */
       public Builder<N, T> connectionLogging(@Nullable Boolean connectionLogging) {
          if (connectionLogging != null) {
@@ -346,9 +347,9 @@ public class BaseLoadBalancer<N extends BaseNode<N>, T extends BaseLoadBalancer<
       }
 
       /**
-       * Specifies limits on the number of connections per IP address to help mitigate malicious or abusive 
+       * Specifies limits on the number of connections per IP address to help mitigate malicious or abusive
        * traffic to your applications.
-       * 
+       *
        * @see ConnectionThrottle
        */
       public Builder<N, T> connectionThrottle(@Nullable ConnectionThrottle connectionThrottle) {
@@ -358,7 +359,7 @@ public class BaseLoadBalancer<N extends BaseNode<N>, T extends BaseLoadBalancer<
 
       /**
        * The type of health monitor check to perform to ensure that the service is performing properly.
-       * 
+       *
        * @see HealthMonitor
        */
       public Builder<N, T> healthMonitor(@Nullable HealthMonitor healthMonitor) {

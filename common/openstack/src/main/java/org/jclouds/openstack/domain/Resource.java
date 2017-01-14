@@ -21,15 +21,16 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.Collections;
 import java.util.Set;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ImmutableSet;
 
 /**
  * Resource found in a paginated collection
- * 
+ *
  * @see <a href=
  *      "http://docs.openstack.org/api/openstack-compute/1.1/content/Paginated_Collections-d1e664.html"
  *      />
@@ -107,7 +108,7 @@ public class Resource implements Comparable<Resource> {
       this.name = name;
       this.links = links == null ? ImmutableSet.<Link>of() : ImmutableSet.copyOf(links);
    }
-   
+
    /**
     * When providing an ID, it is assumed that the resource exists in the current OpenStack
     * deployment
@@ -149,7 +150,7 @@ public class Resource implements Comparable<Resource> {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper("")
+      return MoreObjects.toStringHelper("")
             .add("id", getId())
             .add("name", name)
             .add("links", links);

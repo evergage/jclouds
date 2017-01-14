@@ -16,8 +16,8 @@
  */
 package org.jclouds.ultradns.ws.domain;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.base.Objects;
@@ -112,7 +112,7 @@ public class DirectionalGroup extends ForwardingMultimap<String, String> {
 
       /**
        * adds to current regionToTerritories
-       * 
+       *
        * @see DirectionalGroup#getRegionToTerritories()
        */
       public Builder mapRegionToTerritories(String region, Iterable<String> territories) {
@@ -122,7 +122,7 @@ public class DirectionalGroup extends ForwardingMultimap<String, String> {
 
       /**
        * adds to current regionToTerritories
-       * 
+       *
        * @see DirectionalGroup#getRegionToTerritories()
        */
       public Builder mapRegionToTerritory(String region, String territory) {
@@ -132,7 +132,7 @@ public class DirectionalGroup extends ForwardingMultimap<String, String> {
 
       /**
        * adds to current regionToTerritories
-       * 
+       *
        * @see DirectionalGroup#getRegionToTerritories()
        */
       public Builder mapRegion(String region) {
@@ -142,7 +142,7 @@ public class DirectionalGroup extends ForwardingMultimap<String, String> {
 
       /**
        * replaces current regionToTerritories
-       * 
+       *
        * @see DirectionalGroup#getRegionToTerritories()
        */
       public Builder regionToTerritories(Multimap<String, String> regionToTerritories) {

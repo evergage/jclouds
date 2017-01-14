@@ -20,6 +20,7 @@ import java.net.URI;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -75,7 +76,7 @@ public class Node {
          this.loginPort = loginPort;
          return this;
       }
-      
+
       public Builder locationId(String locationId) {
          this.locationId = locationId;
          return this;
@@ -115,12 +116,12 @@ public class Node {
          this.tags = ImmutableSet.copyOf(tags);
          return this;
       }
-      
+
       public Builder metadata(Map<String, String> metadata) {
          this.metadata = ImmutableMap.copyOf(metadata);
          return this;
       }
-      
+
       public Builder username(String username) {
          this.username = username;
          return this;
@@ -233,11 +234,11 @@ public class Node {
    public boolean isOs64Bit() {
       return os64Bit;
    }
-   
+
    public int getLoginPort() {
       return loginPort;
    }
-   
+
    public Set<String> getTags() {
       Set<String> tagSet = Sets.newHashSet();
       for (String tag : tags)
@@ -299,7 +300,7 @@ public class Node {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper(this).add("id", id).add("name", name).add("description", description)
+      return MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("description", description)
             .add("locationId", locationId).add("hostname", hostname).add("osArch", osArch).add("osFamily", osFamily)
             .add("osDescription", osDescription).add("osVersion", osVersion).add("os64Bit", os64Bit)
             .add("group", group).add("loginPort", loginPort).add("tags", tags).add("metadata", metadata)

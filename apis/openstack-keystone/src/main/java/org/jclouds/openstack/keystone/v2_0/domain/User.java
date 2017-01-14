@@ -21,10 +21,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.beans.ConstructorProperties;
 import java.util.Set;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ForwardingSet;
 import com.google.common.collect.ImmutableSet;
 
@@ -35,7 +36,7 @@ import com.google.common.collect.ImmutableSet;
  * have a login and may be assigned tokens to access users. Users may be
  * directly assigned to a particular tenant and behave as if they are contained
  * in that tenant.
- * 
+ *
  * @see <a href=
  *      "http://docs.openstack.org/api/openstack-identity-service/2.0/content/Identity-User-Concepts-e1362.html"
  *      />
@@ -154,7 +155,7 @@ public class User extends ForwardingSet<Role> {
    /**
     * When providing an ID, it is assumed that the user exists in the current
     * OpenStack deployment
-    * 
+    *
     * @return the id of the user in the current OpenStack deployment
     */
    public String getId() {
@@ -207,7 +208,7 @@ public class User extends ForwardingSet<Role> {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("email", email)
+      return MoreObjects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("email", email)
             .add("enabled", enabled).add("roles", roles).add("tenanId", tenantId);
    }
 

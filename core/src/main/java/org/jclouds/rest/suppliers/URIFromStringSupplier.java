@@ -16,16 +16,16 @@
  */
 package org.jclouds.rest.suppliers;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.net.URI;
 
 import javax.inject.Inject;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.base.Supplier;
 
 public class URIFromStringSupplier implements Supplier<URI> {
@@ -65,7 +65,7 @@ public class URIFromStringSupplier implements Supplier<URI> {
       return string().toString();
    }
 
-   protected ToStringHelper string() {
+   protected MoreObjects.ToStringHelper string() {
       return toStringHelper("").add("endpoint", endpoint);
    }
 

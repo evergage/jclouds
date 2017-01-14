@@ -20,8 +20,9 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import java.beans.ConstructorProperties;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Nova (or Neutron) network definition
@@ -57,7 +58,7 @@ public class Network implements Comparable<Network> {
    public String getPortUuid() {
       return this.portUuid;
    }
-   
+
    /**
     * @return the fixed IP address - Neutron or Nova
     */
@@ -75,13 +76,13 @@ public class Network implements Comparable<Network> {
       if (this == obj) return true;
       if (obj == null || getClass() != obj.getClass()) return false;
       Network that = Network.class.cast(obj);
-      return Objects.equal(this.networkUuid, that.networkUuid) && 
+      return Objects.equal(this.networkUuid, that.networkUuid) &&
             Objects.equal(this.portUuid, that.portUuid) &&
             Objects.equal(this.fixedIp, that.fixedIp);
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("networkUuid", networkUuid)
             .add("portUuid", portUuid)
             .add("fixedIp", fixedIp);
@@ -95,14 +96,14 @@ public class Network implements Comparable<Network> {
    /**
     * @return A new builder object
     */
-   public static Builder builder() { 
+   public static Builder builder() {
       return new Builder();
    }
 
    /**
     * @return A new Builder object from another Network
     */
-   public Builder toBuilder() { 
+   public Builder toBuilder() {
       return new Builder().fromNetwork(this);
    }
 
@@ -114,8 +115,8 @@ public class Network implements Comparable<Network> {
       protected String portUuid;
       protected String fixedIp;
 
-      /** 
-       * @param networkUuid The UUID for the Nova network or Neutron subnet to be attached. 
+      /**
+       * @param networkUuid The UUID for the Nova network or Neutron subnet to be attached.
        * @return The builder object.
        * @see Network#getNetworkUuid()
        */
@@ -124,7 +125,7 @@ public class Network implements Comparable<Network> {
          return this;
       }
 
-      /** 
+      /**
        * @param portUuid The port UUID for this Neutron Network.
        * @return The builder object.
        * @see Network#getPortUuid()
@@ -133,9 +134,9 @@ public class Network implements Comparable<Network> {
          this.portUuid = portUuid;
          return this;
       }
-      
-      /** 
-       * @param fixedIp The fixed IP address for this Network (if any). 
+
+      /**
+       * @param fixedIp The fixed IP address for this Network (if any).
        * Service automatically assigns IP address if this is not provided.
        * Fixed IP is compatible with both Nova Network and Neutron.
        * @return The builder object.
@@ -162,7 +163,7 @@ public class Network implements Comparable<Network> {
                .networkUuid(in.getNetworkUuid())
                .portUuid(in.getPortUuid())
                .fixedIp(in.getFixedIp());
-      }        
+      }
    }
 
    @Override

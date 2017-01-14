@@ -23,7 +23,7 @@ import org.jclouds.compute.domain.NodeMetadata;
 import org.jclouds.scriptbuilder.domain.Statement;
 
 import com.google.common.annotations.Beta;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * A statement that completed execution on a node.
@@ -41,7 +41,7 @@ public class StatementOnNodeCompletion extends StatementOnNode {
    public ExecResponse getResponse() {
       return response;
    }
-   
+
    @Override
    protected ToStringHelper string() {
       return super.string().add("response", response);

@@ -18,28 +18,29 @@ package org.jclouds.rackspace.cloudloadbalancers.v1.domain;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
- * The access rule management feature allows fine-grained network access controls to be applied to the load balancer's 
+ * The access rule management feature allows fine-grained network access controls to be applied to the load balancer's
  * virtual IP address. A single IP address, multiple IP addresses, or entire network subnets can be added as an access
- * rule. Rules that are configured with the ALLOW type will always take precedence over rules with the DENY type. To 
- * reject traffic from all rules except for those with the ALLOW type, add an access rule with an address of 
+ * rule. Rules that are configured with the ALLOW type will always take precedence over rules with the DENY type. To
+ * reject traffic from all rules except for those with the ALLOW type, add an access rule with an address of
  * "0.0.0.0/0" and a DENY type.
  */
 public class AccessRule {
 
    private final Type type;
    private final String address;
-   
+
    /**
     * Use this method to easily construct {@link Type#ALLOW} rules for the address.
     */
    public static AccessRule allow(String address) {
       return new AccessRule(address, Type.ALLOW);
    }
-   
+
    /**
     * Use this method to easily construct {@link Type#DENY} rules for the address.
     */
@@ -70,15 +71,15 @@ public class AccessRule {
       if (this == obj) return true;
       if (obj == null || getClass() != obj.getClass()) return false;
       AccessRule that = AccessRule.class.cast(obj);
-      
+
       return Objects.equal(this.address, that.address);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this).omitNullValues()
+      return MoreObjects.toStringHelper(this).omitNullValues()
             .add("address", address).add("type", type);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();
@@ -88,15 +89,15 @@ public class AccessRule {
       /**
        * Specifies rules that will always take precedence over rules with the DENY type.
        */
-      ALLOW, 
-      
+      ALLOW,
+
       /**
        * Specifies rules to which traffic can be denied.
        */
-      DENY, 
-      
+      DENY,
+
       UNRECOGNIZED;
-      
+
       public static Type fromValue(String type) {
          try {
             return valueOf(checkNotNull(type, "type"));

@@ -22,6 +22,7 @@ import static com.google.common.base.Preconditions.checkState;
 import javax.annotation.Resource;
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.compute.domain.ExecResponse;
 import org.jclouds.compute.domain.NodeMetadata;
 import org.jclouds.compute.reference.ComputeServiceConstants;
@@ -31,7 +32,6 @@ import org.jclouds.ssh.SshClient;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Function;
-import com.google.common.base.Objects;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
 
@@ -53,7 +53,7 @@ public class SudoAwareInitManager {
    public String getInitFile() {
       return initFile;
    }
-   
+
    public SudoAwareInitManager(Function<NodeMetadata, SshClient> sshFactory, boolean runAsRoot, NodeMetadata node,
          InitScriptConfigurationForTasks initScriptConfiguration, InitScript init) {
       this.sshFactory = checkNotNull(sshFactory, "sshFactory");
@@ -101,7 +101,7 @@ public class SudoAwareInitManager {
             .getUsername(), ssh.getHostAddress());
       if (command.endsWith("status") || command.endsWith("stdout") || command.endsWith("stderr"))
          logger.trace(">> running %s", statement);
-      else 
+      else
          computeLogger.debug(">> running " + statement);
       ExecResponse returnVal = ssh.exec(command);
       if (!command.endsWith("status"))
@@ -133,7 +133,7 @@ public class SudoAwareInitManager {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper(this).add("node", node.getId()).add("name", init.getInstanceName())
+      return MoreObjects.toStringHelper(this).add("node", node.getId()).add("name", init.getInstanceName())
             .add("runAsRoot", runAsRoot).toString();
    }
 

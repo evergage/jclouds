@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.beans.ConstructorProperties;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 public final class Session {
@@ -27,7 +28,7 @@ public final class Session {
    public static Session forTokenAndVersion(String token, String version) {
       return new Session(token, version);
    }
-   
+
    private final String token;
    private final String version;
 
@@ -70,6 +71,6 @@ public final class Session {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper(this).add("token", token).add("version", version).toString();
+      return MoreObjects.toStringHelper(this).add("token", token).add("version", version).toString();
    }
 }

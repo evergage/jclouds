@@ -16,8 +16,8 @@
  */
 package org.jclouds.rackspace.cloudidentity.v2_0.domain;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.jclouds.openstack.keystone.v2_0.config.CredentialType;
@@ -27,7 +27,7 @@ import com.google.common.base.Objects;
 
 /**
  * ApiKey Credentials
- * 
+ *
  * @see <a href="http://docs.rackspace.com/servers/api/v2/cs-devguide/content/curl_auth.html">docs</a>
 
  */

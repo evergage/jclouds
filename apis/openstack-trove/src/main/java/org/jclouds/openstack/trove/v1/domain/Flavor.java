@@ -19,10 +19,11 @@ package org.jclouds.openstack.trove.v1.domain;
 import java.beans.ConstructorProperties;
 import java.util.List;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.openstack.v2_0.domain.Link;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 
@@ -88,7 +89,7 @@ public class Flavor implements Comparable<Flavor>{
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("id", id).add("name", name).add("ram", ram);
    }
 
@@ -106,13 +107,13 @@ public class Flavor implements Comparable<Flavor>{
       return this.getId() > that.getId() ? +1 : this.getId() < this.getId() ? -1 : 0;
    }
 
-   public static Builder builder() { 
+   public static Builder builder() {
       return new Builder();
    }
 
-   public Builder toBuilder() { 
+   public Builder toBuilder() {
       return new Builder().fromFlavor(this);
-   }    
+   }
 
    public static class Builder {
       protected int id;
@@ -120,7 +121,7 @@ public class Flavor implements Comparable<Flavor>{
       protected int ram;
       protected List<Link> links;
 
-      /** 
+      /**
        * @see Flavor#getId()
        */
       public Builder id(int id) {
@@ -128,7 +129,7 @@ public class Flavor implements Comparable<Flavor>{
          return this;
       }
 
-      /** 
+      /**
        * @see Flavor#getName()
        */
       public Builder name(String name) {
@@ -136,7 +137,7 @@ public class Flavor implements Comparable<Flavor>{
          return this;
       }
 
-      /** 
+      /**
        * @see Flavor#getRam()
        */
       public Builder ram(int ram) {
@@ -144,7 +145,7 @@ public class Flavor implements Comparable<Flavor>{
          return this;
       }
 
-      /** 
+      /**
        * @see Flavor#getLinks()
        */
       public Builder links(List<Link> links) {
@@ -163,5 +164,5 @@ public class Flavor implements Comparable<Flavor>{
                .ram(in.getRam())
                .links(in.getLinks());
       }
-   }    
+   }
 }

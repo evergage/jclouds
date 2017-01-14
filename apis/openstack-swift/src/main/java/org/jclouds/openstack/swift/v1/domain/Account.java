@@ -16,15 +16,15 @@
  */
 package org.jclouds.openstack.swift.v1.domain;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
@@ -32,7 +32,7 @@ import com.google.common.collect.Multimap;
 
 /**
  * Represents an Account in OpenStack Object Storage.
- * 
+ *
  * @see org.jclouds.openstack.swift.v1.features.AccountApi
  */
 public class Account {
@@ -183,7 +183,7 @@ public class Account {
        * This method will lower-case all metadata keys due to a Swift implementation
        * decision.
        *
-       * @param metadata  the metadata for this account. 
+       * @param metadata  the metadata for this account.
        *
        * @see Account#getMetadata()
        */

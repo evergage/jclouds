@@ -16,12 +16,13 @@
  */
 package org.jclouds.rackspace.cloudloadbalancers.v1.domain;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
- * The load balancer source IP addresses are useful for customers who are automating the deployment of infrastructure 
- * and need to determine the IP addresses of requests coming from our load balancers for the purpose of creating more 
+ * The load balancer source IP addresses are useful for customers who are automating the deployment of infrastructure
+ * and need to determine the IP addresses of requests coming from our load balancers for the purpose of creating more
  * robust firewall rules.
  */
 public class SourceAddresses {
@@ -65,7 +66,7 @@ public class SourceAddresses {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this).add("ipv6Public", ipv6Public).add("ipv4Public", ipv4Public)
+      return MoreObjects.toStringHelper(this).add("ipv6Public", ipv6Public).add("ipv4Public", ipv4Public)
             .add("ipv4Servicenet", ipv4Servicenet);
    }
 
@@ -79,7 +80,7 @@ public class SourceAddresses {
       private String ipv4Public;
       private String ipv4Servicenet;
 
-      /** 
+      /**
        * @see SourceAddresses#getIPV6Public()
        */
       public Builder ipv6Public(String ipv6Public) {
@@ -87,7 +88,7 @@ public class SourceAddresses {
          return this;
       }
 
-      /** 
+      /**
        * @see SourceAddresses#getIPV4Public()
        */
       public Builder ipv4Public(String ipv4Public) {
@@ -95,7 +96,7 @@ public class SourceAddresses {
          return this;
       }
 
-      /** 
+      /**
        * @see SourceAddresses#getIPV4Servicenet()
        */
       public Builder ipv4Servicenet(String ipv4Servicenet) {

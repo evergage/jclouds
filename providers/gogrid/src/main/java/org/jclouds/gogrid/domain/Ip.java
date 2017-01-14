@@ -20,23 +20,24 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.beans.ConstructorProperties;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.primitives.Longs;
 
 /**
  * Class Ip
- * 
+ *
 */
 public class Ip implements Comparable<Ip> {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromIp(this);
    }
 
@@ -49,8 +50,8 @@ public class Ip implements Comparable<Ip> {
       protected boolean isPublic;
       protected IpState state;
       protected Option datacenter;
-   
-      /** 
+
+      /**
        * @see Ip#getId()
        */
       public T id(long id) {
@@ -58,7 +59,7 @@ public class Ip implements Comparable<Ip> {
          return self();
       }
 
-      /** 
+      /**
        * @see Ip#getIp()
        */
       public T ip(String ip) {
@@ -66,7 +67,7 @@ public class Ip implements Comparable<Ip> {
          return self();
       }
 
-      /** 
+      /**
        * @see Ip#getSubnet()
        */
       public T subnet(String subnet) {
@@ -74,7 +75,7 @@ public class Ip implements Comparable<Ip> {
          return self();
       }
 
-      /** 
+      /**
        * @see Ip#isPublic()
        */
       public T isPublic(boolean isPublic) {
@@ -82,7 +83,7 @@ public class Ip implements Comparable<Ip> {
          return self();
       }
 
-      /** 
+      /**
        * @see Ip#getState()
        */
       public T state(IpState state) {
@@ -90,7 +91,7 @@ public class Ip implements Comparable<Ip> {
          return self();
       }
 
-      /** 
+      /**
        * @see Ip#getDatacenter()
        */
       public T datacenter(Option datacenter) {
@@ -101,7 +102,7 @@ public class Ip implements Comparable<Ip> {
       public Ip build() {
          return new Ip(id, ip, subnet, isPublic, state, datacenter);
       }
-      
+
       public T fromIp(Ip in) {
          return this
                   .id(in.getId())
@@ -182,12 +183,12 @@ public class Ip implements Comparable<Ip> {
                && Objects.equal(this.state, that.state)
                && Objects.equal(this.datacenter, that.datacenter);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("id", id).add("ip", ip).add("subnet", subnet).add("isPublic", isPublic).add("state", state).add("datacenter", datacenter);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

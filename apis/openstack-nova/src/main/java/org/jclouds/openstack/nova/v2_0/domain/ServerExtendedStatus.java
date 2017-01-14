@@ -20,14 +20,15 @@ import java.beans.ConstructorProperties;
 
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Additional attributes delivered by Extended Server Status extension (alias "OS-EXT-STS")
- * 
+ *
  * @see <a href=
        "http://nova.openstack.org/api/nova.api.openstack.compute.contrib.extended_status.html"
        />
@@ -38,11 +39,11 @@ public class ServerExtendedStatus {
 
    public static String PREFIX;
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromServerExtendedStatus(this);
    }
 
@@ -52,8 +53,8 @@ public class ServerExtendedStatus {
       protected String taskState;
       protected String vmState;
       protected int powerState;
-   
-      /** 
+
+      /**
        * @see ServerExtendedStatus#getTaskState()
        */
       public T taskState(String taskState) {
@@ -61,7 +62,7 @@ public class ServerExtendedStatus {
          return self();
       }
 
-      /** 
+      /**
        * @see ServerExtendedStatus#getVmState()
        */
       public T vmState(String vmState) {
@@ -69,7 +70,7 @@ public class ServerExtendedStatus {
          return self();
       }
 
-      /** 
+      /**
        * @see ServerExtendedStatus#getPowerState()
        */
       public T powerState(int powerState) {
@@ -80,7 +81,7 @@ public class ServerExtendedStatus {
       public ServerExtendedStatus build() {
          return new ServerExtendedStatus(taskState, vmState, powerState);
       }
-      
+
       public T fromServerExtendedStatus(ServerExtendedStatus in) {
          return this
                   .taskState(in.getTaskState())
@@ -140,12 +141,12 @@ public class ServerExtendedStatus {
                && Objects.equal(this.vmState, that.vmState)
                && Objects.equal(this.powerState, that.powerState);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("taskState", taskState).add("vmState", vmState).add("powerState", powerState);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

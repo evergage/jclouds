@@ -16,8 +16,8 @@
  */
 package org.jclouds.openstack.swift.v1.domain;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.net.URI;
@@ -28,15 +28,15 @@ import java.util.Map.Entry;
 import org.jclouds.io.Payload;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 
 /**
  * Represents an object in OpenStack Object Storage.
- * 
- * 
+ *
+ *
  * @see ObjectApi
  */
 public class SwiftObject implements Comparable<SwiftObject> {
@@ -108,7 +108,7 @@ public class SwiftObject implements Comparable<SwiftObject> {
     * <h3>NOTE</h3>
     * In current swift implementations, headers keys are lower-cased. This means
     * characters such as turkish will probably not work out well.
-    * 
+    *
     * @return a {@code Map<String, String>} containing this object's metadata. The map is empty
     *         except in {@link ObjectApi#head(String) GetObjectMetadata} or
     *         {@link ObjectApi#get(String) GetObject} commands.
@@ -121,7 +121,7 @@ public class SwiftObject implements Comparable<SwiftObject> {
     * <h3>NOTE</h3>
     * The object will only have a {@link Payload#getInput()} when retrieved via the
     * {@link ObjectApi#get(String) GetObject} command.
-    * 
+    *
     * @return The {@link Payload} for this object.
     */
    public Payload getPayload() {
@@ -239,7 +239,7 @@ public class SwiftObject implements Comparable<SwiftObject> {
       /**
        * Will lower-case all metadata keys due to a swift implementation
        * decision.
-       * 
+       *
        * @see SwiftObject#getMetadata()
        */
       public Builder metadata(Map<String, String> metadata) {

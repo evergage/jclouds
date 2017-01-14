@@ -16,18 +16,18 @@
  */
 package org.jclouds.openstack.swift.v1.domain;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import javax.inject.Named;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Represents a single segment of a multi-part upload.
- * 
+ *
  * @see org.jclouds.openstack.swift.v1.features.StaticLargeObjectApi
  */
 public class Segment {

@@ -28,11 +28,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.io.Payload;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
@@ -48,11 +49,11 @@ public class HttpRequest extends HttpMessage {
    public static final Set<String> NON_PAYLOAD_METHODS = ImmutableSet
          .of("OPTIONS", "GET", "HEAD", "DELETE", "TRACE", "CONNECT");
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromHttpRequest(this);
    }
 
@@ -60,8 +61,8 @@ public class HttpRequest extends HttpMessage {
       protected String method;
       protected URI endpoint;
       protected ImmutableList.Builder<HttpRequestFilter> filters = ImmutableList.<HttpRequestFilter>builder();
-   
-      /** 
+
+      /**
        * @see HttpRequest#getMethod()
        */
       public T method(String method) {
@@ -69,7 +70,7 @@ public class HttpRequest extends HttpMessage {
          return self();
       }
 
-      /** 
+      /**
        * @see HttpRequest#getEndpoint()
        */
       public T endpoint(URI endpoint) {
@@ -77,13 +78,13 @@ public class HttpRequest extends HttpMessage {
          return self();
       }
 
-      /** 
+      /**
        * @see HttpRequest#getEndpoint()
        */
       public T endpoint(String endpoint) {
          return endpoint(URI.create(checkNotNull(endpoint, "endpoint")));
       }
-      
+
       /**
        * @see HttpRequest#getEndpoint()
        */
@@ -91,7 +92,7 @@ public class HttpRequest extends HttpMessage {
          endpoint = uriBuilder(endpoint).addQuery(name, values).build();
          return self();
       }
-      
+
       /**
        * @see HttpRequest#getEndpoint()
        */
@@ -107,7 +108,7 @@ public class HttpRequest extends HttpMessage {
          endpoint = uriBuilder(endpoint).addQuery(parameters).build();
          return self();
       }
-      
+
       /**
        * @see HttpRequest#getEndpoint()
        */
@@ -115,7 +116,7 @@ public class HttpRequest extends HttpMessage {
          endpoint = uriBuilder(endpoint).replaceQuery(name, values).build();
          return self();
       }
-      
+
       /**
        * @see HttpRequest#getEndpoint()
        */
@@ -123,14 +124,14 @@ public class HttpRequest extends HttpMessage {
          endpoint = uriBuilder(endpoint).replaceQuery(name, values).build();
          return self();
       }
-      
+
       /**
        * @see HttpRequest#getEndpoint()
        */
       public T replaceQueryParams(Map<String, String> parameters) {
          return replaceQueryParams(Multimaps.forMap(parameters));
       }
-      
+
       /**
        * @see HttpRequest#getEndpoint()
        */
@@ -148,7 +149,7 @@ public class HttpRequest extends HttpMessage {
          endpoint = uriBuilder(endpoint).path(path).build();
          return self();
       }
-      
+
       /**
        * @see #addFormParams
        */
@@ -160,7 +161,7 @@ public class HttpRequest extends HttpMessage {
       /**
        * Replaces the current payload with one that is a urlencoded payload including the following
        * parameters and any formerly set.
-       * 
+       *
        * @see HttpRequest#getPayload()
        */
       public T addFormParams(Multimap<String, String> parameters) {
@@ -183,7 +184,7 @@ public class HttpRequest extends HttpMessage {
       /**
        * Replaces the current payload with one that is a urlencoded payload including the following
        * parameters and any formerly set.
-       * 
+       *
        * @see HttpRequest#getPayload()
        */
       public T replaceFormParams(Multimap<String, String> parameters) {
@@ -197,7 +198,7 @@ public class HttpRequest extends HttpMessage {
          return self();
       }
 
-      /** 
+      /**
        * @see HttpRequest#getFilters()
        */
       public T filters(Iterable<HttpRequestFilter> filters) {
@@ -206,7 +207,7 @@ public class HttpRequest extends HttpMessage {
          return self();
       }
 
-      /** 
+      /**
        * @see HttpRequest#getFilters()
        */
       public T filter(HttpRequestFilter filter) {
@@ -217,7 +218,7 @@ public class HttpRequest extends HttpMessage {
       public HttpRequest build() {
          return new HttpRequest(method, endpoint, headers.build(), payload, filters.build());
       }
-      
+
       public T fromHttpRequest(HttpRequest in) {
          return super.fromHttpMessage(in)
                      .method(in.getMethod())
@@ -232,7 +233,7 @@ public class HttpRequest extends HttpMessage {
          return this;
       }
    }
-   
+
    private final String method;
    private final URI endpoint;
    private final List<HttpRequestFilter> filters;
@@ -253,7 +254,7 @@ public class HttpRequest extends HttpMessage {
    /**
     * We cannot return an enum, as per specification custom methods are allowed. Enums are not
     * extensible.
-    * 
+    *
     * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html#sec5.1.1" >rfc2616</a>
     */
    public String getMethod() {
@@ -267,7 +268,7 @@ public class HttpRequest extends HttpMessage {
    public List<HttpRequestFilter> getFilters() {
       return filters;
    }
-   
+
    @Override
    public int hashCode() {
       return Objects.hashCode(method, endpoint, super.hashCode());
@@ -282,10 +283,10 @@ public class HttpRequest extends HttpMessage {
       return super.equals(that) && Objects.equal(this.method, that.method)
                && Objects.equal(this.endpoint, that.endpoint);
    }
-   
+
    @Override
    protected ToStringHelper string() {
-      return Objects.toStringHelper("").omitNullValues()
+      return MoreObjects.toStringHelper("").omitNullValues()
                     .add("method", method)
                     .add("endpoint", endpoint)
                     .add("headers", headers)

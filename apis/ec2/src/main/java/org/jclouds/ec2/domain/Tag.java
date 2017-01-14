@@ -18,15 +18,16 @@ package org.jclouds.ec2.domain;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Optional;
 
 /**
  * To help you manage your Amazon EC2 instances, images, and other Amazon EC2
  * resources, you can assign your own metadata to each resource in the form of
  * tags.
- * 
+ *
  * @see <a
  *      href="http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/Using_Tags.html"
  *      >doc</a>
@@ -58,7 +59,7 @@ public class Tag {
          throw new AssertionError("intentionally unimplemented");
       }
    }
-   
+
    public static Builder builder() {
       return new Builder();
    }
@@ -191,7 +192,7 @@ public class Tag {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this).omitNullValues().add("resourceId", resourceId)
+      return MoreObjects.toStringHelper(this).omitNullValues().add("resourceId", resourceId)
             .add("resourceType", resourceType).add("key", key).add("value", value.orNull());
    }
 

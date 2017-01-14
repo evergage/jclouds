@@ -24,9 +24,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.rest.AuthorizationException;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 import com.google.common.base.Supplier;
 import com.google.common.cache.CacheBuilder;
@@ -41,19 +41,19 @@ import com.google.common.util.concurrent.UncheckedExecutionException;
  * <p/>
  * A shared exception reference is used so that anyone who encounters an authorizationexception will be short-circuited.
  * This prevents accounts from being locked out.
- * 
+ *
  * <h3>details</h3>
  * http://code.google.com/p/google-guice/issues/detail?id=483 guice doesn't remember when singleton providers throw
  * exceptions. in this case, if the supplier fails with an authorization exception, it is called again for each provider
  * method that depends on it. To short-circuit this, we remember the last exception trusting that guice is
  * single-threaded.
- * 
+ *
  * Note this implementation is folded into the same class, vs being decorated as stacktraces are exceptionally long and
  * difficult to grok otherwise. We use {@link LoadingCache} to deal with concurrency issues related to the supplier.
  */
 public class MemoizedRetryOnTimeOutButNotOnAuthorizationExceptionSupplier<T> extends ForwardingObject implements
       Supplier<T> {
-   
+
    static class SetAndThrowAuthorizationExceptionSupplierBackedLoader<V> extends CacheLoader<String, Optional<V>> {
 
       private final Supplier<V> delegate;
@@ -87,10 +87,10 @@ public class MemoizedRetryOnTimeOutButNotOnAuthorizationExceptionSupplier<T> ext
 
       @Override
       public String toString() {
-         return Objects.toStringHelper(this).add("delegate", delegate).toString();
+         return MoreObjects.toStringHelper(this).add("delegate", delegate).toString();
       }
    }
-   
+
    public static class ValueLoadedEvent<V> {
       private final Object eventKey;
       private final Optional<V> value;
@@ -119,7 +119,7 @@ public class MemoizedRetryOnTimeOutButNotOnAuthorizationExceptionSupplier<T> ext
       return new MemoizedRetryOnTimeOutButNotOnAuthorizationExceptionSupplier<T>(authException, delegate, duration,
             unit, new ValueLoadedCallback.NoOpCallback<T>());
    }
-   
+
    /**
     * Creates a memoized supplier that calls the given callback each time values are loaded.
     */
@@ -129,7 +129,7 @@ public class MemoizedRetryOnTimeOutButNotOnAuthorizationExceptionSupplier<T> ext
       return new MemoizedRetryOnTimeOutButNotOnAuthorizationExceptionSupplier<T>(authException, delegate, duration,
             unit, valueLoadedCallback);
    }
-   
+
    MemoizedRetryOnTimeOutButNotOnAuthorizationExceptionSupplier(AtomicReference<AuthorizationException> authException,
          Supplier<T> delegate, long duration, TimeUnit unit, ValueLoadedCallback<T> valueLoadedCallback) {
       this.delegate = delegate;
@@ -157,7 +157,7 @@ public class MemoizedRetryOnTimeOutButNotOnAuthorizationExceptionSupplier<T> ext
 
    @Override
    public String toString() {
-      return Objects.toStringHelper(this).add("delegate", delegate).add("duration", duration).add("unit", unit)
+      return MoreObjects.toStringHelper(this).add("delegate", delegate).add("duration", duration).add("unit", unit)
             .toString();
    }
 

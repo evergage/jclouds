@@ -16,14 +16,14 @@
  */
 package org.jclouds.openstack.swift.v1.domain;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Map;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Represents a response from an Extract Archive request.
@@ -43,15 +43,15 @@ public class ExtractArchiveResponse {
       this.errors = checkNotNull(errors, "errors");
    }
 
-   /** 
+   /**
     * @return The number of files created.
     */
    public int getCreated() {
       return created;
    }
 
-   /** 
-    * @return a {@code Map<String, String>} containing each path that failed 
+   /**
+    * @return a {@code Map<String, String>} containing each path that failed
     *         to be created and its corresponding error response.
     */
    public Map<String, String> getErrors() {

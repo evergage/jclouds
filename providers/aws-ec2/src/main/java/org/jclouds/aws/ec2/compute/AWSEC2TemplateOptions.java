@@ -27,6 +27,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.base.MoreObjects.ToStringHelper;
 import org.jclouds.aws.ec2.options.RequestSpotInstancesOptions;
 import org.jclouds.aws.ec2.options.Tenancy;
 import org.jclouds.compute.options.TemplateOptions;
@@ -38,7 +39,6 @@ import org.jclouds.rest.annotations.SinceApiVersion;
 import org.jclouds.scriptbuilder.domain.Statement;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 

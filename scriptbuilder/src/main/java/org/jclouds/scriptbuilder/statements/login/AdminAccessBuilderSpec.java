@@ -16,8 +16,8 @@
  */
 package org.jclouds.scriptbuilder.statements.login;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import java.io.File;
@@ -34,11 +34,11 @@ import com.google.common.collect.ImmutableMap;
 
 /**
  * A specification of a {@link AdminAccess.Builder} configuration.
- * 
+ *
  * <p>
  * {@code AdminAccess.Builder} supports parsing configuration off of a string, which makes it
  * especially useful for command-line configuration of a {@code AdminAccess.Builder}.
- * 
+ *
  * <p>
  * The string syntax is a series of comma-separated keys or key-value pairs, each corresponding to a
  * {@code AdminAccess.Builder} method.
@@ -56,23 +56,23 @@ import com.google.common.collect.ImmutableMap;
  * <li>{@code installAdminPrivateKey=[Boolean]}: sets {@link TemplateBuilder#installAdminPrivateKey}.
  * <li>{@code resetLoginPassword=[Boolean]}: sets {@link TemplateBuilder#resetLoginPassword}.
  * </ul>
- * 
+ *
  * <p>
  * Whitespace before and after commas and equal signs is ignored. Keys may not be repeated and both
  * private key and public key must be passed through files, as they might include weird characters.
- * 
+ *
  * <p>
  * {@code AdminAccessBuilderSpec} does not support configuring {@code AdminAccess.Builder} methods
  * with non-value parameters. These must be configured in code.
- * 
+ *
  * <p>
  * A new {@code AdminAccess.Builder} can be instantiated from a {@code AdminAccessBuilderSpec} using
  * {@link AdminAccess.Builder#from(AdminAccessBuilderSpec)} or
  * {@link AdminAccess.Builder#from(String)}.
- * 
+ *
  * <p>
  * Design inspired by {@link CacheBuilderSpec}
- * 
+ *
  * @since 1.5
  */
 
@@ -286,7 +286,7 @@ public class AdminAccessBuilderSpec {
 
    /**
     * Creates a AdminAccessBuilderSpec from multiple specifications,
-    * 
+    *
     * @param adminAccessSpecification
     *           the string form
     */

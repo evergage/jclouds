@@ -16,7 +16,7 @@
  */
 package org.jclouds.rackspace.cloudfiles.v1.domain;
 
-import static com.google.common.base.Objects.toStringHelper;
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.beans.ConstructorProperties;
@@ -25,7 +25,7 @@ import java.net.URI;
 import javax.inject.Named;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Represents a CDN Container in Rackspace Cloud Files.
@@ -117,7 +117,7 @@ public class CDNContainer implements Comparable<CDNContainer> {
    public URI getIosUri() {
       return iosUri;
    }
-   
+
    @Override
    public boolean equals(Object obj) {
       if (this == obj) return true;
@@ -132,7 +132,7 @@ public class CDNContainer implements Comparable<CDNContainer> {
                && Objects.equal(this.streamingUri, that.streamingUri)
                && Objects.equal(this.iosUri, that.iosUri);
    }
-   
+
 
    @Override
    public int hashCode() {
@@ -170,7 +170,7 @@ public class CDNContainer implements Comparable<CDNContainer> {
    }
 
    public static class Builder {
-      
+
       private String name;
       private boolean enabled;
       private boolean logRetention;
@@ -179,7 +179,7 @@ public class CDNContainer implements Comparable<CDNContainer> {
       private URI sslUri;
       private URI streamingUri;
       private URI iosUri;
-      
+
       /**
        * @see CDNContainer#getName()
        */

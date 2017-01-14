@@ -23,21 +23,22 @@ import java.util.Date;
 
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * An OpenStack Nova Volume Snapshot
 */
 public class VolumeSnapshot {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromVolumeSnapshot(this);
    }
 
@@ -51,8 +52,8 @@ public class VolumeSnapshot {
       protected Date created;
       protected String name;
       protected String description;
-   
-      /** 
+
+      /**
        * @see VolumeSnapshot#getId()
        */
       public T id(String id) {
@@ -60,7 +61,7 @@ public class VolumeSnapshot {
          return self();
       }
 
-      /** 
+      /**
        * @see VolumeSnapshot#getVolumeId()
        */
       public T volumeId(String volumeId) {
@@ -68,7 +69,7 @@ public class VolumeSnapshot {
          return self();
       }
 
-      /** 
+      /**
        * @see VolumeSnapshot#getStatus()
        */
       public T status(Volume.Status status) {
@@ -76,7 +77,7 @@ public class VolumeSnapshot {
          return self();
       }
 
-      /** 
+      /**
        * @see VolumeSnapshot#getSize()
        */
       public T size(int size) {
@@ -84,7 +85,7 @@ public class VolumeSnapshot {
          return self();
       }
 
-      /** 
+      /**
        * @see VolumeSnapshot#getCreated()
        */
       public T created(Date created) {
@@ -92,7 +93,7 @@ public class VolumeSnapshot {
          return self();
       }
 
-      /** 
+      /**
        * @see VolumeSnapshot#getName()
        */
       public T name(String name) {
@@ -100,7 +101,7 @@ public class VolumeSnapshot {
          return self();
       }
 
-      /** 
+      /**
        * @see VolumeSnapshot#getDescription()
        */
       public T description(String description) {
@@ -111,7 +112,7 @@ public class VolumeSnapshot {
       public VolumeSnapshot build() {
          return new VolumeSnapshot(id, volumeId, status, size, created, name, description);
       }
-      
+
       public T fromVolumeSnapshot(VolumeSnapshot in) {
          return this
                   .id(in.getId())
@@ -225,12 +226,12 @@ public class VolumeSnapshot {
                && Objects.equal(this.name, that.name)
                && Objects.equal(this.description, that.description);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("id", id).add("volumeId", volumeId).add("status", status).add("size", size).add("created", created).add("name", name).add("description", description);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

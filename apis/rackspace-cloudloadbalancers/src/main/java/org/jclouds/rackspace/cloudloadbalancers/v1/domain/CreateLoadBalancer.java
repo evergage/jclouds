@@ -22,11 +22,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 import org.jclouds.rackspace.cloudloadbalancers.v1.domain.internal.BaseLoadBalancer;
 
-import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
@@ -46,7 +46,7 @@ public class CreateLoadBalancer extends BaseLoadBalancer<AddNode, CreateLoadBala
          @Nullable HealthMonitor healthMonitor, @Nullable Set<AccessRule> accessRules,
          @Nullable Map<String, String> metadata, VirtualIP.Type virtualIPType, Integer virtualIPId) {
       this(name, protocol, port, addNodes, algorithm, timeout, halfClosed, sessionPersistenceType, connectionLogging,
-            connectionThrottle, healthMonitor, accessRules, metadata, 
+            connectionThrottle, healthMonitor, accessRules, metadata,
             getVirtualIPsFromOptions(virtualIPType, virtualIPId));
    }
 
@@ -61,7 +61,7 @@ public class CreateLoadBalancer extends BaseLoadBalancer<AddNode, CreateLoadBala
       this.virtualIps = checkNotNull(virtualIPsFromOptions, "virtualIPsFromOptions");
       this.accessRules = accessRules;
       this.metadata = metadata;
-   }   
+   }
 
    public Map<String, String> getMetadata() {
       return metadata != null ? metadata : ImmutableMap.<String, String> of();
@@ -83,7 +83,7 @@ public class CreateLoadBalancer extends BaseLoadBalancer<AddNode, CreateLoadBala
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this).omitNullValues().add("name", name).add("protocol", protocol)
+      return MoreObjects.toStringHelper(this).omitNullValues().add("name", name).add("protocol", protocol)
             .add("port", port).add("nodes", nodes).add("timeout", timeout).add("algorithm", algorithm)
             .add("timeout", timeout).add("sessionPersistenceType", getSessionPersistenceType())
             .add("connectionLogging", isConnectionLogging()).add("connectionThrottle", connectionThrottle)
@@ -128,9 +128,9 @@ public class CreateLoadBalancer extends BaseLoadBalancer<AddNode, CreateLoadBala
       }
 
       /**
-       * The access list management feature allows fine-grained network access controls to be applied to the load 
+       * The access list management feature allows fine-grained network access controls to be applied to the load
        * balancer's virtual IP address.
-       * 
+       *
        * @see AccessRule
        */
       public Builder accessRules(Iterable<AccessRule> accessRules) {

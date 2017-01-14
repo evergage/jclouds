@@ -20,40 +20,41 @@ import java.beans.ConstructorProperties;
 
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Optional;
 
 /**
- * The SSL Termination feature allows a load balancer user to terminate SSL traffic at the load balancer layer versus 
- * at the web server layer. A user may choose to configure SSL Termination using a key and an SSL certificate or an 
+ * The SSL Termination feature allows a load balancer user to terminate SSL traffic at the load balancer layer versus
+ * at the web server layer. A user may choose to configure SSL Termination using a key and an SSL certificate or an
  * (Intermediate) SSL certificate.
- * <p/> 
- * When SSL Termination is configured on a load balancer, a secure shadow server is created that listens only for 
- * secure traffic on a user-specified port. This shadow server is only visible to and manageable by the system. 
- * Existing or updated attributes on a load balancer with SSL Termination will also apply to its shadow server. 
- * For example, if Connection Logging is enabled on an SSL load balancer, it will also be enabled on the shadow server 
+ * <p/>
+ * When SSL Termination is configured on a load balancer, a secure shadow server is created that listens only for
+ * secure traffic on a user-specified port. This shadow server is only visible to and manageable by the system.
+ * Existing or updated attributes on a load balancer with SSL Termination will also apply to its shadow server.
+ * For example, if Connection Logging is enabled on an SSL load balancer, it will also be enabled on the shadow server
  * and Cloud Files logs will contain log files for both.
  * <p/>
  * Notes
  * <ol>
- * <li>SSL Termination may only be configured on load balancers with non-secure protocols. For example, SSL Termination 
+ * <li>SSL Termination may only be configured on load balancers with non-secure protocols. For example, SSL Termination
  * can be applied to an HTTP load balancer, but not to an HTTPS load balancer.</li>
- * <li>SSL-terminated load balancers decrypt the traffic at the traffic manager and pass unencrypted traffic to the 
- * back-end node. Because of this, the customer's back-end nodes don't know what protocol the client requested. 
- * Therefore the X-Forwarded-Proto (XFP) header has been added for identifying the originating protocol of an HTTP 
+ * <li>SSL-terminated load balancers decrypt the traffic at the traffic manager and pass unencrypted traffic to the
+ * back-end node. Because of this, the customer's back-end nodes don't know what protocol the client requested.
+ * Therefore the X-Forwarded-Proto (XFP) header has been added for identifying the originating protocol of an HTTP
  * request as "http" or "https" depending on what protocol the client requested.</li>
- * <li>Not every service will return certificates in the proper order. Please verify that your chain of certificates 
+ * <li>Not every service will return certificates in the proper order. Please verify that your chain of certificates
  * matches that of walking up the chain from the domain to the CA root.</li>
  * </ol>
- * 
+ *
  * Warning
  * <ol>
- * <li>If SSL is enabled on a load balancer that is configured with nodes that are NOT in the same datacenter, then 
- * decrypted traffic will be sent in clear text over the public internet to the external node(s) and will no longer 
+ * <li>If SSL is enabled on a load balancer that is configured with nodes that are NOT in the same datacenter, then
+ * decrypted traffic will be sent in clear text over the public internet to the external node(s) and will no longer
  * be secure.</li>
  * </ol>
- * 
+ *
  * <table border="1">
  *   <caption>
  *     Optional SSL Attributes
@@ -186,7 +187,7 @@ public class SSLTermination {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this).omitNullValues().add("enabled", enabled)
+      return MoreObjects.toStringHelper(this).omitNullValues().add("enabled", enabled)
             .add("secureTrafficOnly", secureTrafficOnly).add("securePort", securePort)
             .add("certificate", certificate.orNull()).add("privateKey", privateKey.orNull())
             .add("intermediateCertificate", intermediateCertificate.orNull());
@@ -240,8 +241,8 @@ public class SSLTermination {
        * </p>
        * The certificate is validated and verified against the key and intermediate certificate if provided.
        * </p>
-       * All requests to SSL termination require the key/certificates to be in "proper" format, meaning that all raw 
-       * line feed characters should be wrapped in a newline character. So if the user pastes in the key from a 
+       * All requests to SSL termination require the key/certificates to be in "proper" format, meaning that all raw
+       * line feed characters should be wrapped in a newline character. So if the user pastes in the key from a
        * mykey.key file, it will not properly handle the field. For example, use string.replaceAll("\n", "\\n").
        */
       public Builder certificate(String certificate) {
@@ -253,7 +254,7 @@ public class SSLTermination {
        * Required. The private key for the SSL certificate.
        * </p>
        * The private key is validated and verified against the provided certificate(s).
-       * 
+       *
        * @see SSLTermination#certificate(String)
        */
       public Builder privatekey(String privateKey) {
@@ -267,9 +268,9 @@ public class SSLTermination {
        * </p>
        * The intermediate certificate is validated and verified against the key and certificate credentials provided.
        * </p>
-       * A user may only provide an intermediateCertificate when accompanied by a certificate, private key, and 
+       * A user may only provide an intermediateCertificate when accompanied by a certificate, private key, and
        * securePort. It may not be added to an existing SSL configuration as a single attribute in a future request.
-       * 
+       *
        * @see SSLTermination#certificate(String)
        */
       public Builder intermediateCertificate(String intermediateCertificate) {

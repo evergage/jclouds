@@ -24,25 +24,26 @@ import java.util.Map;
 
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 
 /**
  * Volume Type used in the Volume Type Extension for Nova
- * 
+ *
  * @see org.jclouds.openstack.nova.v2_0.extensions.VolumeTypeApi
 */
 public class VolumeType {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromVolumeType(this);
    }
 
@@ -54,8 +55,8 @@ public class VolumeType {
       protected Date created;
       protected Date updated;
       protected Map<String, String> extraSpecs = ImmutableMap.of();
-   
-      /** 
+
+      /**
        * @see VolumeType#getId()
        */
       public T id(String id) {
@@ -63,7 +64,7 @@ public class VolumeType {
          return self();
       }
 
-      /** 
+      /**
        * @see VolumeType#getName()
        */
       public T name(String name) {
@@ -71,7 +72,7 @@ public class VolumeType {
          return self();
       }
 
-      /** 
+      /**
        * @see VolumeType#getCreated()
        */
       public T created(Date created) {
@@ -79,7 +80,7 @@ public class VolumeType {
          return self();
       }
 
-      /** 
+      /**
        * @see VolumeType#getUpdated()
        */
       public T updated(Date updated) {
@@ -87,18 +88,18 @@ public class VolumeType {
          return self();
       }
 
-      /** 
+      /**
        * @see VolumeType#getExtraSpecs()
        */
       public T extraSpecs(Map<String, String> extraSpecs) {
-         this.extraSpecs = ImmutableMap.copyOf(checkNotNull(extraSpecs, "extraSpecs"));     
+         this.extraSpecs = ImmutableMap.copyOf(checkNotNull(extraSpecs, "extraSpecs"));
          return self();
       }
 
       public VolumeType build() {
          return new VolumeType(id, name, created, updated, extraSpecs);
       }
-      
+
       public T fromVolumeType(VolumeType in) {
          return this
                   .id(in.getId())
@@ -133,7 +134,7 @@ public class VolumeType {
       this.name = checkNotNull(name, "name");
       this.created = checkNotNull(created, "created");
       this.updated = Optional.fromNullable(updated);
-      this.extraSpecs = ImmutableMap.copyOf(checkNotNull(extraSpecs, "extraSpecs"));     
+      this.extraSpecs = ImmutableMap.copyOf(checkNotNull(extraSpecs, "extraSpecs"));
    }
 
    public String getId() {
@@ -178,12 +179,12 @@ public class VolumeType {
                && Objects.equal(this.updated, that.updated)
                && Objects.equal(this.extraSpecs, that.extraSpecs);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("id", id).add("name", name).add("created", created).add("updated", updated).add("extraSpecs", extraSpecs);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

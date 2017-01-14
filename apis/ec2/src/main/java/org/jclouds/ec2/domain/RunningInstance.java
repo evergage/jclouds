@@ -22,10 +22,11 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Strings;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.ImmutableMap;
@@ -35,7 +36,7 @@ import com.google.common.collect.Ordering;
 import com.google.common.collect.Sets;
 
 /**
- * 
+ *
  * @see <a href="http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/ApiReference-ItemType-RunningInstancesItemType.html"
  *      />
  */
@@ -48,7 +49,7 @@ public class RunningInstance implements Comparable<RunningInstance> {
    public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromRunningInstance(this);
    }
-   
+
    public abstract static class Builder<T extends Builder<T>> {
       protected abstract T self();
 
@@ -87,7 +88,7 @@ public class RunningInstance implements Comparable<RunningInstance> {
             this.tags.put(key, Strings.nullToEmpty(value));
          return self();
       }
-      
+
       public T region(String region) {
          this.region = region;
          return self();
@@ -128,12 +129,12 @@ public class RunningInstance implements Comparable<RunningInstance> {
          this.instanceState = instanceState;
          return self();
       }
-      
+
       public T rawState(String rawState) {
          this.rawState = rawState;
          return self();
       }
-      
+
       public T instanceType(String instanceType) {
          this.instanceType = instanceType;
          return self();
@@ -214,7 +215,7 @@ public class RunningInstance implements Comparable<RunningInstance> {
             this.ebsBlockDevices.put(key, value);
          return self();
       }
-      
+
       public T fromRunningInstance(RunningInstance in) {
          return region(in.region).groupNames(in.groupNames).amiLaunchIndex(in.amiLaunchIndex).dnsName(in.dnsName)
                .imageId(in.imageId).instanceId(in.instanceId).instanceState(in.instanceState).rawState(in.rawState)
@@ -225,11 +226,11 @@ public class RunningInstance implements Comparable<RunningInstance> {
                .rootDeviceType(in.rootDeviceType).rootDeviceName(in.rootDeviceName).devices(in.ebsBlockDevices)
                .tags(in.tags);
       }
-      
+
       public abstract RunningInstance build();
 
    }
-   
+
    private static class ConcreteBuilder extends Builder<ConcreteBuilder> {
       @Override
       protected ConcreteBuilder self() {
@@ -315,7 +316,7 @@ public class RunningInstance implements Comparable<RunningInstance> {
 
    /**
     * To be removed in jclouds 1.6 <h4>Warning</h4>
-    * 
+    *
     * Especially on EC2 clones that may not support regions, this value is fragile. Consider
     * alternate means to determine context.
     */
@@ -328,7 +329,7 @@ public class RunningInstance implements Comparable<RunningInstance> {
     * The AMI launch index, which can be used to find this instance within the launch group. For
     * more information, go to the Metadata section of the Amazon Elastic Compute Cloud Developer
     * Guide.
-    * 
+    *
     * @see <a href="http://docs.amazonwebservices.com/AWSEC2/2010-08-31/DeveloperGuide/" />
     */
    public String getAmiLaunchIndex() {
@@ -363,14 +364,14 @@ public class RunningInstance implements Comparable<RunningInstance> {
    public InstanceState getInstanceState() {
       return instanceState;
    }
-   
+
    /**
     * The current state of the instance, as returned literally from the input XML
     */
    public String getRawState() {
       return rawState;
    }
-   
+
    /**
     * The instance type.
     */
@@ -470,7 +471,7 @@ public class RunningInstance implements Comparable<RunningInstance> {
    public Map<String, BlockDevice> getEbsBlockDevices() {
       return ebsBlockDevices;
    }
-   
+
    /**
     * Names of the security groups.
     */
@@ -489,7 +490,7 @@ public class RunningInstance implements Comparable<RunningInstance> {
    public int compareTo(RunningInstance other) {
       return ComparisonChain.start().compare(region, other.region).compare(instanceId, other.instanceId, Ordering.natural().nullsLast()).result();
    }
-   
+
    @Override
    public int hashCode() {
       return Objects.hashCode(region, instanceId);
@@ -506,7 +507,7 @@ public class RunningInstance implements Comparable<RunningInstance> {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this).omitNullValues().add("region", region)
+      return MoreObjects.toStringHelper(this).omitNullValues().add("region", region)
                .add("availabilityZone", availabilityZone).add("id", instanceId).add("state", rawState)
                .add("type", instanceType).add("virtualizationType", virtualizationType).add("imageId", imageId)
                .add("ipAddress", ipAddress).add("dnsName", dnsName).add("privateIpAddress", privateIpAddress)

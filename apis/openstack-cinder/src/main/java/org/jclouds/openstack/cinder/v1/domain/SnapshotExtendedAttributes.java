@@ -17,6 +17,8 @@
 
 package org.jclouds.openstack.cinder.v1.domain;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Objects;
 import org.jclouds.javax.annotation.Nullable;
 
@@ -112,8 +114,8 @@ public class SnapshotExtendedAttributes {
             && Objects.equal(this.progress, that.progress);
    }
 
-   protected Objects.ToStringHelper string() {
-      return Objects.toStringHelper(this)
+   protected ToStringHelper string() {
+      return MoreObjects.toStringHelper(this)
             .add("projectId", projectId).add("progress", progress);
    }
 

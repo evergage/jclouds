@@ -16,7 +16,7 @@
  */
 package org.jclouds;
 
-import static com.google.common.base.Objects.toStringHelper;
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Predicates.containsPattern;
 import static com.google.common.base.Predicates.instanceOf;
@@ -31,7 +31,7 @@ import static com.google.common.collect.Iterables.transform;
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Lists.newArrayListWithCapacity;
 import static com.google.common.collect.Maps.filterKeys;
-import static com.google.common.util.concurrent.MoreExecutors.sameThreadExecutor;
+import static com.google.common.util.concurrent.MoreExecutors.newDirectExecutorService;
 import static org.jclouds.Constants.PROPERTY_API;
 import static org.jclouds.Constants.PROPERTY_API_VERSION;
 import static org.jclouds.Constants.PROPERTY_BUILD_VERSION;
@@ -111,30 +111,30 @@ import com.google.inject.TypeLiteral;
  * Creates {@link Context} or {@link Injector} configured to an api and
  * endpoint. Alternatively, this can be used to make a portable {@link View} of
  * that api.
- * 
+ *
  * <br/>
  * ex. to build a {@code Api} on a particular endpoint using the typed
  * interface
- * 
+ *
  * <pre>
  * api = ContextBuilder.newBuilder(new NovaApiMetadata())
  *                     .endpoint("http://10.10.10.10:5000/v2.0")
  *                     .credentials(user, pass)
  *                     .buildApi(NovaApi.class);
  * </pre>
- * 
+ *
  * <br/>
  * ex. to build a {@link View} of a particular backend context, looked up by
  * key.
- * 
+ *
  * <pre>
  * context = ContextBuilder.newBuilder("aws-s3")
  *                         .credentials(apikey, secret)
  *                         .buildView(BlobStoreContext.class);
  * </pre>
- * 
+ *
  * <h4>Assumptions</h4>
- * 
+ *
  * Threadsafe objects will be bound as singletons to the Injector or Context
  * provided.
  * <p/>
@@ -142,7 +142,7 @@ import com.google.inject.TypeLiteral;
  * {@link JDKLoggingModule logging} and
  * {@link JavaUrlHttpCommandExecutorServiceModule http transports} will be
  * installed.
- * 
+ *
  * @see Context
  * @see View
  * @see ApiMetadata
@@ -154,7 +154,7 @@ public class ContextBuilder {
 
    /**
     * looks up a provider or api with the given id
-    * 
+    *
     * @param providerOrApi
     *           id of the provider or api
     * @return means to build a context to that provider
@@ -249,10 +249,10 @@ public class ContextBuilder {
       this.credentialsSupplierOption = Optional.of(checkNotNull(credentialsSupplier, "credentialsSupplier"));
       return this;
    }
-   
+
    /**
     * constant value of the cloud identity and credential.
-    * 
+    *
     * @param credential (optional depending on {@link ApiMetadata#getCredentialName()}
     */
    public ContextBuilder credentials(String identity, @Nullable String credential) {
@@ -350,7 +350,7 @@ public class ContextBuilder {
          expanded.remove(key);
       }
    }
-   
+
    private Properties currentStateToUnexpandedProperties() {
       Properties defaults = new Properties();
       putAllAsString(apiMetadata.getDefaultProperties(), defaults);
@@ -547,7 +547,7 @@ public class ContextBuilder {
                return input.getClass().isAnnotationPresent(SingleThreaded.class);
             }
          })) {
-            modules.add(new ExecutorServiceModule(sameThreadExecutor()));
+            modules.add(new ExecutorServiceModule(newDirectExecutorService()));
          } else {
             modules.add(new ExecutorServiceModule());
          }
@@ -572,7 +572,7 @@ public class ContextBuilder {
     * Builds the base context for this api. Note that this may be of type {@link Closer}, if nothing
     * else was configured via {@link ApiMetadata#getContext()}. Typically, the type returned is
     * {@link ApiContext}
-    * 
+    *
     * @see ApiMetadata#getContext()
     * @see #build(TypeToken)
     */
@@ -594,13 +594,13 @@ public class ContextBuilder {
    public <V extends View> V buildView(Class<V> viewType) {
      return buildView(typeToken(viewType));
    }
-   
+
    /**
     * this will build any {@link ApiMetadata#getViews() view} supported by the ApiMetadata.
-    * 
+    *
     * ex. {@code builder.build(BlobStoreContext.class) } will work, if {@code TypeToken<BlobStore>}
     * is a configured {@link ApiMetadata#getViews() view} of this api.
-    * 
+    *
     */
    @SuppressWarnings("unchecked")
    public <V extends View> V buildView(TypeToken<V> viewType) {
@@ -631,11 +631,11 @@ public class ContextBuilder {
 
    /**
     * This will return the top-level interface for the api or provider.
-    * 
-    * Ex. 
+    *
+    * Ex.
     * <pre>
     * api = ContextBuilder.newBuilder("openstack-nova")
-    *                     ... 
+    *                     ...
     *                     .buildApi(NovaApi.class);
     *</pre>
     */

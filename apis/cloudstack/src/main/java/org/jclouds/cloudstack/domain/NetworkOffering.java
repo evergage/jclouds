@@ -22,10 +22,11 @@ import java.beans.ConstructorProperties;
 import java.util.Date;
 import java.util.Set;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ImmutableSet;
 
 /**
@@ -144,7 +145,7 @@ public class NetworkOffering implements Comparable<NetworkOffering> {
          this.networkRate = networkRate;
          return self();
       }
-      
+
       /**
        * @see NetworkOffering#getTags()
        */
@@ -152,7 +153,7 @@ public class NetworkOffering implements Comparable<NetworkOffering> {
          this.tags = ImmutableSet.<String>builder().addAll(tags);
          return self();
       }
-      
+
       /**
        * @see NetworkOffering#getTags()
        */
@@ -160,7 +161,7 @@ public class NetworkOffering implements Comparable<NetworkOffering> {
          this.tags.add(tag);
          return self();
       }
-      
+
 
       public NetworkOffering build() {
          return new NetworkOffering(id, name, displayText, created, availability, maxConnections, isDefault, supportsVLAN, trafficType, guestIPType, networkRate, tags.build());
@@ -338,7 +339,7 @@ public class NetworkOffering implements Comparable<NetworkOffering> {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("id", id).add("name", name).add("displayText", displayText).add("created", created).add("availability", availability).add("maxConnections", maxConnections).add("isDefault", isDefault).add("supportsVLAN", supportsVLAN).add("trafficType", trafficType).add("guestIPType", guestIPType).add("networkRate", networkRate).add("tags", tags);
    }
 

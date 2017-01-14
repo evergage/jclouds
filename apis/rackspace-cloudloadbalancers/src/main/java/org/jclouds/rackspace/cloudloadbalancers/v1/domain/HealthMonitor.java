@@ -20,21 +20,22 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.beans.ConstructorProperties;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Optional;
 
 /**
- * The load balancing service includes a health monitoring operation which periodically checks your back-end nodes to 
- * ensure they are responding correctly. If a node is not responding, it is removed from rotation until the health 
- * monitor determines that the node is functional. In addition to being performed periodically, the health check also 
- * is performed against every node that is added to ensure that the node is operating properly before allowing it to 
+ * The load balancing service includes a health monitoring operation which periodically checks your back-end nodes to
+ * ensure they are responding correctly. If a node is not responding, it is removed from rotation until the health
+ * monitor determines that the node is functional. In addition to being performed periodically, the health check also
+ * is performed against every node that is added to ensure that the node is operating properly before allowing it to
  * service traffic. Only one health monitor is allowed to be enabled on a load balancer at a time.
  * </p>
- * As part of your strategy for monitoring connections, you should consider defining secondary nodes that provide 
- * failover for effectively routing traffic in case the primary node fails. This is an additional feature that will 
+ * As part of your strategy for monitoring connections, you should consider defining secondary nodes that provide
+ * failover for effectively routing traffic in case the primary node fails. This is an additional feature that will
  * ensure you remain up in case your primary node fails.
  * <p/>
  */
@@ -52,8 +53,8 @@ public class HealthMonitor {
    @ConstructorProperties({
       "type", "delay", "timeout", "attemptsBeforeDeactivation", "bodyRegex", "statusRegex", "path", "hostHeader"
    })
-   protected HealthMonitor(Type type, int delay, int timeout, int attemptsBeforeDeactivation, 
-         @Nullable String bodyRegex, @Nullable String statusRegex, @Nullable String path, 
+   protected HealthMonitor(Type type, int delay, int timeout, int attemptsBeforeDeactivation,
+         @Nullable String bodyRegex, @Nullable String statusRegex, @Nullable String path,
          @Nullable String hostHeader) {
       this.type = checkNotNull(type, "type");
       this.delay = delay;
@@ -63,7 +64,7 @@ public class HealthMonitor {
       this.statusRegex = Optional.fromNullable(statusRegex);
       this.path = Optional.fromNullable(path);
       this.hostHeader = Optional.fromNullable(hostHeader);
-      
+
       if (!isValid())
          if (type.equals(Type.CONNECT))
             throw new IllegalArgumentException("Only delay, timeout, and attemptsBeforeDeactivation must be set.");
@@ -103,15 +104,15 @@ public class HealthMonitor {
    public Optional<String> getHostHeader() {
       return hostHeader;
    }
-   
+
    /**
     * @return true if this HealthMonitor is valid, false otherwise
     */
    public boolean isValid() {
       boolean required = delay != 0 && timeout != 0 && attemptsBeforeDeactivation != 0;
-      
+
       if (type.equals(Type.CONNECT))
-         return required && !path.isPresent() && !statusRegex.isPresent() 
+         return required && !path.isPresent() && !statusRegex.isPresent()
                 && !bodyRegex.isPresent() && !hostHeader.isPresent();
       else
          return required && path.isPresent() && (statusRegex.isPresent() || bodyRegex.isPresent());
@@ -119,7 +120,7 @@ public class HealthMonitor {
 
    @Override
    public int hashCode() {
-      return Objects.hashCode(type, delay, timeout, attemptsBeforeDeactivation, bodyRegex, statusRegex, path, 
+      return Objects.hashCode(type, delay, timeout, attemptsBeforeDeactivation, bodyRegex, statusRegex, path,
             hostHeader);
    }
 
@@ -139,7 +140,7 @@ public class HealthMonitor {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this).omitNullValues().add("type", type).add("delay", delay)
+      return MoreObjects.toStringHelper(this).omitNullValues().add("type", type).add("delay", delay)
             .add("timeout", timeout).add("attemptsBeforeDeactivation", attemptsBeforeDeactivation)
             .add("bodyRegex", bodyRegex.orNull()).add("statusRegex", statusRegex.orNull()).add("path", path.orNull())
             .add("hostHeader", hostHeader.orNull());
@@ -176,7 +177,7 @@ public class HealthMonitor {
       private String path;
       private String hostHeader;
 
-      /** 
+      /**
        * Type of the health monitor. Must be specified as CONNECT to monitor connections.
        */
       public Builder type(Type type) {
@@ -184,8 +185,8 @@ public class HealthMonitor {
          return this;
       }
 
-      /** 
-       * Required. The minimum number of seconds to wait before executing the health monitor. 
+      /**
+       * Required. The minimum number of seconds to wait before executing the health monitor.
        * Must be a number between 1 and 3600.
        */
       public Builder delay(int delay) {
@@ -193,8 +194,8 @@ public class HealthMonitor {
          return this;
       }
 
-      /** 
-       * Required. Maximum number of seconds to wait for a connection to be established before timing out. 
+      /**
+       * Required. Maximum number of seconds to wait for a connection to be established before timing out.
        * Must be a number between 1 and 300.
        */
       public Builder timeout(int timeout) {
@@ -202,8 +203,8 @@ public class HealthMonitor {
          return this;
       }
 
-      /** 
-       * Required. Number of permissible monitor failures before removing a node from rotation. 
+      /**
+       * Required. Number of permissible monitor failures before removing a node from rotation.
        * Must be a number between 1 and 10.
        */
       public Builder attemptsBeforeDeactivation(int attemptsBeforeDeactivation) {
@@ -212,7 +213,7 @@ public class HealthMonitor {
       }
 
       /**
-       * Required (if using HTTP/S). A regular expression that will be used to evaluate the contents of the body of 
+       * Required (if using HTTP/S). A regular expression that will be used to evaluate the contents of the body of
        * the response.
        */
       public Builder bodyRegex(String bodyRegex) {

@@ -16,8 +16,8 @@
  */
 package org.jclouds.openstack.keystone.v1_1.domain;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.base.Objects;
@@ -26,7 +26,7 @@ import com.google.common.collect.Multimap;
 
 /**
  * TODO
- * 
+ *
  * @see <a href=
  *      "http://docs.rackspace.com/loadbalancers/api/v1.0/clb-devguide/content/Endpoint_Access_Endpoints-d1e517.html"
  *      />
@@ -69,7 +69,7 @@ public class Auth implements Comparable<Auth> {
          return token(from.getToken()).serviceCatalog(from.getServiceCatalog());
       }
    }
-  
+
    protected final Token token;
    protected final Multimap<String, Endpoint> serviceCatalog;
 

@@ -16,8 +16,8 @@
  */
 package org.jclouds.dynect.v3.domain;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -220,7 +220,7 @@ public class RecordSet extends ForwardingList<Value> {
 
       /**
        * replaces current values
-       * 
+       *
        * @see RecordSet#iterator()
        */
       public Builder values(Iterable<Value> values) {

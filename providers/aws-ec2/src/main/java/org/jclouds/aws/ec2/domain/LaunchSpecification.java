@@ -17,7 +17,7 @@
 package org.jclouds.aws.ec2.domain;
 
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Arrays;
@@ -38,7 +38,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSortedSet;
 
 /**
- * 
+ *
  * @see <a href=
  *      "http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/ApiReference-query-RequestSpotInstances.html"
  *      />
@@ -125,12 +125,12 @@ public class LaunchSpecification {
          this.availabilityZone = availabilityZone;
          return this;
       }
-      
+
       public Builder subnetId(String subnetId) {
          this.subnetId = subnetId;
          return this;
       }
-      
+
       public Builder ramdiskId(String ramdiskId) {
          this.ramdiskId = ramdiskId;
          return this;
@@ -334,7 +334,7 @@ public class LaunchSpecification {
    public String getAvailabilityZone() {
       return availabilityZone;
    }
-   
+
    /**
     * The ID of the subnet in which to launch the Spot Instance.
     */
@@ -425,7 +425,7 @@ public class LaunchSpecification {
          if (other.subnetId != null)
             return false;
       } else if (!subnetId.equals(other.subnetId))
-         return false;      
+         return false;
       if (blockDeviceMappings == null) {
          if (other.blockDeviceMappings != null)
             return false;

@@ -16,7 +16,7 @@
  */
 package org.jclouds.compute.strategy.impl;
 
-import static com.google.common.base.Objects.toStringHelper;
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.Iterables.any;
 import static com.google.common.collect.Maps.newLinkedHashMap;
@@ -132,21 +132,21 @@ public class CreateNodesWithGroupEncodedIntoNameThenAddToSet implements CreateNo
     * This calls logic necessary to create a node and convert it from its provider-specific object
     * to the jclouds {@link NodeMetadata} object. This call directly precedes customization, such as
     * executing scripts.
-    * 
+    *
     * </p> The outcome of this operation does not imply the node is {@link Status#RUNNING
     * running}. If you want to insert logic after the node is created, yet before an attempt to
     * customize the node, then append your behaviour to this method.
-    * 
+    *
     * ex. to attach an ip address post-creation
-    * 
+    *
     * <pre>
     * &#064;Override
     * protected ListenableFuture&lt;AtomicReference&lt;NodeMetadata&gt;&gt; createNodeInGroupWithNameAndTemplate(String group, String name,
     *          Template template) {
-    * 
+    *
     *    ListenableFuture&lt;AtomicReference&lt;NodeMetadata&gt;&gt; future = super.addNodeIntoGroupWithNameAndTemplate(group, name, template);
     *    return Futures.compose(future, new Function&lt;AtomicReference&lt;NodeMetadata&gt;, AtomicReference&lt;NodeMetadata&gt;&gt;() {
-    * 
+    *
     *       &#064;Override
     *       public AtomicReference&lt;NodeMetadata&gt; apply(AtomicReference&lt;NodeMetadata&gt; input) {
     *          NodeMetadata node = input.get();
@@ -154,11 +154,11 @@ public class CreateNodesWithGroupEncodedIntoNameThenAddToSet implements CreateNo
     *          input.set(NodeMetadataBuilder.fromNodeMetadata(node).publicAddresses(ImmutableSet.of(ip.getIp())).build());
     *          return input;
     *       }
-    * 
+    *
     *    }, executor);
     * }
     * </pre>
-    * 
+    *
     * @param group group the node belongs to
     * @param name generated name of the node
     * @param template user-specified template
@@ -177,7 +177,7 @@ public class CreateNodesWithGroupEncodedIntoNameThenAddToSet implements CreateNo
     * any check for name conflicts.
     * If there are insufficient names in nodeNames, subsequent names will be generated in the
     * default format.
-    * 
+    *
     * @param group
     * @param count
     * @param template

@@ -17,7 +17,7 @@
 package org.jclouds.compute.config;
 
 import static com.google.common.base.Functions.compose;
-import static com.google.common.base.Objects.toStringHelper;
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Predicates.notNull;
 
 import java.util.Set;
@@ -54,16 +54,16 @@ public class ComputeServiceAdapterContextModule<N, H, I, L> extends BaseComputeS
    /**
     * install this, if you want to use your computeservice adapter to handle locations. Note that if you do this, you'll
     * want to instantiate a subclass to prevent type erasure.
-    * 
+    *
     * ex.
-    * 
+    *
     * <pre>
     * install(new LocationsFromComputeServiceAdapterModule&lt;NodeMetadata, Hardware, Image, Location&gt;() {
     * });
     * </pre>
-    * 
+    *
     * not
-    * 
+    *
     * <pre>
     * install(new LocationsFromComputeServiceAdapterModule&lt;NodeMetadata, Hardware, Image, Location&gt;());
     * </pre>

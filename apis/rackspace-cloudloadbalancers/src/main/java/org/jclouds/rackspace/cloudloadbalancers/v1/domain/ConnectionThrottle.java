@@ -20,12 +20,13 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import java.beans.ConstructorProperties;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
- * The connection throttling feature imposes limits on the number of connections per IP address to help mitigate 
- * malicious or abusive traffic to your applications. The attributes in the table that follows can be configured 
+ * The connection throttling feature imposes limits on the number of connections per IP address to help mitigate
+ * malicious or abusive traffic to your applications. The attributes in the table that follows can be configured
  * based on the traffic patterns for your sites.
  */
 public class ConnectionThrottle {
@@ -43,7 +44,7 @@ public class ConnectionThrottle {
       this.minConnections = minConnections;
       this.maxConnectionRate = maxConnectionRate;
       this.rateInterval = rateInterval;
-      checkArgument(isValid(), 
+      checkArgument(isValid(),
             "At least one of maxConnections, minConnections, maxConnectionRate, or rateInterval must be set.");
    }
 
@@ -62,7 +63,7 @@ public class ConnectionThrottle {
    public int getRateInterval() {
       return this.rateInterval;
    }
-   
+
    public boolean isValid() {
       return maxConnections != 0 && minConnections != 0 && maxConnectionRate != 0 && rateInterval != 0;
    }
@@ -87,7 +88,7 @@ public class ConnectionThrottle {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this).add("maxConnections", maxConnections).add("minConnections", minConnections)
+      return MoreObjects.toStringHelper(this).add("maxConnections", maxConnections).add("minConnections", minConnections)
             .add("maxConnectionRate", maxConnectionRate).add("rateInterval", rateInterval);
    }
 
@@ -102,8 +103,8 @@ public class ConnectionThrottle {
       private int maxConnectionRate;
       private int rateInterval;
 
-      /** 
-       * Maximum number of connections to allow for a single IP address. Setting a value of 0 will allow unlimited 
+      /**
+       * Maximum number of connections to allow for a single IP address. Setting a value of 0 will allow unlimited
        * simultaneous connections; otherwise set a value between 1 and 100000.
        */
       public Builder maxConnections(int maxConnections) {
@@ -111,8 +112,8 @@ public class ConnectionThrottle {
          return this;
       }
 
-      /** 
-       * Allow at least this number of connections per IP address before applying throttling restrictions. Setting 
+      /**
+       * Allow at least this number of connections per IP address before applying throttling restrictions. Setting
        * a value of 0 allows unlimited simultaneous connections; otherwise, set a value between 1 and 1000.
        */
       public Builder minConnections(int minConnections) {
@@ -120,8 +121,8 @@ public class ConnectionThrottle {
          return this;
       }
 
-      /** 
-       * Maximum number of connections allowed from a single IP address in the defined rateInterval. Setting a value 
+      /**
+       * Maximum number of connections allowed from a single IP address in the defined rateInterval. Setting a value
        * of 0 allows an unlimited connection rate; otherwise, set a value between 1 and 100000.
        */
       public Builder maxConnectionRate(int maxConnectionRate) {
@@ -129,9 +130,9 @@ public class ConnectionThrottle {
          return this;
       }
 
-      /** 
-       * Frequency (in seconds) at which the maxConnectionRate is assessed. For example, a maxConnectionRate of 30 
-       * with a rateInterval of 60 would allow a maximum of 30 connections per minute for a single IP address. This 
+      /**
+       * Frequency (in seconds) at which the maxConnectionRate is assessed. For example, a maxConnectionRate of 30
+       * with a rateInterval of 60 would allow a maximum of 30 connections per minute for a single IP address. This
        * value must be between 1 and 3600.
        */
       public Builder rateInterval(int rateInterval) {

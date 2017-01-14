@@ -24,10 +24,11 @@ import java.beans.ConstructorProperties;
 import java.util.Date;
 import java.util.Set;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ImmutableSet;
 
 /**
@@ -323,7 +324,7 @@ public class Host implements Comparable<Host> {
          this.tags = ImmutableSet.<String>builder().addAll(tags);
          return self();
       }
-      
+
       /**
        * @see Host#getTags()
        */
@@ -331,7 +332,7 @@ public class Host implements Comparable<Host> {
          this.tags.add(tag);
          return self();
       }
-      
+
       /**
        * @see Host#getHypervisor()
        */
@@ -930,7 +931,7 @@ public class Host implements Comparable<Host> {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("id", id).add("allocationState", allocationState).add("averageLoad", averageLoad)
             .add("capabilities", capabilities).add("clusterId", clusterId).add("clusterName", clusterName)
             .add("clusterType", clusterType).add("cpuAllocated", cpuAllocated).add("cpuNumber", cpuNumber)

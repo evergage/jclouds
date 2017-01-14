@@ -20,23 +20,24 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.beans.ConstructorProperties;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.primitives.Longs;
 
 /**
  * Class Server
- * 
+ *
 */
 public class Server implements Comparable<Server> {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromServer(this);
    }
 
@@ -54,8 +55,8 @@ public class Server implements Comparable<Server> {
       protected Option os;
       protected Ip ip;
       protected ServerImage image;
-   
-      /** 
+
+      /**
        * @see Server#getId()
        */
       public T id(long id) {
@@ -63,7 +64,7 @@ public class Server implements Comparable<Server> {
          return self();
       }
 
-      /** 
+      /**
        * @see Server#isSandbox()
        */
       public T isSandbox(boolean isSandbox) {
@@ -71,7 +72,7 @@ public class Server implements Comparable<Server> {
          return self();
       }
 
-      /** 
+      /**
        * @see Server#getName()
        */
       public T name(String name) {
@@ -79,7 +80,7 @@ public class Server implements Comparable<Server> {
          return self();
       }
 
-      /** 
+      /**
        * @see Server#getDescription()
        */
       public T description(String description) {
@@ -87,7 +88,7 @@ public class Server implements Comparable<Server> {
          return self();
       }
 
-      /** 
+      /**
        * @see Server#getState()
        */
       public T state(ServerState state) {
@@ -95,7 +96,7 @@ public class Server implements Comparable<Server> {
          return self();
       }
 
-      /** 
+      /**
        * @see Server#getDatacenter()
        */
       public T datacenter(Option datacenter) {
@@ -103,7 +104,7 @@ public class Server implements Comparable<Server> {
          return self();
       }
 
-      /** 
+      /**
        * @see Server#getType()
        */
       public T type(Option type) {
@@ -111,7 +112,7 @@ public class Server implements Comparable<Server> {
          return self();
       }
 
-      /** 
+      /**
        * @see Server#getRam()
        */
       public T ram(Option ram) {
@@ -119,7 +120,7 @@ public class Server implements Comparable<Server> {
          return self();
       }
 
-      /** 
+      /**
        * @see Server#getOs()
        */
       public T os(Option os) {
@@ -127,7 +128,7 @@ public class Server implements Comparable<Server> {
          return self();
       }
 
-      /** 
+      /**
        * @see Server#getIp()
        */
       public T ip(Ip ip) {
@@ -135,7 +136,7 @@ public class Server implements Comparable<Server> {
          return self();
       }
 
-      /** 
+      /**
        * @see Server#getImage()
        */
       public T image(ServerImage image) {
@@ -146,7 +147,7 @@ public class Server implements Comparable<Server> {
       public Server build() {
          return new Server(id, isSandbox, name, description, state, datacenter, type, ram, os, ip, image);
       }
-      
+
       public T fromServer(Server in) {
          return this
                   .id(in.getId())
@@ -220,7 +221,7 @@ public class Server implements Comparable<Server> {
    public ServerState getState() {
       return this.state;
    }
-   
+
    @Nullable
    public Option getDatacenter() {
       return this.datacenter;
@@ -268,12 +269,12 @@ public class Server implements Comparable<Server> {
                && Objects.equal(this.ip, that.ip)
                && Objects.equal(this.image, that.image);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("id", id).add("isSandbox", isSandbox).add("name", name).add("description", description).add("state", state).add("datacenter", datacenter).add("type", type).add("ram", ram).add("os", os).add("ip", ip).add("image", image);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

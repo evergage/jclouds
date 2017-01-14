@@ -41,6 +41,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Qualifier;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 import org.jclouds.lifecycle.Closer;
 import org.jclouds.reflect.FunctionalReflection;
@@ -52,7 +53,6 @@ import org.jclouds.rest.config.SetCaller;
 
 import com.google.common.annotations.Beta;
 import com.google.common.base.Function;
-import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
@@ -81,7 +81,7 @@ public class DelegatesToInvocationFunction<S, F extends Function<Invocation, Obj
 
    /**
     * {@inheritDoc}
-    * 
+    *
     * <p>
     * <ul>
     * <li>{@code proxy.hashCode()} delegates to {@link AbstractInvocationHandler#hashCode}
@@ -94,7 +94,7 @@ public class DelegatesToInvocationFunction<S, F extends Function<Invocation, Obj
     * </ul>
     * <li>other method calls are dispatched to {@link #handleInvocation}.
     * </ul>
-    * 
+    *
     * @throws Throwable
     */
    @Override
@@ -180,7 +180,7 @@ public class DelegatesToInvocationFunction<S, F extends Function<Invocation, Obj
    protected final F methodInvoker;
 
    @Inject
-   DelegatesToInvocationFunction(Injector injector, SetCaller setCaller, 
+   DelegatesToInvocationFunction(Injector injector, SetCaller setCaller,
          Class<S> ownerType, Function<InvocationSuccess, Optional<Object>> optionalConverter, F methodInvoker) {
       this.injector = checkNotNull(injector, "injector");
       this.ownerType = typeToken(checkNotNull(ownerType, "ownerType"));
@@ -282,7 +282,7 @@ public class DelegatesToInvocationFunction<S, F extends Function<Invocation, Obj
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").omitNullValues().add("ownerType", ownerType.getRawType().getSimpleName())
+      return MoreObjects.toStringHelper("").omitNullValues().add("ownerType", ownerType.getRawType().getSimpleName())
             .add("methodInvoker", methodInvoker).toString();
    }
 }

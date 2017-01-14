@@ -24,39 +24,39 @@ import org.jclouds.openstack.v2_0.domain.Link;
 import org.jclouds.openstack.v2_0.domain.Resource;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Optional;
 
 /**
  * Server Resource with administrative password returned by ServerApi#CreateServer calls
- * 
+ *
  * @see <a href=
       "http://docs.openstack.org/api/openstack-compute/1.1/content/Get_Server_Details-d1e2623.html"
       />
 */
 public class ServerCreated extends Resource {
 
-   public static Builder builder() { 
+   public static Builder builder() {
       return new Builder();
    }
-   
-   public Builder toBuilder() { 
+
+   public Builder toBuilder() {
       return builder().fromServerCreated(this);
    }
 
    public static final class Builder extends Resource.Builder<Builder>  {
       protected String adminPass;
       protected String diskConfig;
-   
-      /** 
+
+      /**
        * @see ServerCreated#getAdminPass()
        */
       public Builder adminPass(String adminPass) {
          this.adminPass = adminPass;
          return self();
       }
-      
-      /** 
+
+      /**
        * @see ServerCreated#getDiskConfig()
        */
       public Builder diskConfig(String diskConfig) {
@@ -67,7 +67,7 @@ public class ServerCreated extends Resource {
       public ServerCreated build() {
          return new ServerCreated(id, name, links, adminPass, diskConfig);
       }
-      
+
       public Builder fromServerCreated(ServerCreated in) {
          return super.fromResource(in).adminPass(in.getAdminPass().orNull()).diskConfig(in.getDiskConfig().orNull());
       }
@@ -82,9 +82,9 @@ public class ServerCreated extends Resource {
    private final Optional<String> diskConfig;
 
    @ConstructorProperties({
-      "id", "name", "links", "adminPass", "OS-DCF:diskConfig" 
+      "id", "name", "links", "adminPass", "OS-DCF:diskConfig"
    })
-   protected ServerCreated(String id, @Nullable String name, Set<Link> links, @Nullable String adminPass, 
+   protected ServerCreated(String id, @Nullable String name, Set<Link> links, @Nullable String adminPass,
          @Nullable String diskConfig) {
       super(id, name, links);
       this.adminPass = Optional.fromNullable(adminPass);

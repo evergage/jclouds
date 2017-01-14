@@ -20,16 +20,17 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.beans.ConstructorProperties;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * A container used to group or isolate resources and/or identity objects.
  * Depending on the service operator, a tenant may map to a customer, account,
  * organization, or project.
- * 
+ *
  * @see <a href=
  *      "http://docs.openstack.org/api/openstack-identity-service/2.0/content/Identity-Service-Concepts-e1362.html"
  *      />
@@ -116,7 +117,7 @@ public class Tenant {
    /**
     * When providing an ID, it is assumed that the tenant exists in the current
     * OpenStack deployment
-    * 
+    *
     * @return the id of the tenant in the current OpenStack deployment
     */
    public String getId() {
@@ -162,7 +163,7 @@ public class Tenant {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this).omitNullValues().add("id", id).add("name", name)
+      return MoreObjects.toStringHelper(this).omitNullValues().add("id", id).add("name", name)
             .add("description", description).add("enabled", enabled);
    }
 

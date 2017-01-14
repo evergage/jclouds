@@ -21,8 +21,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.Set;
 
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ImmutableSet;
 
 public class ZoneSecurityGroupNamePortsCidrs extends ZoneAndName {
@@ -58,7 +59,7 @@ public class ZoneSecurityGroupNamePortsCidrs extends ZoneAndName {
          this.name = name;
          return self();
       }
-      
+
       /**
        * @see ZoneSecurityGroupNamePortsCidrs#getPorts()
        */
@@ -70,7 +71,7 @@ public class ZoneSecurityGroupNamePortsCidrs extends ZoneAndName {
       public T ports(Integer... in) {
          return ports(ImmutableSet.copyOf(in));
       }
-      
+
       /**
        * @see ZoneSecurityGroupNamePortsCidrs#getCidrs()
        */
@@ -94,7 +95,7 @@ public class ZoneSecurityGroupNamePortsCidrs extends ZoneAndName {
             .cidrs(in.getCidrs());
       }
    }
-   
+
    private static class ConcreteBuilder extends Builder<ConcreteBuilder> {
       @Override
       protected ConcreteBuilder self() {
@@ -102,7 +103,7 @@ public class ZoneSecurityGroupNamePortsCidrs extends ZoneAndName {
       }
    }
 
-   
+
    private final Set<Integer> ports;
    private final Set<String> cidrs;
 
@@ -120,7 +121,7 @@ public class ZoneSecurityGroupNamePortsCidrs extends ZoneAndName {
    public Set<Integer> getPorts() {
       return ports;
    }
-   
+
    /**
     *
     * @return the set of cidrs to give access to the open ports in the security group
@@ -146,7 +147,7 @@ public class ZoneSecurityGroupNamePortsCidrs extends ZoneAndName {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
          .add("zoneId", zoneId).add("name", name).add("ports", ports).add("cidrs", cidrs);
    }
 

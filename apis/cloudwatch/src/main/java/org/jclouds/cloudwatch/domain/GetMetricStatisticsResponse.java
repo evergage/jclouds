@@ -18,6 +18,7 @@ package org.jclouds.cloudwatch.domain;
 
 import java.util.Iterator;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
@@ -26,7 +27,7 @@ import com.google.common.collect.ImmutableSet;
 
 /**
  *  the list of {@link Datapoint} for the metric
- *  
+ *
  * @see <a href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html" />
  */
 public class GetMetricStatisticsResponse extends FluentIterable<Datapoint> {
@@ -80,7 +81,7 @@ public class GetMetricStatisticsResponse extends FluentIterable<Datapoint> {
     */
    @Override
    public String toString() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
                     .add("label", label)
                     .add("datapoints", datapoints).toString();
    }

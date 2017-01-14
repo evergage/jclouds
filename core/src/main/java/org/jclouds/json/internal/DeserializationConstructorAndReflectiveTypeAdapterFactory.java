@@ -26,6 +26,7 @@ import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.json.internal.NamingStrategies.AnnotationConstructorNamingStrategy;
 
 import com.google.common.base.Objects;
@@ -61,34 +62,34 @@ import com.google.gson.stream.JsonWriter;
  * </ul>
  * <h3>Example: Using javax inject to select a constructor and corresponding named parameters</h3>
  * <p/>
- * 
+ *
  * <pre>
- * 
+ *
  * import NamingStrategies.*;
- * 
+ *
  * serializationStrategy = new AnnotationOrNameFieldNamingStrategy(
  *    new ExtractSerializedName(), new ExtractNamed());
- * 
+ *
  * deserializationStrategy = new AnnotationConstructorNamingStrategy(
  *    ImmutableSet.of(javax.inject.Inject.class),
  *    ImmutableSet.of(new ExtractNamed()));
- *    
+ *
  * factory = new DeserializationConstructorAndReflectiveTypeAdapterFactory(new ConstructorConstructor(),
  *      serializationStrategy, Excluder.DEFAULT, deserializationStrategy);
- * 
+ *
  * gson = new GsonBuilder(serializationStrategy).registerTypeAdapterFactory(factory).create();
- * 
+ *
  * </pre>
  * <p/>
  * The above would work fine on the following class, which has no gson-specific annotations:
  * <p/>
- * 
+ *
  * <pre>
  * private static class ImmutableAndVerifiedInCtor {
  *    final int foo;
  *    &#064;Named(&quot;_bar&quot;)
  *    final int bar;
- * 
+ *
  *    &#064;Inject
  *    ImmutableAndVerifiedInCtor(@Named(&quot;foo&quot;) int foo, @Named(&quot;_bar&quot;) int bar) {
  *       if (foo &lt; 0)
@@ -250,7 +251,7 @@ public final class DeserializationConstructorAndReflectiveTypeAdapterFactory imp
 
       @Override
       public String toString() {
-         return Objects.toStringHelper(this).add("parameterizedCtor", parameterizedCtor)
+         return MoreObjects.toStringHelper(this).add("parameterizedCtor", parameterizedCtor)
                .add("parameterReaders", parameterReaders).add("serializer", serializer).toString();
       }
 

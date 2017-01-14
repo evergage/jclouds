@@ -28,24 +28,24 @@ import org.jclouds.openstack.v2_0.domain.Link;
 import org.jclouds.openstack.v2_0.domain.Resource;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Optional;
 
 /**
  * A flavor is an available hardware configuration for a server. Each flavor has
  * a unique combination of disk space and memory capacity.
- * 
+ *
  * @see <a href=
       "http://docs.openstack.org/api/openstack-compute/2/content/List_Flavors-d1e4188.html"
       />
 */
 public class Flavor extends Resource {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromFlavor(this);
    }
 
@@ -56,8 +56,8 @@ public class Flavor extends Resource {
       protected String swap;
       protected Double rxtxFactor;
       protected Integer ephemeral;
-   
-      /** 
+
+      /**
        * @see Flavor#getRam()
        */
       public T ram(int ram) {
@@ -65,7 +65,7 @@ public class Flavor extends Resource {
          return self();
       }
 
-      /** 
+      /**
        * @see Flavor#getDisk()
        */
       public T disk(int disk) {
@@ -73,7 +73,7 @@ public class Flavor extends Resource {
          return self();
       }
 
-      /** 
+      /**
        * @see Flavor#getVcpus()
        */
       public T vcpus(int vcpus) {
@@ -81,7 +81,7 @@ public class Flavor extends Resource {
          return self();
       }
 
-      /** 
+      /**
        * @see Flavor#getSwap()
        */
       public T swap(String swap) {
@@ -89,7 +89,7 @@ public class Flavor extends Resource {
          return self();
       }
 
-      /** 
+      /**
        * @see Flavor#getRxtxFactor()
        */
       public T rxtxFactor(Double rxtxFactor) {
@@ -97,7 +97,7 @@ public class Flavor extends Resource {
          return self();
       }
 
-      /** 
+      /**
        * @see Flavor#getEphemeral()
        */
       public T ephemeral(Integer ephemeral) {
@@ -108,7 +108,7 @@ public class Flavor extends Resource {
       public Flavor build() {
          return new Flavor(id, name, links, ram, disk, vcpus, swap, rxtxFactor, ephemeral);
       }
-      
+
       public T fromFlavor(Flavor in) {
          return super.fromResource(in)
                   .ram(in.getRam())
@@ -151,7 +151,7 @@ public class Flavor extends Resource {
       this.rxtxFactor = Optional.fromNullable(rxtxFactor);
       this.ephemeral = Optional.fromNullable(ephemeral);
    }
-   
+
    public int getRam() {
       return this.ram;
    }
@@ -176,7 +176,7 @@ public class Flavor extends Resource {
     * Retrieves ephemeral disk space in GB
     * <p/>
     * NOTE: This field is only present if the Flavor Extra Data extension is installed (alias "OS-FLV-EXT-DATA").
-    * 
+    *
     * @see org.jclouds.openstack.nova.v2_0.features.ExtensionApi#getExtensionByAlias
     * @see org.jclouds.openstack.nova.v2_0.extensions.ExtensionNamespaces#FLAVOR_EXTRA_DATA
     */
@@ -201,10 +201,10 @@ public class Flavor extends Resource {
                && Objects.equal(this.rxtxFactor, that.rxtxFactor)
                && Objects.equal(this.ephemeral, that.ephemeral);
    }
-   
+
    protected ToStringHelper string() {
       return super.string()
             .add("ram", ram).add("disk", disk).add("vcpus", vcpus).add("swap", swap).add("rxtxFactor", rxtxFactor).add("ephemeral", ephemeral);
    }
-   
+
 }

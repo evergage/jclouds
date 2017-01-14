@@ -21,6 +21,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.Map;
 
 import com.google.common.base.Function;
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.ForwardingMap;
 import com.google.common.collect.ImmutableMap;
@@ -28,7 +29,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 
 /**
- * 
+ *
  * @see <a
  *      href="http://docs.amazonwebservices.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/MessageLifecycle.html"
  *      >doc</a>
@@ -136,7 +137,7 @@ public class BatchResult<V> extends ForwardingMap<String, V> {
     */
    @Override
    public String toString() {
-      return Objects.toStringHelper(this).omitNullValues().add("results", results).add("errors", errors).toString();
+      return MoreObjects.toStringHelper(this).omitNullValues().add("results", results).add("errors", errors).toString();
    }
 
 }

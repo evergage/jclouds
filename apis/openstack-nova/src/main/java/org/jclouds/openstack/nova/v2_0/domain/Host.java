@@ -20,21 +20,22 @@ import java.beans.ConstructorProperties;
 
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Class Host
 */
 public class Host {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromHost(this);
    }
 
@@ -44,8 +45,8 @@ public class Host {
       protected String name;
       protected String service;
       protected String zone;
-   
-      /** 
+
+      /**
        * @see Host#getName()
        */
       public T name(String name) {
@@ -53,7 +54,7 @@ public class Host {
          return self();
       }
 
-      /** 
+      /**
        * @see Host#getService()
        */
       public T service(String service) {
@@ -72,7 +73,7 @@ public class Host {
       public Host build() {
          return new Host(name, service, zone);
       }
-      
+
       public T fromHost(Host in) {
          return this
                   .name(in.getName())
@@ -130,12 +131,12 @@ public class Host {
                && Objects.equal(this.service, that.service)
                && Objects.equal(this.zone, that.zone);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("name", name).add("service", service).add("zone", zone);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

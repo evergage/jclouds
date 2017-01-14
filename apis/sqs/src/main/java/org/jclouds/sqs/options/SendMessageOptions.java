@@ -16,6 +16,7 @@
  */
 package org.jclouds.sqs.options;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.http.options.BaseHttpRequestOptions;
 
 import com.google.common.base.Objects;
@@ -23,7 +24,7 @@ import com.google.common.collect.Multimap;
 
 /**
  * Options used to send a message.
- * 
+ *
  * @see <a
  *      href="http://docs.amazonwebservices.com/AWSSimpleQueueService/2011-10-01/APIReference/Query_QuerySendMessage.html"
  *      >docs</a>
@@ -37,7 +38,7 @@ public class SendMessageOptions extends BaseHttpRequestOptions implements Clonea
     * positive DelaySeconds value become available for processing after the
     * delay time is finished. If you don't specify a value, the default value
     * for the queue applies.
-    * 
+    *
     * @param delaySeconds
     *           from 0 to 900 (15 minutes). If this parameter is not used, the
     *           default value for the queue applies.
@@ -99,6 +100,6 @@ public class SendMessageOptions extends BaseHttpRequestOptions implements Clonea
     */
    @Override
    public String toString() {
-      return Objects.toStringHelper(this).omitNullValues().add("delaySeconds", delaySeconds).toString();
+      return MoreObjects.toStringHelper(this).omitNullValues().add("delaySeconds", delaySeconds).toString();
    }
 }

@@ -31,7 +31,7 @@ import org.jclouds.openstack.nova.v2_0.domain.Network;
 import org.jclouds.scriptbuilder.domain.Statement;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
 
@@ -112,7 +112,7 @@ public class NovaTemplateOptions extends TemplateOptions implements Cloneable {
 
    @Override
    public int hashCode() {
-      return Objects.hashCode(super.hashCode(), autoAssignFloatingIp, floatingIpPoolNames, generateKeyPair, keyPairName, 
+      return Objects.hashCode(super.hashCode(), autoAssignFloatingIp, floatingIpPoolNames, generateKeyPair, keyPairName,
               Arrays.hashCode(userData), diskConfig, configDrive, novaNetworks, availabilityZone);
    }
 

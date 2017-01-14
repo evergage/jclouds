@@ -29,6 +29,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.cloudstack.CloudStackApi;
 import org.jclouds.cloudstack.compute.extensions.CloudStackImageExtension;
 import org.jclouds.cloudstack.compute.extensions.CloudStackSecurityGroupExtension;
@@ -88,7 +89,6 @@ import org.jclouds.rest.AuthorizationException;
 import org.jclouds.rest.suppliers.MemoizedRetryOnTimeOutButNotOnAuthorizationExceptionSupplier;
 
 import com.google.common.base.Function;
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import com.google.common.cache.CacheBuilder;
@@ -177,7 +177,7 @@ public class CloudStackComputeServiceContextModule extends
                }
                @Override
                public String toString() {
-                  return Objects.toStringHelper(client.getGuestOSApi()).add("method", "listOSCategories").toString();
+                  return MoreObjects.toStringHelper(client.getGuestOSApi()).add("method", "listOSCategories").toString();
                }
             }, seconds, TimeUnit.SECONDS);
    }
@@ -202,7 +202,7 @@ public class CloudStackComputeServiceContextModule extends
                }
                @Override
                public String toString() {
-                  return Objects.toStringHelper(client.getGuestOSApi()).add("method", "listOSTypes").toString();
+                  return MoreObjects.toStringHelper(client.getGuestOSApi()).add("method", "listOSTypes").toString();
                }
             }, seconds, TimeUnit.SECONDS);
    }

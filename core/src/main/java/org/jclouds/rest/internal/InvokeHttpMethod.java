@@ -16,8 +16,8 @@
  */
 package org.jclouds.rest.internal;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Throwables.propagate;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
@@ -104,7 +104,7 @@ public class InvokeHttpMethod implements Function<Invocation, Object> {
     * on the other hand, the time limit is reached, we attempt to abort the call
     * to the target, and throw an {@link UncheckedTimeoutException} to the
     * caller.
-    * 
+    *
     * @param invocation
     *           the Invocation to invoke via {@link #invoke(Invocation)}
     * @param limitNanos
@@ -214,6 +214,6 @@ public class InvokeHttpMethod implements Function<Invocation, Object> {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").omitNullValues().add("annotationParser", annotationProcessor).toString();
+      return toStringHelper("").omitNullValues().add("annotationParser", annotationProcessor).toString();
    }
 }

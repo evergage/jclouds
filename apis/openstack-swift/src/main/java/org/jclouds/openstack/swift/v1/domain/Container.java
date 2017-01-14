@@ -16,8 +16,8 @@
  */
 package org.jclouds.openstack.swift.v1.domain;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.beans.ConstructorProperties;
@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
@@ -33,7 +33,7 @@ import com.google.common.collect.Multimap;
 
 /**
  * Represents a Container in OpenStack Object Storage.
- * 
+ *
  * @see org.jclouds.openstack.swift.v1.features.ContainerApi
  */
 public class Container implements Comparable<Container> {
@@ -79,9 +79,9 @@ public class Container implements Comparable<Container> {
 
    /**
     * Absent except in {@link ContainerApi#get(String) Get Container} commands.
-    * 
+    *
     * @return true  if this container is publicly readable, false otherwise.
-    * 
+    *
     * @see org.jclouds.openstack.swift.v1.options.CreateContainerOptions#anybodyRead()
     */
    public Optional<Boolean> getAnybodyRead() {
@@ -92,7 +92,7 @@ public class Container implements Comparable<Container> {
     * <h3>NOTE</h3>
     * In current swift implementations, headers keys are lower-cased. This means
     * characters such as turkish will probably not work out well.
-    * 
+    *
     * @return a {@code Map<String, String>} containing this container's metadata.
     */
    public Map<String, String> getMetadata() {
@@ -201,7 +201,7 @@ public class Container implements Comparable<Container> {
       /**
        * <h3>NOTE</h3>
        * This method will lower-case all metadata keys.
-       * 
+       *
        * @see Container#getMetadata()
        */
       public Builder metadata(Map<String, String> metadata) {

@@ -16,8 +16,6 @@
  */
 package org.jclouds.ovf.xml;
 
-import static org.testng.Assert.assertEquals;
-
 import java.io.InputStream;
 import java.net.URI;
 
@@ -30,6 +28,8 @@ import org.testng.annotations.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+
+import static org.testng.Assert.assertEquals;
 
 /**
  * Tests behavior of {@code DiskSectionHandler}

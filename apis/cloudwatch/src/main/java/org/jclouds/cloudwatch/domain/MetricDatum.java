@@ -22,8 +22,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.Date;
 import java.util.Set;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -124,10 +125,10 @@ public class MetricDatum {
 
       /**
        * A list of dimensions describing qualities of the metric.
-       * 
+       *
        * @param dimensions
        *           the dimensions describing the qualities of the metric
-       * 
+       *
        * @return this {@code Builder} object
        */
       public Builder dimensions(Iterable<Dimension> dimensions) {
@@ -137,10 +138,10 @@ public class MetricDatum {
 
       /**
        * A dimension describing qualities of the metric.
-       * 
+       *
        * @param dimension
        *           the dimension describing the qualities of the metric
-       * 
+       *
        * @return this {@code Builder} object
        */
       public Builder dimension(Dimension dimension) {
@@ -150,10 +151,10 @@ public class MetricDatum {
 
       /**
        * The name of the metric.
-       * 
+       *
        * @param metricName
        *           the metric name
-       * 
+       *
        * @return this {@code Builder} object
        */
       public Builder metricName(String metricName) {
@@ -163,10 +164,10 @@ public class MetricDatum {
 
       /**
        * The object describing the set of statistical values describing the metric.
-       * 
+       *
        * @param statisticValues
        *           the object describing the set of statistical values for the metric
-       * 
+       *
        * @return this {@code Builder} object
        */
       public Builder statisticValues(StatisticValues statisticValues) {
@@ -177,10 +178,10 @@ public class MetricDatum {
       /**
        * The time stamp used for the metric. If not specified, the default value is set to the time
        * the metric data was received.
-       * 
+       *
        * @param timestamp
        *           the time stamp used for the metric
-       * 
+       *
        * @return this {@code Builder} object
        */
       public Builder timestamp(Date timestamp) {
@@ -190,10 +191,10 @@ public class MetricDatum {
 
       /**
        * The unit for the metric.
-       * 
+       *
        * @param unit
        *           the unit for the metric
-       * 
+       *
        * @return this {@code Builder} object
        */
       public Builder unit(Unit unit) {
@@ -203,10 +204,10 @@ public class MetricDatum {
 
       /**
        * The value for the metric.
-       * 
+       *
        * @param value
        *           the value for the metric
-       * 
+       *
        * @return this {@code Builder} object
        */
       public Builder value(Double value) {
@@ -246,7 +247,7 @@ public class MetricDatum {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper("").omitNullValues().add("dimensions", dimensions).add("metricName", metricName)
+      return MoreObjects.toStringHelper("").omitNullValues().add("dimensions", dimensions).add("metricName", metricName)
                .add("statisticValues", statisticValues.orNull()).add("timestamp", timestamp.orNull()).add("unit", unit)
                .add("value", value.orNull());
    }

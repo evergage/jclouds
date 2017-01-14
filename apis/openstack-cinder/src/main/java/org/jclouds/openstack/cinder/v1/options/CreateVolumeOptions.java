@@ -16,8 +16,8 @@
  */
 package org.jclouds.openstack.cinder.v1.options;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -31,7 +31,7 @@ import org.jclouds.rest.MapBinder;
 import org.jclouds.rest.binders.BindToJsonPayload;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
@@ -140,7 +140,7 @@ public class CreateVolumeOptions implements MapBinder {
 
    /**
     * @see VolumeTypeApi#list()
-    * 
+    *
     * @param volumeType The type of Volume to create
     */
    public CreateVolumeOptions volumeType(String volumeType) {

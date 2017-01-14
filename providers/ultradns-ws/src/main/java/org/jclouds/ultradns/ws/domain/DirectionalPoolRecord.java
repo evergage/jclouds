@@ -17,8 +17,8 @@
 package org.jclouds.ultradns.ws.domain;
 
 import static com.google.common.base.Functions.toStringFunction;
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.Iterables.transform;
@@ -130,7 +130,7 @@ public class DirectionalPoolRecord {
 
       /**
        * adds to current values
-       * 
+       *
        * @see DirectionalPoolRecord#getRData()
        */
       public Builder infoValue(Object infoValue) {
@@ -140,7 +140,7 @@ public class DirectionalPoolRecord {
 
       /**
        * replaces current values
-       * 
+       *
        * @see DirectionalPoolRecord#getRData()
        */
       public Builder rdata(Object infoValue) {
@@ -150,7 +150,7 @@ public class DirectionalPoolRecord {
 
       /**
        * replaces current values
-       * 
+       *
        * @see DirectionalPoolRecord#getRData()
        */
       public Builder rdata(Iterable<?> infoValues) {

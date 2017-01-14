@@ -22,21 +22,22 @@ import java.beans.ConstructorProperties;
 
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Represents the set of limits (quotas) returned by the Quota Extension
- * 
+ *
  * @see org.jclouds.openstack.nova.v2_0.extensions.QuotaApi
 */
 public class Quota {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromQuotas(this);
    }
 
@@ -56,8 +57,8 @@ public class Quota {
       protected int securityGroups;
       protected int securityGroupRules;
       protected int keyPairs;
-   
-      /** 
+
+      /**
        * @see Quota#getId()
        */
       public T id(String id) {
@@ -65,7 +66,7 @@ public class Quota {
          return self();
       }
 
-      /** 
+      /**
        * @see Quota#getMetadatas()
        */
       public T metadataItems(int metadataItems) {
@@ -73,7 +74,7 @@ public class Quota {
          return self();
       }
 
-      /** 
+      /**
        * @see Quota#getInjectedFileContentBytes()
        */
       public T injectedFileContentBytes(int injectedFileContentBytes) {
@@ -81,7 +82,7 @@ public class Quota {
          return self();
       }
 
-      /** 
+      /**
        * @see Quota#getVolumes()
        */
       public T volumes(int volumes) {
@@ -89,7 +90,7 @@ public class Quota {
          return self();
       }
 
-      /** 
+      /**
        * @see Quota#getGigabytes()
        */
       public T gigabytes(int gigabytes) {
@@ -97,7 +98,7 @@ public class Quota {
          return self();
       }
 
-      /** 
+      /**
        * @see Quota#getRam()
        */
       public T ram(int ram) {
@@ -105,7 +106,7 @@ public class Quota {
          return self();
       }
 
-      /** 
+      /**
        * @see Quota#getFloatingIps()
        */
       public T floatingIps(int floatingIps) {
@@ -113,7 +114,7 @@ public class Quota {
          return self();
       }
 
-      /** 
+      /**
        * @see Quota#getInstances()
        */
       public T instances(int instances) {
@@ -121,7 +122,7 @@ public class Quota {
          return self();
       }
 
-      /** 
+      /**
        * @see Quota#getInjectedFiles()
        */
       public T injectedFiles(int injectedFiles) {
@@ -129,7 +130,7 @@ public class Quota {
          return self();
       }
 
-      /** 
+      /**
        * @see Quota#getCores()
        */
       public T cores(int cores) {
@@ -137,7 +138,7 @@ public class Quota {
          return self();
       }
 
-      /** 
+      /**
        * @see Quota#getSecurityGroups()
        */
       public T securityGroups(int securityGroups) {
@@ -145,7 +146,7 @@ public class Quota {
          return self();
       }
 
-      /** 
+      /**
        * @see Quota#getSecurityGroupRules()
        */
       public T securityGroupRules(int securityGroupRules) {
@@ -153,7 +154,7 @@ public class Quota {
          return self();
       }
 
-      /** 
+      /**
        * @see Quota#getKeyPairs()
        */
       public T keyPairs(int keyPairs) {
@@ -164,7 +165,7 @@ public class Quota {
       public Quota build() {
          return new Quota(id, metadataItems, injectedFileContentBytes, volumes, gigabytes, ram, floatingIps, instances, injectedFiles, cores, securityGroups, securityGroupRules, keyPairs);
       }
-      
+
       public T fromQuotas(Quota in) {
          return this
                   .id(in.getId())
@@ -342,12 +343,12 @@ public class Quota {
                && Objects.equal(this.securityGroupRules, that.securityGroupRules)
                && Objects.equal(this.keyPairs, that.keyPairs);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("id", id).add("metadataItems", metadataItems).add("injectedFileContentBytes", injectedFileContentBytes).add("volumes", volumes).add("gigabytes", gigabytes).add("ram", ram).add("floatingIps", floatingIps).add("instances", instances).add("injectedFiles", injectedFiles).add("cores", cores).add("securityGroups", securityGroups).add("securityGroupRules", securityGroupRules).add("keyPairs", keyPairs);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

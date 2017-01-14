@@ -24,23 +24,24 @@ import java.util.Set;
 
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ImmutableSet;
 
 /**
  * Information the SimpleTenantUsage extension returns data about each tenant
- * 
+ *
 */
 public class SimpleTenantUsage {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromSimpleTenantUsage(this);
    }
 
@@ -55,8 +56,8 @@ public class SimpleTenantUsage {
       protected Date start;
       protected Date stop;
       protected Set<SimpleServerUsage> serverUsages = ImmutableSet.of();
-   
-      /** 
+
+      /**
        * @see SimpleTenantUsage#getTenantId()
        */
       public T tenantId(String tenantId) {
@@ -64,7 +65,7 @@ public class SimpleTenantUsage {
          return self();
       }
 
-      /** 
+      /**
        * @see SimpleTenantUsage#getTotalLocalGbUsage()
        */
       public T totalLocalGbUsage(double totalLocalGbUsage) {
@@ -72,7 +73,7 @@ public class SimpleTenantUsage {
          return self();
       }
 
-      /** 
+      /**
        * @see SimpleTenantUsage#getTotalVcpusUsage()
        */
       public T totalVcpusUsage(double totalVcpusUsage) {
@@ -80,7 +81,7 @@ public class SimpleTenantUsage {
          return self();
       }
 
-      /** 
+      /**
        * @see SimpleTenantUsage#getTotalMemoryMbUsage()
        */
       public T totalMemoryMbUsage(double totalMemoryMbUsage) {
@@ -88,7 +89,7 @@ public class SimpleTenantUsage {
          return self();
       }
 
-      /** 
+      /**
        * @see SimpleTenantUsage#getTotalHours()
        */
       public T totalHours(double totalHours) {
@@ -96,7 +97,7 @@ public class SimpleTenantUsage {
          return self();
       }
 
-      /** 
+      /**
        * @see SimpleTenantUsage#getStart()
        */
       public T start(Date start) {
@@ -104,7 +105,7 @@ public class SimpleTenantUsage {
          return self();
       }
 
-      /** 
+      /**
        * @see SimpleTenantUsage#getStop()
        */
       public T stop(Date stop) {
@@ -112,11 +113,11 @@ public class SimpleTenantUsage {
          return self();
       }
 
-      /** 
+      /**
        * @see SimpleTenantUsage#getServerUsages()
        */
       public T serverUsages(Set<SimpleServerUsage> serverUsages) {
-         this.serverUsages = ImmutableSet.copyOf(checkNotNull(serverUsages, "serverUsages"));      
+         this.serverUsages = ImmutableSet.copyOf(checkNotNull(serverUsages, "serverUsages"));
          return self();
       }
 
@@ -127,7 +128,7 @@ public class SimpleTenantUsage {
       public SimpleTenantUsage build() {
          return new SimpleTenantUsage(tenantId, totalLocalGbUsage, totalVcpusUsage, totalMemoryMbUsage, totalHours, start, stop, serverUsages);
       }
-      
+
       public T fromSimpleTenantUsage(SimpleTenantUsage in) {
          return this
                   .tenantId(in.getTenantId())
@@ -174,7 +175,7 @@ public class SimpleTenantUsage {
       this.totalHours = totalHours;
       this.start = start;
       this.stop = stop;
-      this.serverUsages = serverUsages == null ? ImmutableSet.<SimpleServerUsage>of() : ImmutableSet.copyOf(serverUsages);      
+      this.serverUsages = serverUsages == null ? ImmutableSet.<SimpleServerUsage>of() : ImmutableSet.copyOf(serverUsages);
    }
 
    public String getTenantId() {
@@ -230,12 +231,12 @@ public class SimpleTenantUsage {
                && Objects.equal(this.stop, that.stop)
                && Objects.equal(this.serverUsages, that.serverUsages);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("tenantId", tenantId).add("totalLocalGbUsage", totalLocalGbUsage).add("totalVcpusUsage", totalVcpusUsage).add("totalMemoryMbUsage", totalMemoryMbUsage).add("totalHours", totalHours).add("start", start).add("stop", stop).add("serverUsages", serverUsages);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

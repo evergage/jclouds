@@ -20,20 +20,21 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.beans.ConstructorProperties;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Class Customer
- * 
+ *
 */
 public class Customer {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromCustomer(this);
    }
 
@@ -42,8 +43,8 @@ public class Customer {
 
       protected long id;
       protected String name;
-   
-      /** 
+
+      /**
        * @see Customer#getId()
        */
       public T id(long id) {
@@ -51,7 +52,7 @@ public class Customer {
          return self();
       }
 
-      /** 
+      /**
        * @see Customer#getName()
        */
       public T name(String name) {
@@ -62,7 +63,7 @@ public class Customer {
       public Customer build() {
          return new Customer(id, name);
       }
-      
+
       public T fromCustomer(Customer in) {
          return this
                   .id(in.getId())
@@ -109,12 +110,12 @@ public class Customer {
       return Objects.equal(this.id, that.id)
                && Objects.equal(this.name, that.name);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("id", id).add("name", name);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

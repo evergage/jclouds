@@ -23,14 +23,15 @@ import java.net.URI;
 
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Optional;
 
 /**
  * For convenience, resources contain links to themselves. This allows a api to easily obtain a
  * resource URIs rather than to construct them.
- * 
+ *
  * @see <a href= "http://docs.openstack.org/api/openstack-compute/1.1/content/LinksReferences.html"
  *      />
  */
@@ -49,7 +50,7 @@ public class Link {
        */
       BOOKMARK,
       /**
-       * 
+       *
        */
       DESCRIBEDBY,
       /**
@@ -158,7 +159,7 @@ public class Link {
     * of the resource. For example, an OpenStack Compute image may have an alternate representation
     * in the OpenStack Image service. Note that the type attribute here is used to provide a hint as
     * to the type of representation to expect when following the link.
-    * 
+    *
     * @return the relation of the resource in the current OpenStack deployment
     */
    public Link.Relation getRelation() {
@@ -196,7 +197,7 @@ public class Link {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this).omitNullValues().add("relation", relation).add("type", type.orNull())
+      return MoreObjects.toStringHelper(this).omitNullValues().add("relation", relation).add("type", type.orNull())
                .add("href", href);
    }
 

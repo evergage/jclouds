@@ -22,10 +22,11 @@ import java.beans.ConstructorProperties;
 
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * A Floating IP is an IP address that can be created and associated with a
@@ -38,7 +39,7 @@ public class FloatingIP implements Comparable<FloatingIP> {
       return new ConcreteBuilder();
    }
 
-   public Builder<?> toBuilder() { 
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromFloatingIP(this);
    }
 
@@ -51,7 +52,7 @@ public class FloatingIP implements Comparable<FloatingIP> {
       protected String instanceId;
       protected String pool;
 
-      /** 
+      /**
        * @see FloatingIP#getId()
        */
       public T id(String id) {
@@ -59,7 +60,7 @@ public class FloatingIP implements Comparable<FloatingIP> {
          return self();
       }
 
-      /** 
+      /**
        * @see FloatingIP#getIp()
        */
       public T ip(String ip) {
@@ -67,7 +68,7 @@ public class FloatingIP implements Comparable<FloatingIP> {
          return self();
       }
 
-      /** 
+      /**
        * @see FloatingIP#getFixedIp()
        */
       public T fixedIp(String fixedIp) {
@@ -75,7 +76,7 @@ public class FloatingIP implements Comparable<FloatingIP> {
          return self();
       }
 
-      /** 
+      /**
        * @see FloatingIP#getInstanceId()
        */
       public T instanceId(String instanceId) {
@@ -83,7 +84,7 @@ public class FloatingIP implements Comparable<FloatingIP> {
          return self();
       }
 
-      /** 
+      /**
        * @see FloatingIP#getPool()
        */
       public T pool(String pool) {
@@ -94,7 +95,7 @@ public class FloatingIP implements Comparable<FloatingIP> {
       public FloatingIP build() {
          return new FloatingIP(id, ip, fixedIp, instanceId, pool);
       }
-      
+
       public T fromFloatingIP(FloatingIP in) {
          return this
                   .id(in.getId())
@@ -172,7 +173,7 @@ public class FloatingIP implements Comparable<FloatingIP> {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("id", id).add("ip", ip).add("fixedIp", fixedIp).add("instanceId", instanceId).add("pool", pool);
    }
 

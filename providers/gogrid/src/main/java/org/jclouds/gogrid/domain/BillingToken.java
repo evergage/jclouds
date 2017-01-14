@@ -20,21 +20,22 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.beans.ConstructorProperties;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.primitives.Longs;
 
 /**
  * Class BillingToken
- * 
+ *
 */
 public class BillingToken implements Comparable<BillingToken> {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromBillingToken(this);
    }
 
@@ -44,8 +45,8 @@ public class BillingToken implements Comparable<BillingToken> {
       protected long id;
       protected String name;
       protected double price;
-   
-      /** 
+
+      /**
        * @see BillingToken#getId()
        */
       public T id(long id) {
@@ -53,7 +54,7 @@ public class BillingToken implements Comparable<BillingToken> {
          return self();
       }
 
-      /** 
+      /**
        * @see BillingToken#getName()
        */
       public T name(String name) {
@@ -61,7 +62,7 @@ public class BillingToken implements Comparable<BillingToken> {
          return self();
       }
 
-      /** 
+      /**
        * @see BillingToken#getPrice()
        */
       public T price(double price) {
@@ -72,7 +73,7 @@ public class BillingToken implements Comparable<BillingToken> {
       public BillingToken build() {
          return new BillingToken(id, name, price);
       }
-      
+
       public T fromBillingToken(BillingToken in) {
          return this
                   .id(in.getId())
@@ -127,12 +128,12 @@ public class BillingToken implements Comparable<BillingToken> {
                && Objects.equal(this.name, that.name)
                && Objects.equal(this.price, that.price);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("id", id).add("name", name).add("price", price);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

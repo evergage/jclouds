@@ -25,11 +25,12 @@ import java.util.Set;
 
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
@@ -45,12 +46,12 @@ public class Volume {
       public String value() {
       return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, name());
       }
-      
+
       @Override
       public String toString() {
       return value();
       }
-      
+
       public static Status fromValue(String status) {
       try {
       return valueOf(CaseFormat.LOWER_HYPHEN.to(CaseFormat.UPPER_UNDERSCORE, checkNotNull(status, "status")));
@@ -60,11 +61,11 @@ public class Volume {
       }
    }
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromVolume(this);
    }
 
@@ -82,8 +83,8 @@ public class Volume {
       protected String name;
       protected String description;
       protected Map<String, String> metadata = ImmutableMap.of();
-   
-      /** 
+
+      /**
        * @see Volume#getId()
        */
       public T id(String id) {
@@ -91,7 +92,7 @@ public class Volume {
          return self();
       }
 
-      /** 
+      /**
        * @see Volume#getStatus()
        */
       public T status(Volume.Status status) {
@@ -99,7 +100,7 @@ public class Volume {
          return self();
       }
 
-      /** 
+      /**
        * @see Volume#getSize()
        */
       public T size(int size) {
@@ -107,7 +108,7 @@ public class Volume {
          return self();
       }
 
-      /** 
+      /**
        * @see Volume#getZone()
        */
       public T zone(String zone) {
@@ -115,7 +116,7 @@ public class Volume {
          return self();
       }
 
-      /** 
+      /**
        * @see Volume#getCreated()
        */
       public T created(Date created) {
@@ -123,11 +124,11 @@ public class Volume {
          return self();
       }
 
-      /** 
+      /**
        * @see Volume#getAttachments()
        */
       public T attachments(Set<VolumeAttachment> attachments) {
-         this.attachments = ImmutableSet.copyOf(checkNotNull(attachments, "attachments"));      
+         this.attachments = ImmutableSet.copyOf(checkNotNull(attachments, "attachments"));
          return self();
       }
 
@@ -135,7 +136,7 @@ public class Volume {
          return attachments(ImmutableSet.copyOf(in));
       }
 
-      /** 
+      /**
        * @see Volume#getVolumeType()
        */
       public T volumeType(String volumeType) {
@@ -143,7 +144,7 @@ public class Volume {
          return self();
       }
 
-      /** 
+      /**
        * @see Volume#getSnapshotId()
        */
       public T snapshotId(String snapshotId) {
@@ -151,7 +152,7 @@ public class Volume {
          return self();
       }
 
-      /** 
+      /**
        * @see Volume#getName()
        */
       public T name(String name) {
@@ -159,7 +160,7 @@ public class Volume {
          return self();
       }
 
-      /** 
+      /**
        * @see Volume#getDescription()
        */
       public T description(String description) {
@@ -167,18 +168,18 @@ public class Volume {
          return self();
       }
 
-      /** 
+      /**
        * @see Volume#getMetadata()
        */
       public T metadata(Map<String, String> metadata) {
-         this.metadata = ImmutableMap.copyOf(checkNotNull(metadata, "metadata"));     
+         this.metadata = ImmutableMap.copyOf(checkNotNull(metadata, "metadata"));
          return self();
       }
 
       public Volume build() {
          return new Volume(id, status, size, zone, created, attachments, volumeType, snapshotId, name, description, metadata);
       }
-      
+
       public T fromVolume(Volume in) {
          return this
                   .id(in.getId())
@@ -227,12 +228,12 @@ public class Volume {
       this.size = size;
       this.zone = checkNotNull(zone, "zone");
       this.created = checkNotNull(created, "created");
-      this.attachments = attachments == null ? ImmutableSet.<VolumeAttachment>of() : ImmutableSet.copyOf(attachments);      
+      this.attachments = attachments == null ? ImmutableSet.<VolumeAttachment>of() : ImmutableSet.copyOf(attachments);
       this.volumeType = volumeType;
       this.snapshotId = snapshotId;
       this.name = name;
       this.description = description;
-      this.metadata = metadata == null ? ImmutableMap.<String, String>of() : ImmutableMap.copyOf(metadata);      
+      this.metadata = metadata == null ? ImmutableMap.<String, String>of() : ImmutableMap.copyOf(metadata);
    }
 
    /**
@@ -332,12 +333,12 @@ public class Volume {
                && Objects.equal(this.description, that.description)
                && Objects.equal(this.metadata, that.metadata);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("id", id).add("status", status).add("size", size).add("zone", zone).add("created", created).add("attachments", attachments).add("volumeType", volumeType).add("snapshotId", snapshotId).add("name", name).add("description", description).add("metadata", metadata);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

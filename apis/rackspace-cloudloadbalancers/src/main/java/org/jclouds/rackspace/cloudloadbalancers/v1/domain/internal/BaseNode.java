@@ -20,8 +20,9 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * The nodes defined by the load balancer are responsible for servicing the requests received
@@ -97,7 +98,7 @@ public class BaseNode<T extends BaseNode<T>> implements Comparable<BaseNode<T>> 
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this).omitNullValues().add("address", address).add("port", port)
+      return MoreObjects.toStringHelper(this).omitNullValues().add("address", address).add("port", port)
             .add("condition", condition).add("type", type).add("weight", weight);
    }
 
@@ -209,7 +210,7 @@ public class BaseNode<T extends BaseNode<T>> implements Comparable<BaseNode<T>> 
 
       /**
        * Required. Condition for the node, which determines its role within the load balancer.
-       * 
+       *
        * @see Condition
        */
       public Builder<T> condition(Condition condition) {
@@ -219,7 +220,7 @@ public class BaseNode<T extends BaseNode<T>> implements Comparable<BaseNode<T>> 
 
       /**
        * Type of node to add.
-       * 
+       *
        * @see Type
        */
       public Builder<T> type(Type type) {
@@ -228,8 +229,8 @@ public class BaseNode<T extends BaseNode<T>> implements Comparable<BaseNode<T>> 
       }
 
       /**
-       * Weight of node to add. If the {@link Algorithm#WEIGHTED_ROUND_ROBIN} load balancer algorithm mode is 
-       * selected, then the user should assign the relevant weight to the node using the weight attribute for 
+       * Weight of node to add. If the {@link Algorithm#WEIGHTED_ROUND_ROBIN} load balancer algorithm mode is
+       * selected, then the user should assign the relevant weight to the node using the weight attribute for
        * the node. Must be an integer from 1 to 100.
        */
       public Builder<T> weight(Integer weight) {

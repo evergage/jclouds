@@ -16,8 +16,8 @@
  */
 package org.jclouds.dynect.v3.domain;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -56,7 +56,7 @@ public class CreateRecord<D extends Map<String, Object>> {
 
    /**
     * zero for zone default
-    * 
+    *
     * @see Record#getTTL()
     */
    public int getTTL() {

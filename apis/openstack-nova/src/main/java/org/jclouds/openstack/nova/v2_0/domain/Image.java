@@ -31,13 +31,13 @@ import org.jclouds.openstack.v2_0.domain.Link;
 import org.jclouds.openstack.v2_0.domain.Resource;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ImmutableMap;
 
 /**
  * An image is a collection of files you use to create or rebuild a server. Operators provide
  * pre-built OS images by default. You may also create custom images.
- * 
+ *
  * @see <a href= "http://docs.openstack.org/api/openstack-compute/1.1/content/Images-d1e4427.html"
       />
 */
@@ -49,16 +49,16 @@ public class Image extends Resource {
     * attribute include: UNKNOWN, ACTIVE, SAVING, ERROR, and DELETED. Images with an ACTIVE status
     * are available for install. The optional minDisk and minRam attributes set the minimum disk and
     * RAM requirements needed to create a server with the image.
-    * 
+    *
     */
    public static enum Status {
-      
+
       UNRECOGNIZED, UNKNOWN, ACTIVE, SAVING, ERROR, DELETED;
-      
+
       public String value() {
       return name();
       }
-      
+
       public static Status fromValue(String v) {
       try {
       return valueOf(v);
@@ -66,14 +66,14 @@ public class Image extends Resource {
       return UNRECOGNIZED;
       }
       }
-      
+
    }
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromImage(this);
    }
 
@@ -89,8 +89,8 @@ public class Image extends Resource {
       protected Resource server;
       protected List<BlockDeviceMapping> blockDeviceMapping = ImmutableList.of();
       protected Map<String, String> metadata = ImmutableMap.of();
-   
-      /** 
+
+      /**
        * @see Image#getUpdated()
        */
       public T updated(Date updated) {
@@ -98,7 +98,7 @@ public class Image extends Resource {
          return self();
       }
 
-      /** 
+      /**
        * @see Image#getCreated()
        */
       public T created(Date created) {
@@ -106,7 +106,7 @@ public class Image extends Resource {
          return self();
       }
 
-      /** 
+      /**
        * @see Image#getTenantId()
        */
       public T tenantId(String tenantId) {
@@ -114,7 +114,7 @@ public class Image extends Resource {
          return self();
       }
 
-      /** 
+      /**
        * @see Image#getUserId()
        */
       public T userId(String userId) {
@@ -122,7 +122,7 @@ public class Image extends Resource {
          return self();
       }
 
-      /** 
+      /**
        * @see Image#getStatus()
        */
       public T status(Image.Status status) {
@@ -130,7 +130,7 @@ public class Image extends Resource {
          return self();
       }
 
-      /** 
+      /**
        * @see Image#getProgress()
        */
       public T progress(int progress) {
@@ -138,7 +138,7 @@ public class Image extends Resource {
          return self();
       }
 
-      /** 
+      /**
        * @see Image#getMinDisk()
        */
       public T minDisk(int minDisk) {
@@ -146,7 +146,7 @@ public class Image extends Resource {
          return self();
       }
 
-      /** 
+      /**
        * @see Image#getMinRam()
        */
       public T minRam(int minRam) {
@@ -154,7 +154,7 @@ public class Image extends Resource {
          return self();
       }
 
-      /** 
+      /**
        * @see Image#getServer()
        */
       public T server(Resource server) {
@@ -167,18 +167,18 @@ public class Image extends Resource {
          return self();
       }
 
-      /** 
+      /**
        * @see Image#getMetadata()
        */
       public T metadata(Map<String, String> metadata) {
-         this.metadata = ImmutableMap.copyOf(checkNotNull(metadata, "metadata"));     
+         this.metadata = ImmutableMap.copyOf(checkNotNull(metadata, "metadata"));
          return self();
       }
 
       public Image build() {
          return new Image(id, name, links, updated, created, tenantId, userId, status, progress, minDisk, minRam, blockDeviceMapping, server, metadata);
       }
-      
+
       public T fromImage(Image in) {
          return super.fromResource(in)
                   .updated(in.getUpdated())
@@ -307,10 +307,10 @@ public class Image extends Resource {
                && Objects.equal(this.server, that.server)
                && Objects.equal(this.metadata, that.metadata);
    }
-   
+
    protected ToStringHelper string() {
       return super.string()
             .add("updated", updated).add("created", created).add("tenantId", tenantId).add("userId", userId).add("status", status).add("progress", progress).add("minDisk", minDisk).add("minRam", minRam).add("server", server).add("metadata", metadata);
    }
-   
+
 }

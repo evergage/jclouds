@@ -19,6 +19,7 @@ package org.jclouds.ssh.jsch;
 import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.domain.Credentials;
 import org.jclouds.domain.LoginCredentials;
 import org.jclouds.javax.annotation.Nullable;
@@ -195,7 +196,7 @@ public final class SessionConnection implements Connection<Session> {
    }
 
    /**
-    * 
+    *
     * @return login used in this session
     */
    public LoginCredentials getLoginCredentials() {
@@ -203,7 +204,7 @@ public final class SessionConnection implements Connection<Session> {
    }
 
    /**
-    * 
+    *
     * @return proxy used for this connection
     */
    public Optional<Proxy> getProxy() {
@@ -211,7 +212,7 @@ public final class SessionConnection implements Connection<Session> {
    }
 
    /**
-    * 
+    *
     * @return how long to wait for the initial connection to be made
     */
    public int getConnectTimeout() {
@@ -219,7 +220,7 @@ public final class SessionConnection implements Connection<Session> {
    }
 
    /**
-    * 
+    *
     * @return how long to keep the session open, or {@code 0} for indefinitely
     */
    public int getSessionTimeout() {
@@ -227,7 +228,7 @@ public final class SessionConnection implements Connection<Session> {
    }
 
    /**
-    * 
+    *
     * @return the current session or {@code null} if not connected
     */
    @Nullable
@@ -253,7 +254,7 @@ public final class SessionConnection implements Connection<Session> {
 
    @Override
    public String toString() {
-      return Objects.toStringHelper("").omitNullValues()
+      return MoreObjects.toStringHelper("").omitNullValues()
             .add("hostAndPort", hostAndPort).add("loginUser", loginCredentials.getUser())
             .add("session", session != null ? session.hashCode() : null)
             .add("connectTimeout", connectTimeout)

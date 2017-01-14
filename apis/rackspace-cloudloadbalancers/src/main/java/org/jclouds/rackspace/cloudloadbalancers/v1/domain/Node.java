@@ -19,10 +19,11 @@ package org.jclouds.rackspace.cloudloadbalancers.v1.domain;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.rackspace.cloudloadbalancers.v1.domain.internal.BaseNode;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * The nodes defined by the load balancer are responsible for servicing the requests received
@@ -53,7 +54,7 @@ public class Node extends BaseNode<Node> {
    private int id;
    private Status status;
    private Metadata metadata = new Metadata();
-   
+
    // for serialization only
    protected Node() {
    }
@@ -79,11 +80,11 @@ public class Node extends BaseNode<Node> {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this).omitNullValues()
+      return MoreObjects.toStringHelper(this).omitNullValues()
             .add("id", id).add("address", address).add("port", port).add("condition", condition)
             .add("type", type).add("weight", weight).add("status", status).add("metadata", metadata);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();
@@ -185,7 +186,7 @@ public class Node extends BaseNode<Node> {
       @Override
       public Builder type(Type type) {
          return Builder.class.cast(super.type(type));
-      }      
+      }
 
       /**
        * {@inheritDoc}

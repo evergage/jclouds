@@ -22,21 +22,22 @@ import java.beans.ConstructorProperties;
 
 import javax.inject.Named;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Class HostResourceUsage
 */
 public class HostResourceUsage {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromHostResourceUsage(this);
    }
 
@@ -48,8 +49,8 @@ public class HostResourceUsage {
       protected int memoryMb;
       protected int cpu;
       protected int diskGb;
-   
-      /** 
+
+      /**
        * @see HostResourceUsage#getHost()
        */
       public T host(String host) {
@@ -57,7 +58,7 @@ public class HostResourceUsage {
          return self();
       }
 
-      /** 
+      /**
        * @see HostResourceUsage#getProject()
        */
       public T project(String project) {
@@ -65,7 +66,7 @@ public class HostResourceUsage {
          return self();
       }
 
-      /** 
+      /**
        * @see HostResourceUsage#getMemoryMb()
        */
       public T memoryMb(int memoryMb) {
@@ -73,7 +74,7 @@ public class HostResourceUsage {
          return self();
       }
 
-      /** 
+      /**
        * @see HostResourceUsage#getCpu()
        */
       public T cpu(int cpu) {
@@ -81,7 +82,7 @@ public class HostResourceUsage {
          return self();
       }
 
-      /** 
+      /**
        * @see HostResourceUsage#getDiskGb()
        */
       public T diskGb(int diskGb) {
@@ -92,7 +93,7 @@ public class HostResourceUsage {
       public HostResourceUsage build() {
          return new HostResourceUsage(host, project, memoryMb, cpu, diskGb);
       }
-      
+
       public T fromHostResourceUsage(HostResourceUsage in) {
          return this
                   .host(in.getHost())
@@ -166,12 +167,12 @@ public class HostResourceUsage {
                && Objects.equal(this.cpu, that.cpu)
                && Objects.equal(this.diskGb, that.diskGb);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("host", host).add("project", project).add("memoryMb", memoryMb).add("cpu", cpu).add("diskGb", diskGb);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Set;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
@@ -29,7 +30,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Ordering;
 
 /**
- * 
+ *
  * @see <a href=
  *      "http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/ApiReference-ItemType-ReservationInfoType.html"
  *      />
@@ -154,7 +155,7 @@ public class Reservation<T extends RunningInstance> extends ForwardingSet<T> imp
 
    /**
     * To be removed in jclouds 1.6 <h4>Warning</h4>
-    * 
+    *
     * Especially on EC2 clones that may not support regions, this value is fragile. Consider
     * alternate means to determine context.
     */
@@ -162,7 +163,7 @@ public class Reservation<T extends RunningInstance> extends ForwardingSet<T> imp
    public String getRegion() {
       return region;
    }
-   
+
    /**
     * Names of the security groups.
     */
@@ -214,7 +215,7 @@ public class Reservation<T extends RunningInstance> extends ForwardingSet<T> imp
     */
    @Override
    public String toString() {
-      return Objects.toStringHelper(this).omitNullValues().add("region", region).add("reservationId", reservationId)
+      return MoreObjects.toStringHelper(this).omitNullValues().add("region", region).add("reservationId", reservationId)
                .add("requesterId", requesterId).add("instances", instances).add("groupNames", groupNames).toString();
    }
 

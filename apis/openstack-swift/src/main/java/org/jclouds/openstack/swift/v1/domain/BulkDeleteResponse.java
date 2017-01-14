@@ -16,18 +16,18 @@
  */
 package org.jclouds.openstack.swift.v1.domain;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Map;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Represents a response from a Bulk Delete request.
- * 
+ *
  * @see org.jclouds.openstack.swift.v1.features.BulkApi
  */
 public class BulkDeleteResponse {
@@ -45,22 +45,22 @@ public class BulkDeleteResponse {
       this.errors = checkNotNull(errors, "errors");
    }
 
-   /** 
+   /**
     * @return The number of files deleted.
     * */
    public int getDeleted() {
       return deleted;
    }
 
-   /** 
+   /**
     * @return The number of files not found.
     */
    public int getNotFound() {
       return notFound;
    }
 
-   /** 
-    * @return a {@code Map<String, String>} containing each path that failed 
+   /**
+    * @return a {@code Map<String, String>} containing each path that failed
     *         to be deleted and its corresponding error response.
     */
    public Map<String, String> getErrors() {

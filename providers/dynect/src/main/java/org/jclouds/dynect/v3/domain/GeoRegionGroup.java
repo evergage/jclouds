@@ -16,8 +16,8 @@
  */
 package org.jclouds.dynect.v3.domain;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.List;
@@ -135,7 +135,7 @@ public class GeoRegionGroup {
 
       /**
        * replaces current record sets
-       * 
+       *
        * @see GeoRegionGroup#getCountries()
        */
       public Builder countries(Iterable<String> countries) {
@@ -161,7 +161,7 @@ public class GeoRegionGroup {
 
       /**
        * replaces current record sets
-       * 
+       *
        * @see GeoRegionGroup#getRecordSets()
        */
       public Builder recordSets(Iterable<RecordSet> recordSets) {

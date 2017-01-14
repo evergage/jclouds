@@ -20,12 +20,13 @@ import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.domain.LoginCredentials;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Optional;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 
 /**
  * Enables additional options for running a script.
@@ -60,7 +61,7 @@ public class RunScriptOptions {
          to.overrideAuthenticateSudo(this.shouldAuthenticateSudo());
       }
    }
-   
+
    public static class ImmutableRunScriptOptions extends RunScriptOptions {
       private final RunScriptOptions delegate;
 
@@ -144,12 +145,12 @@ public class RunScriptOptions {
       public RunScriptOptions overrideLoginUser(String loginUser) {
          throw new IllegalArgumentException("loginUser is immutable");
       }
-      
+
       @Override
       public RunScriptOptions wrapInInitScript(boolean wrapInInitScript) {
          throw new IllegalArgumentException("wrapInInitScript is immutable");
       }
-      
+
       @Override
       public String getTaskName() {
          return delegate.getTaskName();
@@ -196,14 +197,14 @@ public class RunScriptOptions {
       this.authenticateSudo = overridingCredentials.shouldAuthenticateSudo() ? true : null;
       return this;
    }
-  
+
 
    public RunScriptOptions overrideLoginUser(String loginUser) {
       checkNotNull(loginUser, "loginUser");
       this.loginUser = loginUser;
       return this;
    }
-  
+
    public RunScriptOptions overrideLoginPassword(String password) {
       checkNotNull(password, "password");
       this.loginPassword = Optional.of(password);
@@ -237,7 +238,7 @@ public class RunScriptOptions {
     * @return What to call the task relating to this script; default
     *         {@code jclouds-script-timestamp} where timestamp is millis since
     *         epoch
-    * 
+    *
     */
    public RunScriptOptions nameTask(String name) {
       this.taskName = name;
@@ -252,7 +253,7 @@ public class RunScriptOptions {
    /**
     * default true
     * <p/>
-    * 
+    *
     * @param wrapInInitScript
     *           if the command is long-running, use this option to ensure it is
     *           wrapInInitScripted properly. (ex. have jclouds wrap it an init
@@ -267,7 +268,7 @@ public class RunScriptOptions {
    /**
     * As of version 1.1.0, we cannot kick off a script unless a node is in
     * RUNNING state.
-    * 
+    *
     * @param blockOnComplete
     *           (default true) false means kick off the script in the
     *           background, but don't wait for it to finish. (as of version
@@ -302,7 +303,7 @@ public class RunScriptOptions {
    }
 
    /**
-    * 
+    *
     * @return the login user for
     *         {@link org.jclouds.compute.ComputeService#runScriptOnNode}. By
     *         default, null.
@@ -313,7 +314,7 @@ public class RunScriptOptions {
    }
 
    /**
-    * 
+    *
     * @return Whether the login user should authenticate sudo during
     *         {@link org.jclouds.compute.ComputeService#runScriptOnNode}. By
     *         default, null.
@@ -363,7 +364,7 @@ public class RunScriptOptions {
    }
 
    /**
-    * 
+    *
     * @return the login ssh key for
     *         {@link org.jclouds.compute.ComputeService#runScriptOnNode}. By
     *         default, null.
@@ -376,7 +377,7 @@ public class RunScriptOptions {
    /**
     * Whether to run the script as root (or run with current privileges). By
     * default, true.
-    * 
+    *
     * @return value
     */
    public boolean shouldRunAsRoot() {
@@ -392,7 +393,7 @@ public class RunScriptOptions {
 
    /**
     * Whether to wait until the script has completed. By default, true.
-    * 
+    *
     * @return value
     */
    public boolean shouldWrapInInitScript() {
@@ -482,7 +483,7 @@ public class RunScriptOptions {
    }
 
    protected ToStringHelper string() {
-      ToStringHelper toString = Objects.toStringHelper("").omitNullValues();
+      ToStringHelper toString = MoreObjects.toStringHelper("").omitNullValues();
       toString.add("loginUser", loginUser);
       if (loginPassword != null && loginPassword.isPresent())
          toString.add("loginPasswordPresent", true);

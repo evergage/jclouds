@@ -16,8 +16,8 @@
  */
 package org.jclouds.compute.domain;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import java.util.List;
@@ -36,12 +36,12 @@ import com.google.common.collect.ImmutableMap;
 
 /**
  * A specification of a {@link TemplateBuilder} configuration.
- * 
+ *
  * <p>
  * {@code TemplateBuilderSpec} supports parsing configuration off of a string,
  * which makes it especially useful for command-line configuration of a
  * {@code TemplateBuilder}.
- * 
+ *
  * <p>
  * The string syntax is a series of comma-separated keys or key-value pairs,
  * each corresponding to a {@code TemplateBuilder} method.
@@ -70,14 +70,14 @@ import com.google.common.collect.ImmutableMap;
  * {@code loginUser} is set.
  * <li>{@code locationId=[String]}: sets {@link TemplateBuilder#locationId}.
  * </ul>
- * 
+ *
  * The set of supported keys will grow as {@code TemplateBuilder} evolves, but
  * existing keys will never be removed.
- * 
+ *
  * <p>
  * Whitespace before and after commas and equal signs is ignored. Keys may not
  * be repeated.
- * 
+ *
  * <p>
  * It is also illegal to use the following combination of keys
  * <ul>
@@ -97,21 +97,21 @@ import com.google.common.collect.ImmutableMap;
  * <li>{@code osDescriptionMatches}
  * </ul>
  * </ul>
- * 
+ *
  * <p>
  * {@code TemplateBuilderSpec} does not support configuring
  * {@code TemplateBuilder} methods with non-value parameters. These must be
  * configured in code.
- * 
+ *
  * <p>
  * A new {@code TemplateBuilder} can be instantiated from a
  * {@code TemplateBuilderSpec} using
  * {@link TemplateBuilder#from(TemplateBuilderSpec)} or
  * {@link TemplateBuilder#from(String)}.
- * 
+ *
  * <p>
  * Design inspired by {@link CacheBuilderSpec}
- * 
+ *
  * @since 1.5
  */
 @Beta
@@ -180,11 +180,11 @@ public class TemplateBuilderSpec {
    String locationId;
    @VisibleForTesting
    Boolean forceCacheReload;
-   
+
    /** Specification; used for toParseableString(). */
    // transient in case people using serializers don't want this to show up
    protected transient String specification;
-   
+
    protected TemplateBuilderSpec() {
       // we want serializers like Gson to work w/o using sun.misc.Unsafe,
       // prohibited in GAE. This also implies fields are not final.
@@ -197,7 +197,7 @@ public class TemplateBuilderSpec {
 
    /**
     * Creates a TemplateBuilderSpec from a string.
-    * 
+    *
     * @param templateBuilderSpecification
     *           the string form
     */
@@ -225,7 +225,7 @@ public class TemplateBuilderSpec {
    /**
     * Returns a TemplateBuilder configured according to this instance's
     * specification.
-    * @param templateOptions 
+    * @param templateOptions
     */
    public TemplateBuilder copyTo(TemplateBuilder builder, TemplateOptions templateOptions) {
       if (hardwareId != null) {
@@ -331,7 +331,7 @@ public class TemplateBuilderSpec {
             && equal(loginUser, that.loginUser) && equal(authenticateSudo, that.authenticateSudo)
             && equal(locationId, that.locationId) && equal(forceCacheReload, that.forceCacheReload);
    }
-   
+
    /** Base class for parsing doubles. */
    abstract static class DoubleParser implements ValueParser {
       protected abstract void parseDouble(TemplateBuilderSpec spec, double value);
@@ -394,7 +394,7 @@ public class TemplateBuilderSpec {
          set(spec, value);
       }
    }
-   
+
    /** Base class for parsing booleans. */
    abstract static class BooleanParser implements ValueParser {
       protected abstract void parseBoolean(TemplateBuilderSpec spec, boolean value);
@@ -421,7 +421,7 @@ public class TemplateBuilderSpec {
          spec.hardwareId = value;
       }
    }
-   
+
    /** Parse minCores */
    static class MinCoresParser extends DoubleParser {
       @Override
@@ -451,7 +451,7 @@ public class TemplateBuilderSpec {
          spec.minDisk = value;
       }
    }
-   
+
    /** Parse hypervisorMatches */
    static class HypervisorMatchesMatchesParser extends StringParser {
       @Override
@@ -486,7 +486,7 @@ public class TemplateBuilderSpec {
          spec.imageNameMatches = value;
       }
    }
-   
+
    /** Parse osFamily */
    static class OsFamilyParser extends EnumParser<OsFamily> {
 
@@ -511,7 +511,7 @@ public class TemplateBuilderSpec {
          spec.osVersionMatches = value;
       }
    }
-   
+
    /** Parse os64Bit */
    static class Os64BitParser extends BooleanParser {
       @Override
@@ -541,7 +541,7 @@ public class TemplateBuilderSpec {
          spec.osDescriptionMatches = value;
       }
    }
-   
+
    /** Parse loginUser */
    static class LoginUserParser extends StringParser {
       @Override
@@ -550,7 +550,7 @@ public class TemplateBuilderSpec {
          spec.loginUser = value;
       }
    }
-   
+
    /** Parse authenticateSudo */
    static class AuthenticateSudoParser extends BooleanParser {
       @Override
@@ -569,7 +569,7 @@ public class TemplateBuilderSpec {
          spec.locationId = value;
       }
    }
-   
+
    /** Parse forceCacheReload */
    static class ForceCacheReloadParser extends BooleanParser {
       @Override
@@ -578,7 +578,7 @@ public class TemplateBuilderSpec {
          spec.forceCacheReload = value;
       }
    }
-   
+
    public String getHardwareId() {
       return hardwareId;
    }
@@ -642,5 +642,5 @@ public class TemplateBuilderSpec {
    public Boolean getForceCacheReload() {
       return forceCacheReload;
    }
-   
+
 }

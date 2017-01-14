@@ -16,8 +16,8 @@
  */
 package org.jclouds.openstack.domain;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Objects.toStringHelper;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.beans.ConstructorProperties;
@@ -32,7 +32,7 @@ import com.google.common.base.Objects;
 /**
  * For convenience, resources contain links to themselves. This allows a client to easily obtain a
  * resource URIs rather than to construct them.
- * 
+ *
  * @see <a href= "http://docs.openstack.org/api/openstack-compute/1.1/content/LinksReferences.html"
  *      />
  */
@@ -51,7 +51,7 @@ public class Link {
        */
       BOOKMARK,
       /**
-       * 
+       *
        */
       DESCRIBEDBY,
       /**
@@ -81,11 +81,11 @@ public class Link {
    public static Link create(Relation relation, URI href) {
       return new Link(relation, null, href);
    }
-   
+
    public static Link create(Relation relation, String type, URI href) {
       return new Link(relation, type, href);
    }
-   
+
    public static Builder builder() {
       return new Builder();
    }
@@ -114,7 +114,7 @@ public class Link {
          this.type = type;
          return this;
       }
-      
+
       /**
        * @see Link#getHref()
        */
@@ -126,12 +126,12 @@ public class Link {
       public Link build() {
          return new Link(relation, type, href);
       }
-      
+
       public Builder fromLink(Link from) {
          return relation(from.getRelation()).type(from.getType()).href(from.getHref());
       }
    }
-  
+
    @Named("rel")
    protected Relation relation;
    protected String type;
@@ -152,13 +152,13 @@ public class Link {
     * of the resource. For example, an OpenStack Compute image may have an alternate representation
     * in the OpenStack Image service. Note that the type attribute here is used to provide a hint as
     * to the type of representation to expect when following the link.
-    * 
+    *
     * @return the relation of the resource in the current OpenStack deployment
     */
    public Relation getRelation() {
       return relation;
    }
-   
+
    /**
     * @return the type of the resource or null if not specified
     */
@@ -166,7 +166,7 @@ public class Link {
    public String getType() {
       return type;
    }
-   
+
    /**
     * @return the href of the resource
     */

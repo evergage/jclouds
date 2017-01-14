@@ -21,24 +21,25 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.beans.ConstructorProperties;
 import java.util.Set;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.primitives.Longs;
 
 /**
  * Class LoadBalancer
- * 
+ *
 */
 public class LoadBalancer implements Comparable<LoadBalancer> {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromLoadBalancer(this);
    }
 
@@ -55,8 +56,8 @@ public class LoadBalancer implements Comparable<LoadBalancer> {
       protected LoadBalancerOs os;
       protected LoadBalancerState state;
       protected Option datacenter;
-   
-      /** 
+
+      /**
        * @see LoadBalancer#getId()
        */
       public T id(long id) {
@@ -64,7 +65,7 @@ public class LoadBalancer implements Comparable<LoadBalancer> {
          return self();
       }
 
-      /** 
+      /**
        * @see LoadBalancer#getName()
        */
       public T name(String name) {
@@ -72,7 +73,7 @@ public class LoadBalancer implements Comparable<LoadBalancer> {
          return self();
       }
 
-      /** 
+      /**
        * @see LoadBalancer#getDescription()
        */
       public T description(String description) {
@@ -80,7 +81,7 @@ public class LoadBalancer implements Comparable<LoadBalancer> {
          return self();
       }
 
-      /** 
+      /**
        * @see LoadBalancer#getVirtualIp()
        */
       public T virtualIp(IpPortPair virtualIp) {
@@ -88,11 +89,11 @@ public class LoadBalancer implements Comparable<LoadBalancer> {
          return self();
       }
 
-      /** 
+      /**
        * @see LoadBalancer#getRealIpList()
        */
       public T realIpList(Set<IpPortPair> realIpList) {
-         this.realIpList = ImmutableSet.copyOf(checkNotNull(realIpList, "realIpList"));      
+         this.realIpList = ImmutableSet.copyOf(checkNotNull(realIpList, "realIpList"));
          return self();
       }
 
@@ -100,7 +101,7 @@ public class LoadBalancer implements Comparable<LoadBalancer> {
          return realIpList(ImmutableSet.copyOf(in));
       }
 
-      /** 
+      /**
        * @see LoadBalancer#getType()
        */
       public T type(LoadBalancerType type) {
@@ -108,7 +109,7 @@ public class LoadBalancer implements Comparable<LoadBalancer> {
          return self();
       }
 
-      /** 
+      /**
        * @see LoadBalancer#getPersistence()
        */
       public T persistence(LoadBalancerPersistenceType persistence) {
@@ -116,7 +117,7 @@ public class LoadBalancer implements Comparable<LoadBalancer> {
          return self();
       }
 
-      /** 
+      /**
        * @see LoadBalancer#getOs()
        */
       public T os(LoadBalancerOs os) {
@@ -124,7 +125,7 @@ public class LoadBalancer implements Comparable<LoadBalancer> {
          return self();
       }
 
-      /** 
+      /**
        * @see LoadBalancer#getState()
        */
       public T state(LoadBalancerState state) {
@@ -132,7 +133,7 @@ public class LoadBalancer implements Comparable<LoadBalancer> {
          return self();
       }
 
-      /** 
+      /**
        * @see LoadBalancer#getDatacenter()
        */
       public T datacenter(Option datacenter) {
@@ -143,7 +144,7 @@ public class LoadBalancer implements Comparable<LoadBalancer> {
       public LoadBalancer build() {
          return new LoadBalancer(id, name, description, virtualIp, realIpList, type, persistence, os, state, datacenter);
       }
-      
+
       public T fromLoadBalancer(LoadBalancer in) {
          return this
                   .id(in.getId())
@@ -185,7 +186,7 @@ public class LoadBalancer implements Comparable<LoadBalancer> {
       this.name = checkNotNull(name, "name");
       this.description = description;
       this.virtualIp = checkNotNull(virtualIp, "virtualIp");
-      this.realIpList = ImmutableSet.copyOf(checkNotNull(realIpList, "realIpList"));      
+      this.realIpList = ImmutableSet.copyOf(checkNotNull(realIpList, "realIpList"));
       this.type = checkNotNull(type, "type");
       this.persistence = checkNotNull(persistence, "persistence");
       this.os = checkNotNull(os, "os");
@@ -255,12 +256,12 @@ public class LoadBalancer implements Comparable<LoadBalancer> {
                && Objects.equal(this.state, that.state)
                && Objects.equal(this.datacenter, that.datacenter);
    }
-   
+
    protected ToStringHelper string() {
-      return Objects.toStringHelper(this)
+      return MoreObjects.toStringHelper(this)
             .add("id", id).add("name", name).add("description", description).add("virtualIp", virtualIp).add("realIpList", realIpList).add("type", type).add("persistence", persistence).add("os", os).add("state", state).add("datacenter", datacenter);
    }
-   
+
    @Override
    public String toString() {
       return string().toString();

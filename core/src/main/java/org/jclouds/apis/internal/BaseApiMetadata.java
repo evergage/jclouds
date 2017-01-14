@@ -39,12 +39,13 @@ import java.net.URI;
 import java.util.Properties;
 import java.util.Set;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.Context;
 import org.jclouds.View;
 import org.jclouds.apis.ApiMetadata;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.reflect.TypeToken;
@@ -52,7 +53,7 @@ import com.google.inject.Module;
 /**
  * The BaseApiMetadata class is an abstraction of {@link ApiMetadata} to be extended by those
  * implementing ApiMetadata.
- * 
+ *
  * (Note: This class must be abstract to allow {@link java.util.ServiceLoader} to work properly.
  */
 public abstract class BaseApiMetadata implements ApiMetadata {
@@ -121,7 +122,7 @@ public abstract class BaseApiMetadata implements ApiMetadata {
          this.name = checkNotNull(name, "name");
          return self();
       }
-      
+
       /**
        * {@inheritDoc}
        */
@@ -129,7 +130,7 @@ public abstract class BaseApiMetadata implements ApiMetadata {
       public T view(Class<? extends View> view) {
          return view(typeToken(checkNotNull(view, "view")));
       }
-      
+
       /**
        * {@inheritDoc}
        */
@@ -137,7 +138,7 @@ public abstract class BaseApiMetadata implements ApiMetadata {
       public T view(TypeToken<? extends View> view) {
          return views(ImmutableSet.<TypeToken<? extends View>>of(checkNotNull(view, "view")));
       }
-      
+
       /**
        * {@inheritDoc}
        */
@@ -253,7 +254,7 @@ public abstract class BaseApiMetadata implements ApiMetadata {
       public T defaultModule(Class<? extends Module> defaultModule) {
          return defaultModules(ImmutableSet.<Class<? extends Module>>of(checkNotNull(defaultModule, "defaultModule")));
       }
-      
+
       /**
        * {@inheritDoc}
        */
@@ -342,7 +343,7 @@ public abstract class BaseApiMetadata implements ApiMetadata {
    }
 
    protected ToStringHelper string() {
-      return Objects.toStringHelper("").add("id", getId()).add("name", getName()).add("views", getViews()).add(
+      return MoreObjects.toStringHelper("").add("id", getId()).add("name", getName()).add("views", getViews()).add(
                "endpointName", getEndpointName()).add("identityName", getIdentityName()).add("credentialName",
                getCredentialName()).add("documentation", getDocumentation());
    }

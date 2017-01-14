@@ -16,11 +16,12 @@
  */
 package org.jclouds.http;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.io.Payload;
 import org.jclouds.javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.Multimap;
 
 /**
@@ -28,11 +29,11 @@ import com.google.common.collect.Multimap;
  */
 public class HttpResponse extends HttpMessage {
 
-   public static Builder<?> builder() { 
+   public static Builder<?> builder() {
       return new ConcreteBuilder();
    }
-   
-   public Builder<?> toBuilder() { 
+
+   public Builder<?> toBuilder() {
       return new ConcreteBuilder().fromHttpResponse(this);
    }
 
@@ -40,7 +41,7 @@ public class HttpResponse extends HttpMessage {
       protected int statusCode;
       protected String message;
 
-      /** 
+      /**
        * @see HttpResponse#getStatusCode()
        */
       public T statusCode(int statusCode) {
@@ -48,7 +49,7 @@ public class HttpResponse extends HttpMessage {
          return self();
       }
 
-      /** 
+      /**
        * @see HttpResponse#getMessage()
        */
       public T message(@Nullable String message) {
@@ -59,7 +60,7 @@ public class HttpResponse extends HttpMessage {
       public HttpResponse build() {
          return new HttpResponse(statusCode, message, headers.build(), payload);
       }
-      
+
       public T fromHttpResponse(HttpResponse in) {
          return super.fromHttpMessage(in)
                      .statusCode(in.getStatusCode())
@@ -73,7 +74,7 @@ public class HttpResponse extends HttpMessage {
          return this;
       }
    }
-   
+
    private final int statusCode;
    private final String message;
 
@@ -91,11 +92,11 @@ public class HttpResponse extends HttpMessage {
    public String getMessage() {
       return message;
    }
-   
+
    public String getStatusLine() {
       return String.format("HTTP/1.1 %d %s", getStatusCode(), getMessage());
    }
-   
+
    @Override
    public int hashCode() {
       return Objects.hashCode(statusCode, message, super.hashCode());
@@ -107,14 +108,14 @@ public class HttpResponse extends HttpMessage {
       // testing equals by value, not by type
       if (!(obj instanceof HttpResponse)) return false;
       HttpResponse that = HttpResponse.class.cast(obj);
-      return super.equals(that) 
+      return super.equals(that)
                && Objects.equal(this.statusCode, that.statusCode)
                && Objects.equal(this.message, that.message);
    }
-   
+
    @Override
    protected ToStringHelper string() {
-      return Objects.toStringHelper("").omitNullValues()
+      return MoreObjects.toStringHelper("").omitNullValues()
                     .add("statusCode", statusCode)
                     .add("message", message)
                     .add("headers", headers)

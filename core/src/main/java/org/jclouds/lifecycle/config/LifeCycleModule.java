@@ -18,7 +18,7 @@ package org.jclouds.lifecycle.config;
 
 import static com.google.common.base.Throwables.propagate;
 import static com.google.common.collect.Iterables.filter;
-import static com.google.common.util.concurrent.MoreExecutors.sameThreadExecutor;
+import static com.google.common.util.concurrent.MoreExecutors.newDirectExecutorService;
 import static com.google.inject.matcher.Matchers.any;
 import static org.jclouds.Constants.PROPERTY_SCHEDULER_THREADS;
 import static org.jclouds.Constants.PROPERTY_USER_THREADS;
@@ -50,15 +50,15 @@ import com.google.inject.spi.TypeListener;
 /**
  * This associates java lifecycle annotations with guice hooks. For example, we invoke {@link PostConstruct} after
  * injection, and Associate {@link PreDestroy} with a global {@link Closer} object.
- * 
+ *
  * <h3>Important</h3> Make sure you create your injector with {@link Stage#PRODUCTION} and execute the bound
  * {@link ExecutionList} prior to using any other objects.
- * 
+ *
  * <p/>
  * Ex.
- * 
+ *
  * <pre>
- * 
+ *
  * </pre>
  */
 public class LifeCycleModule extends AbstractModule {
@@ -117,7 +117,7 @@ public class LifeCycleModule extends AbstractModule {
                            invokeOnInjectee(method, injectee);
                         }
 
-                     }, sameThreadExecutor());
+                     }, newDirectExecutorService());
                   }
                });
             }

@@ -22,12 +22,13 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import com.google.common.base.MoreObjects;
 import org.jclouds.http.HttpRequest;
 import org.jclouds.rest.MapBinder;
 import org.jclouds.rest.binders.BindToJsonPayload;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import com.google.common.base.MoreObjects.ToStringHelper;
 import com.google.common.collect.ImmutableMap;
 
 public class UpdateUserOptions implements MapBinder{
@@ -59,7 +60,7 @@ public class UpdateUserOptions implements MapBinder{
    }
 
    protected ToStringHelper string() {
-      ToStringHelper toString = Objects.toStringHelper("").omitNullValues();
+      ToStringHelper toString = MoreObjects.toStringHelper("").omitNullValues();
       toString.add("name", name);
       toString.add("email", email);
       toString.add("password", password);
@@ -73,7 +74,7 @@ public class UpdateUserOptions implements MapBinder{
    }
 
    static class ServerRequest {
-      
+
       String name;
       String email;
       String password;
@@ -121,7 +122,7 @@ public class UpdateUserOptions implements MapBinder{
       this.password = password;
       return this;
    }
-   
+
    /**
     * Gets the user e-mail
     */
@@ -171,7 +172,7 @@ public class UpdateUserOptions implements MapBinder{
          UpdateUserOptions options = new UpdateUserOptions();
          return options.enabled(enabled);
       }
-      
+
       /**
        * @see UpdateUserOptions#password(String)
        */
